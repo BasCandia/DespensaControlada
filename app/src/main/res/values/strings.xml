@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Xpiration</string>
+    <string name="NombreProducto">Nombre de Producto</string>
+    <string name="CodigoBarra">Codigo de Barra</string>
+    <string name="FechaCaducidad">Fecha de Caducidad</string>
+    <string name="DescCamara">Icono para camara</string>
+    
 </resources>
