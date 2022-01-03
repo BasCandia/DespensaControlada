@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="StrCategoria">
+        <item>Seleccione una Categoria</item>
+        <item>Lacteos</item>
+        <item>Frutas y verduras</item>
+        <item>Carnes pescados y huevos</item>
+        <item>Cerelaes</item>
+        <item>Productos de panaderia</item>
+        <item>Legumbres y Papas</item>
+        <item>Mantecas y aceites</item>
+        <item>Bebidas</item>
+        <item>Otros</item>
+    </string-array>
+
+</resources>
