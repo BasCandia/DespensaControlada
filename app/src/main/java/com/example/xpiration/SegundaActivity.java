@@ -28,7 +28,7 @@ public class SegundaActivity extends AppCompatActivity {
 
     EditText fecha;
     Spinner spinnerC;
-    Connection connect;
+    Connection con;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,27 +69,12 @@ public class SegundaActivity extends AppCompatActivity {
         newFragment.show(getFragmentManager(), "datePicker");
     }
 
-    public Connection conexionDB(){
-
-        Connection connect=null;
-        try{
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-            Class.forName("net.sourceforge.jtds.jdbc.Driver").newInstance();
-            connect = DriverManager.getConnection("jdbc:jtds:sqlserver://192.168.1.13:1433;databaseName=xpiration;user=sa;password=asddsa123;");
-        }catch (Exception ex){
-            Toast.makeText(getApplicationContext(),ex.getMessage(),Toast.LENGTH_SHORT).show();
-
-        }
-
-        return connect;
-
-    }
-
     public void listaCategorias(){
         try{
             String query1 = "SELECT * FROM CATEGORIA";
-            Statement st = conexionDB().createStatement();
+            ConnectionHelper conexion = new ConnectionHelper();
+            con = conexion.connectionclass();
+            Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query1);
 
             ArrayList<String> data = new ArrayList<String>();
