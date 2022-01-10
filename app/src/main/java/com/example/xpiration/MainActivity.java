@@ -21,6 +21,8 @@ import java.sql.Statement;
 public class MainActivity extends AppCompatActivity {
 
 
+
+
     ImageView casa;
     ImageView mas;
     ImageView menu;
@@ -62,6 +64,10 @@ public class MainActivity extends AppCompatActivity {
                 context.startActivity(intent);
             }
         });
+
+
+
+
 
 
     }
