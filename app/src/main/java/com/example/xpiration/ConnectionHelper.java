@@ -1,17 +1,19 @@
 package com.example.xpiration;
 
+import android.annotation.SuppressLint;
 import android.os.StrictMode;
 import android.util.Log;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+
 public class ConnectionHelper {
     Connection con;
     String uname, pass, ip, port, database;
-
+    @SuppressLint("NewApi")
     public Connection connectionclass(){
-        ip = "172.21.0.1";
+        ip = "192.168.1.13";
         database = "xpiration";
         uname = "sa";
         pass = "asddsa123";

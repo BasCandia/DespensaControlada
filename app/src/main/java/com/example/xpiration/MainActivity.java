@@ -5,25 +5,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.StrictMode;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    Connection connect;
-    String ConectioResult="";
-    ArrayList<String> CategoriasSpiner = new ArrayList<String>();
-    Spinner spinnerC;
 
     ImageView casa;
     ImageView mas;
@@ -32,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -64,30 +63,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        spinnerC = (Spinner) findViewById(R.id.Categorias);
-        try {
-            ConnectionHelper connectionHelper = new ConnectionHelper();
-            connect = connectionHelper.connectionclass();
-            if(connect!=null){
-
-
-            }else{
-                ConectioResult="Revisa la Conexion";
-            }
-        }catch (Exception ex){
-            Log.e("Error", ex.getMessage());
-        }
-
-
-
-
-
 
     }
 
-    public void GetTextFromSQL(View v){
-        //Categorias
 
-
-    }
 }

@@ -5,14 +5,30 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
 
 public class SegundaActivity extends AppCompatActivity {
 
     EditText fecha;
+    Spinner spinnerC;
+    Connection connect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +52,8 @@ public class SegundaActivity extends AppCompatActivity {
             }
         });
 
+        spinnerC = (Spinner) findViewById(R.id.Categorias);
+        FillSpiner();
     }
 
 
@@ -52,8 +70,38 @@ public class SegundaActivity extends AppCompatActivity {
         newFragment.show(getFragmentManager(), "datePicker");
     }
 
+    public void FillSpiner(){
+
+        try {
+            ConnectionHelper connectionHelper = new ConnectionHelper();
+            connect = connectionHelper.connectionclass();
+
+            String query1 = "SELECT CATEGORIA_NOMBRE FROM CATEGORIA";
+            PreparedStatement stmt = connect.prepareStatement(query1);
+            ResultSet rs = stmt.executeQuery();
+
+            ArrayList<String> data = new ArrayList<String>();
+            while(rs.next()){
+                String cat = rs.getString("CATEGORIA_NOMBRE");
+                data.add(cat);
+            }
+
+            ArrayAdapter array = new ArrayAdapter(this,android.R.layout.simple_list_item_1,data);
+            spinnerC.setAdapter(array);
+
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+    }
+
 
 }
+
+
+
+
+
 
 
 
