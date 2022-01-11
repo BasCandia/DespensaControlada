@@ -4,5 +4,6 @@
     <string name="CodigoBarra">Codigo de Barra</string>
     <string name="FechaCaducidad">Fecha de Caducidad</string>
     <string name="DescCamara">Icono para camara</string>
+    <string name="BtnSegunda">Crear</string>
     
 </resources>
