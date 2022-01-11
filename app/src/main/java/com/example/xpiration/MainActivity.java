@@ -1,6 +1,8 @@
 package com.example.xpiration;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +19,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
+import entidades.ListaProductosAdapter;
+import entidades.Productos;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,13 +30,28 @@ public class MainActivity extends AppCompatActivity {
     ImageView casa;
     ImageView mas;
     ImageView menu;
+    RecyclerView recyclerView;
     private Context context;
+    Productos p;
+    ArrayList<Productos> listaMain;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        recyclerView = findViewById(R.id.ListaProductos);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        p = new Productos();
+        listaMain = new ArrayList<Productos>();
+
+        ListaProductosAdapter adapter = new ListaProductosAdapter(p.mostrarProductos());
+        recyclerView.setAdapter(adapter);
+
 
         context = this;
 
@@ -60,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 context.startActivity(intent);
             }
         });
+
 
 
 

@@ -8,12 +8,13 @@
         <entry key="..\:/Users/matin/AndroidStudioProjects/Xpiration/app/src/main/res/drawable/ic_green_circle.xml" value="0.3828125" />
         <entry key="..\:/Users/matin/AndroidStudioProjects/Xpiration/app/src/main/res/drawable/ic_home.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/matin/AndroidStudioProjects/Xpiration/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22135416666666666" />
-        <entry key="..\:/Users/matin/AndroidStudioProjects/Xpiration/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/matin/AndroidStudioProjects/Xpiration/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/matin/AndroidStudioProjects/Xpiration/app/src/main/res/layout/activity_otra.xml" value="0.26902173913043476" />
         <entry key="..\:/Users/matin/AndroidStudioProjects/Xpiration/app/src/main/res/layout/activity_segunda.xml" value="0.33" />
-        <entry key="..\:/Users/matin/AndroidStudioProjects/Xpiration/app/src/main/res/layout/lista_item_producto.xml" value="1.25" />
+        <entry key="..\:/Users/matin/AndroidStudioProjects/Xpiration/app/src/main/res/layout/lista_item_producto.xml" value="0.5" />
         <entry key="..\:/Users/matin/AndroidStudioProjects/Xpiration/app/src/main/res/layout/lista_item_productos.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/matin/AndroidStudioProjects/Xpiration/app/src/main/res/layout/lista_productos.xml" value="2.2" />
+        <entry key="..\:/Users/matin/AndroidStudioProjects/Xpiration/app/src/main/res/layout/test.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
