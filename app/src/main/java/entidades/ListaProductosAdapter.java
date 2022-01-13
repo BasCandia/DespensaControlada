@@ -3,6 +3,7 @@ package entidades;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
 
     ArrayList<Productos> listaProductos;
 
+
     public ListaProductosAdapter(ArrayList<Productos> listaProductos){
         this.listaProductos = listaProductos;
     }
@@ -33,6 +35,7 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
 
     @Override
     public void onBindViewHolder(@NonNull ProductoViewHolder holder, int position) {
+
 
         Date now = new Date();
         DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
@@ -53,6 +56,15 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
 
         holder.viewNombre.setText(listaProductos.get(position).getPRODUCTO_NOMBRE());
         holder.viewFecha.setText(diff+" dias para Caducar");
+        if(diff<=listaProductos.get(position).getPRODUCTO_NOTIFICACION_NARANJA()){
+            holder.estado.setImageResource(R.drawable.ic_yellow_circle);
+            if(diff<=listaProductos.get(position).getPRODUCTO_NOTIFICACION_ROJA()){
+                holder.estado.setImageResource(R.drawable.ic_red_circle);
+            }
+        }
+
+
+
     }
 
     @Override
@@ -64,11 +76,13 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
     public class ProductoViewHolder extends RecyclerView.ViewHolder {
 
         TextView viewNombre, viewFecha;
+        ImageView estado;
 
         public ProductoViewHolder(@NonNull View itemView) {
             super(itemView);
             viewNombre = itemView.findViewById(R.id.ProductoNombre);
             viewFecha = itemView.findViewById(R.id.Caducidad);
+            estado = itemView.findViewById(R.id.IconoEstado);
 
         }
     }
