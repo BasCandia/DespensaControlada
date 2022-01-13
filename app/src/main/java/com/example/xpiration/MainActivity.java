@@ -35,19 +35,25 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Productos> listaMain;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 //****************************** Inicializacion de elementos ***************************************
+        context = this;
         recyclerView = findViewById(R.id.ListaProductos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         p = new Productos();
         listaMain = new ArrayList<Productos>();
-        ListaProductosAdapter adapter = new ListaProductosAdapter(p.mostrarProductos());
+        ListaProductosAdapter adapter = new ListaProductosAdapter(p.mostrarProductos(),context);
         recyclerView.setAdapter(adapter);
-        context = this;
+
+
+
+
 
 //****************************** Boton para agregar productos **************************************
         mas = findViewById(R.id.plus);
@@ -56,18 +62,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,SegundaActivity.class);
                 context.startActivity(intent);
+                finish();
             }
         });
 
-
-
-
-
-
-
-
-
     }
-
 
 }
