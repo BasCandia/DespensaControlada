@@ -43,6 +43,7 @@ public class SegundaActivity extends AppCompatActivity {
     String vDateYMD = dateFormatYMD.format(now);
     Date nuevo;
     Date comparado;
+    TextView notiNaranja,notiRoja;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +52,10 @@ public class SegundaActivity extends AppCompatActivity {
         context = this;
 
         nombre = findViewById(R.id.Nombre);
-
         fecha = findViewById(R.id.FechaCaducidad);
+        notiNaranja = findViewById(R.id.notiNaranja);
+        notiRoja = findViewById(R.id.notiRoja);
+
 
         fecha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,25 +97,34 @@ public class SegundaActivity extends AppCompatActivity {
                                if (nombre.getText().length() == 0) {
                                    Toast.makeText(getApplicationContext(), "Ingrese Nombre del producto", Toast.LENGTH_SHORT).show();
                                } else {
-                                   try {
-                                       String query = "INSERT PRODUCTO VALUES (" + spinnerC.getSelectedItemPosition() + ",'" + nombre.getText() + "',CONVERT(varchar,GETDATE(),111),'" + fecha.getText().toString() + "',null)";
-                                       ConnectionHelper conexion = new ConnectionHelper();
-                                       con = conexion.connectionclass();
+                                   if((notiNaranja.getText().toString().isEmpty() == true) || (notiNaranja.getText().toString().compareToIgnoreCase("0") == 0)){
+                                       Toast.makeText(getApplicationContext(), "Ingrese dias para notificacion Preventiva", Toast.LENGTH_SHORT).show();
+                                   }else{
+                                       if((notiRoja.getText().toString().isEmpty() == true) || (notiRoja.getText().toString().compareToIgnoreCase("0") == 0)){
+                                           Toast.makeText(getApplicationContext(), "Ingrese dias para notificacion Critica", Toast.LENGTH_SHORT).show();
+                                       }else{
+                                           try {
+                                               String query = "INSERT PRODUCTO VALUES (" + spinnerC.getSelectedItemPosition() + ",'" + nombre.getText() + "',CONVERT(varchar,GETDATE(),111),'" + fecha.getText().toString() + "',"+notiNaranja.getText()+','+notiRoja.getText()+",null)";
+                                               ConnectionHelper conexion = new ConnectionHelper();
+                                               con = conexion.connectionclass();
 
-                                       PreparedStatement pst = con.prepareStatement(query);
-                                       // pst.setInt(1,spinnerC.getSelectedItemPosition());
-                                       // pst.setString(2,nombre.getText().toString());
-                                       // pst.setString(3,fecha.getText().toString());
+                                               PreparedStatement pst = con.prepareStatement(query);
+                                               // pst.setInt(1,spinnerC.getSelectedItemPosition());
+                                               // pst.setString(2,nombre.getText().toString());
+                                               // pst.setString(3,fecha.getText().toString());
 
-                                       pst.executeUpdate();
+                                               pst.executeUpdate();
 
-                                       Toast.makeText(getApplicationContext(), "Producto agregado correctamente", Toast.LENGTH_SHORT).show();
+                                               Toast.makeText(getApplicationContext(), "Producto agregado correctamente", Toast.LENGTH_SHORT).show();
 
-                                       Intent intent = new Intent(SegundaActivity.this, MainActivity.class);
-                                       context.startActivity(intent);
-                                   } catch (SQLException e) {
-                                       Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                               Intent intent = new Intent(SegundaActivity.this, MainActivity.class);
+                                               context.startActivity(intent);
+                                           } catch (SQLException e) {
+                                               Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                           }
+                                       }
                                    }
+
                                }
                            }
                        }
