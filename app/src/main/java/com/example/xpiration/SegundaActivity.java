@@ -32,31 +32,34 @@ import java.util.Date;
 
 public class SegundaActivity extends AppCompatActivity {
 
-    private Context context;
+    private Context context; //instancia
+//********************************* Elementos en pantalla ******************************************
     EditText fecha;
     Spinner spinnerC;
     Connection con;
     Button crear;
     TextView nombre;
+    TextView notiNaranja,notiRoja;
+//**************** Elementos para seleccionar fecha de forma interactiva ***************************
     Date now = new Date();
     DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
     String vDateYMD = dateFormatYMD.format(now);
     Date nuevo;
     Date comparado;
-    TextView notiNaranja,notiRoja;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_segunda);
         context = this;
-
+//****************************** Inicializacion de elementos ***************************************
         nombre = findViewById(R.id.Nombre);
         fecha = findViewById(R.id.FechaCaducidad);
         notiNaranja = findViewById(R.id.notiNaranja);
         notiRoja = findViewById(R.id.notiRoja);
 
-
+//**************** Al hacer click en fecha desplega elemento interactivo ***************************
         fecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,14 +72,17 @@ public class SegundaActivity extends AppCompatActivity {
 
             }
         });
+
+//****************** funcion para cargar en spinner datos de la tabla  *****************************
         listaCategorias();
 
+//************* boton para enviar la insercion y pasar a ventana principal *************************
         crear = findViewById(R.id.BtnCrear);
         crear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //tomar datos de las otras cosas y hacerlos query
-                Toast.makeText(getApplicationContext(),String.valueOf(spinnerC.getSelectedItemPosition()),Toast.LENGTH_SHORT).show();
+//******************** Validaciones para query de insercion ****************************************
+                //Toast.makeText(getApplicationContext(),String.valueOf(spinnerC.getSelectedItemPosition()),Toast.LENGTH_SHORT).show();
                if(spinnerC.getSelectedItemPosition() == 0) {
                    Toast.makeText(getApplicationContext(),"Seleccione una Categoria",Toast.LENGTH_SHORT).show();
                }else {
@@ -103,6 +109,7 @@ public class SegundaActivity extends AppCompatActivity {
                                        if((notiRoja.getText().toString().isEmpty() == true) || (notiRoja.getText().toString().compareToIgnoreCase("0") == 0)){
                                            Toast.makeText(getApplicationContext(), "Ingrese dias para notificacion Critica", Toast.LENGTH_SHORT).show();
                                        }else{
+//************** inicializacion de conexion, construccion y envio de query *************************
                                            try {
                                                String query = "INSERT PRODUCTO VALUES (" + spinnerC.getSelectedItemPosition() + ",'" + nombre.getText() + "',CONVERT(varchar,GETDATE(),111),'" + fecha.getText().toString() + "',"+notiNaranja.getText()+','+notiRoja.getText()+",null)";
                                                ConnectionHelper conexion = new ConnectionHelper();
@@ -134,13 +141,12 @@ public class SegundaActivity extends AppCompatActivity {
 
     }
 
-
+//****** obtiene los datos seleccionados interactivamente para la fecha y los formatea *************
     private void showDatePickerDialog() {
         DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                // +1 because January is zero
-                //final String selectedDate = day + " / " + (month+1) + " / " + year;
+
                 String mesMod,dayMod;
 
                 if(month < 9){
@@ -153,7 +159,7 @@ public class SegundaActivity extends AppCompatActivity {
                 }else{
                     dayMod = "/";
                 }
-
+                //month+1 es porque enero es un 0
                 final String selectedDate = year + mesMod + (month+1) + dayMod + day;
 
                 fecha.setText(selectedDate);
@@ -163,27 +169,29 @@ public class SegundaActivity extends AppCompatActivity {
         newFragment.show(getFragmentManager(), "datePicker");
     }
 
+//****************** funcion para cargar en spinner datos de la tabla  *****************************
     public void listaCategorias(){
         try{
+            //prepara query
             String query1 = "SELECT * FROM CATEGORIA";
             ConnectionHelper conexion = new ConnectionHelper();
+            //realiza conexion
             con = conexion.connectionclass();
             Statement st = con.createStatement();
+            //obtiene respuesta
             ResultSet rs = st.executeQuery(query1);
-
             ArrayList<String> data = new ArrayList<String>();
             data.add("Seleccione una Categoria");
             while(rs.next()){
                 String cat = rs.getString("CATEGORIA_NOMBRE");
+                //entrega datos a array data
                 data.add(cat);
             }
             spinnerC = (Spinner) findViewById(R.id.Categorias);
 
             ArrayAdapter array = new ArrayAdapter(this,android.R.layout.simple_list_item_1,data);
             spinnerC.setAdapter(array);
-
-
-
+            //entrega datos de array a spinner
         }catch (SQLException e){
             Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
         }
