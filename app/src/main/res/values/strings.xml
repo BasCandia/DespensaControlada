@@ -5,6 +5,7 @@
     <string name="FechaCaducidad">Fecha de Caducidad</string>
     <string name="DescCamara">Icono para camara</string>
     <string name="BtnSegunda">Crear</string>
+    <string name="BtnGuardar">Guardar</string>
     <string name="notiNaranja">Dias para notificacion Preventiva</string>
     <string name="notiRoja">Dias para notificacion Critica</string>
     <string name="Categoria">Categoria</string>

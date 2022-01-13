@@ -12,12 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Xpiration">
-        <activity
-            android:name=".ver_producto"
-            android:exported="false" />
-        <activity
-            android:name=".SegundaActivity"
-            android:exported="false" />
+
+
+
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -27,6 +25,40 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".SegundaActivity"
+            android:parentActivityName=".MainActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"
+                />
+        </activity>
+
+
+
+        <activity
+            android:name=".VerActivity"
+            android:parentActivityName=".MainActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"
+                />
+        </activity>
+
+        <activity
+            android:name=".EditarActivity"
+            android:parentActivityName=".MainActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"
+                />
+        </activity>
+
+
     </application>
 
 </manifest>

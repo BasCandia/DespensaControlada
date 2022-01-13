@@ -6,19 +6,16 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,6 +25,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import entidades.Productos;
 
 
 public class SegundaActivity extends AppCompatActivity {
@@ -77,65 +76,12 @@ public class SegundaActivity extends AppCompatActivity {
         listaCategorias();
 
 //************* boton para enviar la insercion y pasar a ventana principal *************************
-        crear = findViewById(R.id.BtnCrear);
+        crear = findViewById(R.id.BtnGuardar);
         crear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//******************** Validaciones para query de insercion ****************************************
-                //Toast.makeText(getApplicationContext(),String.valueOf(spinnerC.getSelectedItemPosition()),Toast.LENGTH_SHORT).show();
-               if(spinnerC.getSelectedItemPosition() == 0) {
-                   Toast.makeText(getApplicationContext(),"Seleccione una Categoria",Toast.LENGTH_SHORT).show();
-               }else {
-                   //Toast.makeText(getApplicationContext(),fecha.getText().toString(),Toast.LENGTH_SHORT).show();
-                       //Podria mejorarse la seguridad
-                       if(fecha.getText().toString().isEmpty()){
-                           Toast.makeText(getApplicationContext(),"Ingrese una fecha de vencimiento",Toast.LENGTH_SHORT).show();
-                       }else {
-                           try {
-                               nuevo = dateFormatYMD.parse(vDateYMD);
-                               comparado = dateFormatYMD.parse(fecha.getText().toString());
-                           } catch (ParseException e) {
-                               e.printStackTrace();
-                           }
-                           if (comparado.compareTo(nuevo) <= 0) {
-                               Toast.makeText(getApplicationContext(), "El producto caduca hoy o ya ha caducado", Toast.LENGTH_SHORT).show();
-                           } else {
-                               if (nombre.getText().length() == 0) {
-                                   Toast.makeText(getApplicationContext(), "Ingrese Nombre del producto", Toast.LENGTH_SHORT).show();
-                               } else {
-                                   if((notiNaranja.getText().toString().isEmpty() == true) || (notiNaranja.getText().toString().compareToIgnoreCase("0") == 0)){
-                                       Toast.makeText(getApplicationContext(), "Ingrese dias para notificacion Preventiva", Toast.LENGTH_SHORT).show();
-                                   }else{
-                                       if((notiRoja.getText().toString().isEmpty() == true) || (notiRoja.getText().toString().compareToIgnoreCase("0") == 0)){
-                                           Toast.makeText(getApplicationContext(), "Ingrese dias para notificacion Critica", Toast.LENGTH_SHORT).show();
-                                       }else{
-//************** inicializacion de conexion, construccion y envio de query *************************
-                                           try {
-                                               String query = "INSERT PRODUCTO VALUES (" + spinnerC.getSelectedItemPosition() + ",'" + nombre.getText() + "',CONVERT(varchar,GETDATE(),111),'" + fecha.getText().toString() + "',"+notiNaranja.getText()+','+notiRoja.getText()+",null)";
-                                               ConnectionHelper conexion = new ConnectionHelper();
-                                               con = conexion.connectionclass();
-
-                                               PreparedStatement pst = con.prepareStatement(query);
-                                               // pst.setInt(1,spinnerC.getSelectedItemPosition());
-                                               // pst.setString(2,nombre.getText().toString());
-                                               // pst.setString(3,fecha.getText().toString());
-
-                                               pst.executeUpdate();
-
-                                               Toast.makeText(getApplicationContext(), "Producto agregado correctamente", Toast.LENGTH_SHORT).show();
-
-                                               Intent intent = new Intent(SegundaActivity.this, MainActivity.class);
-                                               context.startActivity(intent);
-                                           } catch (SQLException e) {
-                                               Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                                           }
-                                       }
-                                   }
-
-                               }
-                           }
-                       }
-               }
+                Productos p = new Productos();
+                p.insertar(context,nombre.getText().toString(),vDateYMD,fecha.getText().toString(),spinnerC.getSelectedItemPosition(),notiNaranja.getText().toString(),notiRoja.getText().toString());
             }
         });
 

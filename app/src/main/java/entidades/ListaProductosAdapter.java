@@ -1,5 +1,7 @@
 package entidades;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,9 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.xpiration.R;
+import com.example.xpiration.VerActivity;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -83,6 +87,16 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
             viewNombre = itemView.findViewById(R.id.ProductoNombre);
             viewFecha = itemView.findViewById(R.id.Caducidad);
             estado = itemView.findViewById(R.id.IconoEstado);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Context context = view.getContext();
+                    Intent intent = new Intent(context, VerActivity.class);
+                    intent.putExtra("ID",listaProductos.get(getAdapterPosition()).getPRODUCTO_ID());
+                    context.startActivity(intent);
+                }
+            });
 
         }
     }
