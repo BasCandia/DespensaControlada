@@ -26,12 +26,9 @@ import entidades.Productos;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    ImageView casa;
+//********************************* Elementos en pantalla ******************************************
     ImageView mas;
-    ImageView menu;
     ImageView estado;
-
     RecyclerView recyclerView;
     private Context context;
     Productos p;
@@ -43,27 +40,16 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+//****************************** Inicializacion de elementos ***************************************
         recyclerView = findViewById(R.id.ListaProductos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         p = new Productos();
         listaMain = new ArrayList<Productos>();
-
         ListaProductosAdapter adapter = new ListaProductosAdapter(p.mostrarProductos());
         recyclerView.setAdapter(adapter);
-
-
         context = this;
 
-        casa = findViewById(R.id.Casa);
-        casa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,SegundaActivity.class);
-                context.startActivity(intent);
-            }
-        });
-
+//****************************** Boton para agregar productos **************************************
         mas = findViewById(R.id.plus);
         mas.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,14 +59,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        menu = findViewById(R.id.Menu);
-        menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,SegundaActivity.class);
-                context.startActivity(intent);
-            }
-        });
+
 
 
 

@@ -18,34 +18,28 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/ListaProductos"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_gravity="center" />
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="417dp"
-        android:layout_height="70dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageView
-            android:id="@+id/Casa"
-            android:layout_width="61dp"
-            android:layout_height="62dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginBottom="28dp"
-            app:srcCompat="@drawable/ic_home" />
+        app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
             android:id="@+id/plus"
@@ -53,16 +47,10 @@
             android:layout_height="62dp"
             android:layout_marginStart="85dp"
             android:layout_marginBottom="28dp"
+            android:background="@drawable/background_rounded"
+
             app:srcCompat="@drawable/ic_plus" />
 
-        <ImageView
-            android:id="@+id/Menu"
-            android:layout_width="57dp"
-            android:layout_height="63dp"
-            android:layout_marginStart="88dp"
-            android:layout_marginEnd="34dp"
-            android:layout_marginBottom="27dp"
-            app:srcCompat="@drawable/ic_grip_horizontal" />
     </LinearLayout>
 
 
