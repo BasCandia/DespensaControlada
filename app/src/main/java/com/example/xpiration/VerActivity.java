@@ -99,18 +99,18 @@ public class VerActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        if(producto.Borrar(id)){
-                            Intent intent = new Intent(VerActivity.this,MainActivity.class);
-                            intent.putExtra("ID",id);
-                            startActivity(intent);
-                        }
+                        producto.Borrar(id);
+                        Intent intent = new Intent(VerActivity.this,MainActivity.class);
+                        intent.putExtra("ID",id);
+                        startActivity(intent);
+
                     }
                 });
 
                 builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
+                        dialogInterface.cancel();
                     }
                 });
                 AlertDialog dialog = builder.create();
