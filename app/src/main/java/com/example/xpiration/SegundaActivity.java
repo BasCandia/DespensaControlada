@@ -43,8 +43,7 @@ public class SegundaActivity extends AppCompatActivity {
     Date now = new Date();
     DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
     String vDateYMD = dateFormatYMD.format(now);
-    Date nuevo;
-    Date comparado;
+
 
 
     @Override

@@ -68,7 +68,8 @@ public class EditarActivity extends AppCompatActivity {
 
         if(producto != null){
             nombre.setText(producto.getPRODUCTO_NOMBRE());
-            fecha.setText(producto.getPRODUCTO_FECHA_CADUCIDAD() + "");
+            String modificado = producto.getPRODUCTO_FECHA_CADUCIDAD().toString().replace("-","/");
+            fecha.setText(modificado);
             notiNaranja.setText(producto.getPRODUCTO_NOTIFICACION_NARANJA()+"");
             notiRoja.setText(producto.getPRODUCTO_NOTIFICACION_ROJA()+"");
             spinnerC.setSelection(producto.getCATEGORIA_ID());
@@ -81,14 +82,14 @@ public class EditarActivity extends AppCompatActivity {
                 Date now = new Date();
                 DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
                 String vDateYMD = dateFormatYMD.format(now);
+                //Toast.makeText(context,vDateYMD,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context,fecha.getText().toString(),Toast.LENGTH_SHORT).show();
                 boolean resultado = producto.Editar(context,id,nombre.getText().toString(),vDateYMD,fecha.getText().toString(),spinnerC.getSelectedItemPosition(),notiNaranja.getText().toString(),notiRoja.getText().toString());
                 if(resultado){
                     verRegistro();
                 }else{
                     System.out.println("Error tratando de editar un registro");
                 }
-
-
             }
         });
 

@@ -1,7 +1,10 @@
 package com.example.xpiration;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
@@ -33,6 +36,7 @@ public class VerActivity extends AppCompatActivity {
     TextView notiNaranja,notiRoja;
     ImageView editar;
     ImageView borrar;
+    Context context;
 
     int id;
     Productos producto;
@@ -43,6 +47,7 @@ public class VerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_producto);
 
+        context = this;
 
         nombre = findViewById(R.id.Nombre);
         fecha = findViewById(R.id.FechaCaducidad);
@@ -50,6 +55,7 @@ public class VerActivity extends AppCompatActivity {
         notiRoja = findViewById(R.id.notiRoja);
         guardar = findViewById(R.id.BtnGuardar);
         spinnerC = findViewById(R.id.Categorias);
+        borrar = findViewById(R.id.iconBorrar);
         listaCategorias();
 
         if(savedInstanceState == null){
@@ -68,7 +74,8 @@ public class VerActivity extends AppCompatActivity {
         if(producto != null){
             nombre.setText(producto.getPRODUCTO_NOMBRE());
             nombre.setInputType(InputType.TYPE_NULL);
-            fecha.setText(producto.getPRODUCTO_FECHA_CADUCIDAD() + "");
+            String modificado = producto.getPRODUCTO_FECHA_CADUCIDAD().toString().replace("-","/");
+            fecha.setText(modificado);
             fecha.setInputType(InputType.TYPE_NULL);
             notiNaranja.setText(producto.getPRODUCTO_NOTIFICACION_NARANJA()+"");
             notiNaranja.setInputType(InputType.TYPE_NULL);
@@ -81,6 +88,37 @@ public class VerActivity extends AppCompatActivity {
 
 
         }
+
+        borrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(VerActivity.this);
+                builder.setMessage("¿Desea eliminar este producto?");
+
+                builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        if(producto.Borrar(id)){
+                            Intent intent = new Intent(VerActivity.this,MainActivity.class);
+                            intent.putExtra("ID",id);
+                            startActivity(intent);
+                        }
+                    }
+                });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+
+            }
+        });
 
 
         editar=findViewById(R.id.IconEditar);
@@ -96,6 +134,8 @@ public class VerActivity extends AppCompatActivity {
 
 
     }
+
+
 
     public void listaCategorias(){
         try{

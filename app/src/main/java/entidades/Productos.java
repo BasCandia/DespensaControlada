@@ -158,7 +158,7 @@ public class Productos {
 
 
     public boolean Editar (Context context,int ID, String nombre, String fechaIngreso, String fechaCaducidad,int Categoria, String notiNaranja, String notiRoja){
-        //******************** Validaciones para query de insercion ****************************************
+        //******************** Validaciones para query de edicion ****************************************
 
         DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
         Date nuevo = null;
@@ -177,19 +177,21 @@ public class Productos {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-
+                if (comparado.compareTo(nuevo) <= 0) {
+                    Toast.makeText(context, "El producto caduca hoy o ya ha caducado", Toast.LENGTH_SHORT).show();
+                } else {
                     if (nombre.length() == 0) {
                         Toast.makeText(context, "Ingrese Nombre del producto", Toast.LENGTH_SHORT).show();
                     } else {
-                        if((notiNaranja.isEmpty()) || (notiNaranja.compareToIgnoreCase("0") == 0)){
+                        if ((notiNaranja.isEmpty()) || (notiNaranja.compareToIgnoreCase("0") == 0)) {
                             Toast.makeText(context, "Ingrese dias para notificacion Preventiva", Toast.LENGTH_SHORT).show();
-                        }else{
-                            if((notiRoja.isEmpty()) || (notiRoja.compareToIgnoreCase("0") == 0)){
+                        } else {
+                            if ((notiRoja.isEmpty()) || (notiRoja.compareToIgnoreCase("0") == 0)) {
                                 Toast.makeText(context, "Ingrese dias para notificacion Critica", Toast.LENGTH_SHORT).show();
-                            }else{
+                            } else {
 //************** inicializacion de conexion, construccion y envio de query *************************
                                 try {
-                                    String query = (" UPDATE PRODUCTO SET CATEGORIA_ID = "+Categoria+", PRODUCTO_NOMBRE = '" + nombre + "', PRODUCTO_FECHA_INGRESO = '" + fechaIngreso + "', PRODUCTO_FECHA_CADUCIDAD = '" + fechaCaducidad +"', PRODUCTO_NOTIFICACION_NARANJA = " + notiNaranja + ", PRODUCTO_NOTIFICACION_ROJA = " + notiRoja + "WHERE PRODUCTO_ID = " + ID);
+                                    String query = (" UPDATE PRODUCTO SET CATEGORIA_ID = " + Categoria + ", PRODUCTO_NOMBRE = '" + nombre + "', PRODUCTO_FECHA_INGRESO = '" + fechaIngreso + "', PRODUCTO_FECHA_CADUCIDAD = '" + fechaCaducidad + "', PRODUCTO_NOTIFICACION_NARANJA = " + notiNaranja + ", PRODUCTO_NOTIFICACION_ROJA = " + notiRoja + "WHERE PRODUCTO_ID = " + ID);
 
                                     ConnectionHelper conexion = new ConnectionHelper();
                                     Connection con = conexion.connectionclass();
@@ -211,11 +213,29 @@ public class Productos {
                             }
                         }
 
-
+                    }
                 }
             }
         }
         return false;
+    }
+
+    public boolean Borrar(int ID){
+        boolean bandera;
+        try{
+            String query = "DELETE FROM PRODUCTO WHERE PRODUCTO_ID="+ID;
+            ConnectionHelper conexion = new ConnectionHelper();
+            con = conexion.connectionclass();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            bandera = true;
+
+        }catch (SQLException e) {
+            bandera = false;
+        }
+
+
+        return bandera;
     }
 
     public ArrayList<Productos> mostrarProductos(){
