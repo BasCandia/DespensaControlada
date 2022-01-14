@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -36,7 +38,7 @@ import entidades.Productos;
 public class MainActivity extends AppCompatActivity {
 
 //********************************* Elementos en pantalla ******************************************
-    ImageView mas;
+    FloatingActionButton mas;
     ImageView estado;
     RecyclerView recyclerView;
     private Context context;
@@ -84,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,SegundaActivity.class);
                 context.startActivity(intent);
-                finish();
             }
         });
 

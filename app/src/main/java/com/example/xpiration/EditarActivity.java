@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,8 @@ public class EditarActivity extends AppCompatActivity {
     Button guardar;
     TextView nombre;
     TextView notiNaranja,notiRoja;
+    ImageView editar;
+    ImageView borrar;
     int id;
     Productos producto;
     Connection con;
@@ -53,6 +56,10 @@ public class EditarActivity extends AppCompatActivity {
         notiRoja = findViewById(R.id.notiRoja);
         guardar = findViewById(R.id.BtnGuardar);
         spinnerC = findViewById(R.id.Categorias);
+        editar = findViewById(R.id.IconEditar);
+        borrar = findViewById(R.id.iconBorrar);
+        editar.setVisibility(View.INVISIBLE);
+        borrar.setVisibility(View.INVISIBLE);
         listaCategorias();
 
         if(savedInstanceState == null){
