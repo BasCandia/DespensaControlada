@@ -28,7 +28,7 @@ import entidades.Productos;
 
 public class VerActivity extends AppCompatActivity {
 
-    //********************************* Elementos en pantalla ******************************************
+//********************************* Elementos en pantalla ******************************************
     EditText fecha;
     Spinner spinnerC;
     Button guardar;
@@ -48,7 +48,7 @@ public class VerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ver_producto);
 
         context = this;
-
+//******************* Declaracion y seteo de Elementos ************************
         nombre = findViewById(R.id.Nombre);
         fecha = findViewById(R.id.FechaCaducidad);
         notiNaranja = findViewById(R.id.notiNaranja);
@@ -88,7 +88,7 @@ public class VerActivity extends AppCompatActivity {
 
 
         }
-
+//******************************** Boton de Borrar *************************************************
         borrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,7 +120,7 @@ public class VerActivity extends AppCompatActivity {
             }
         });
 
-
+//******************************** Boton de Editar *************************************************
         editar=findViewById(R.id.IconEditar);
         editar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,8 +135,7 @@ public class VerActivity extends AppCompatActivity {
 
     }
 
-
-
+//******************************** Carga las categorias al spinner *********************************
     public void listaCategorias(){
         try{
             //prepara query

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Productos {
+//*************************** Declaracion de variables de Productos ********************************
     private int PRODUCTO_ID;
     private int CATEGORIA_ID;
     private String PRODUCTO_NOMBRE;
@@ -33,6 +34,7 @@ public class Productos {
 
     Connection con;
 
+//************************** Getter and setter de productos ****************************************
     public int getPRODUCTO_ID() {
         return PRODUCTO_ID;
     }
@@ -96,8 +98,10 @@ public class Productos {
     public void setPRODUCTO_NOTIFICACION_ROJA(int PRODUCTO_NOTIFICACION_ROJA) {
         this.PRODUCTO_NOTIFICACION_ROJA = PRODUCTO_NOTIFICACION_ROJA;
     }
+
+//************************ Funcion para insertar query en base de datos ****************************
     public void insertar (Context context, String nombre, String fechaIngreso, String fechaCaducidad,int Categoria, String notiNaranja, String notiRoja){
-        //******************** Validaciones para query de insercion ****************************************
+//******************** Validaciones para query de insercion ****************************************
 
         DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
         Date nuevo = null;
@@ -156,7 +160,7 @@ public class Productos {
         }
     }
 
-
+//************************ Funcion para editar query en base de datos ****************************
     public boolean Editar (Context context,int ID, String nombre, String fechaIngreso, String fechaCaducidad,int Categoria, String notiNaranja, String notiRoja){
         //******************** Validaciones para query de edicion ****************************************
 
@@ -219,7 +223,7 @@ public class Productos {
         }
         return false;
     }
-
+//************************ Funcion para borrar query en base de datos ******************************
     public boolean Borrar(int ID){
         boolean bandera;
         try{
@@ -239,7 +243,6 @@ public class Productos {
     }
 
     public ArrayList<Productos> mostrarProductos(){
-
 
         ArrayList<Productos> listaProductos = new ArrayList<Productos>();
         try {

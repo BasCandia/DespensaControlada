@@ -29,7 +29,7 @@ import entidades.Productos;
 
 public class EditarActivity extends AppCompatActivity {
 
-    //********************************* Elementos en pantalla ******************************************
+//********************************* Elementos en pantalla ******************************************
     EditText fecha;
     Spinner spinnerC;
     Button guardar;
@@ -46,7 +46,7 @@ public class EditarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ver_producto);
         context = this;
 
-
+//******************* Declaracion y seteo de Elementos ************************
         nombre = findViewById(R.id.Nombre);
         fecha = findViewById(R.id.FechaCaducidad);
         notiNaranja = findViewById(R.id.notiNaranja);
@@ -77,7 +77,7 @@ public class EditarActivity extends AppCompatActivity {
             spinnerC.setSelection(producto.getCATEGORIA_ID());
 
         }
-
+//******************* Elementos para seleccionar fecha de forma interactiva ************************
         fecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,7 +89,7 @@ public class EditarActivity extends AppCompatActivity {
             }
         });
 
-
+//***************************** Boton para Editar **************************************************
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,7 +117,7 @@ public class EditarActivity extends AppCompatActivity {
         intent.putExtra("ID",id);
         startActivity(intent);
     }
-
+//****************** funcion para cargar en spinner datos de la tabla  *****************************
     public void listaCategorias(){
         try{
             //prepara query
@@ -145,6 +145,7 @@ public class EditarActivity extends AppCompatActivity {
         }
     }
 
+//**************** Elementos para seleccionar fecha de forma interactiva ***************************
     private void showDatePickerDialog() {
         DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
             @Override

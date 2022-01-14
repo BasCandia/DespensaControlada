@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAdapter.ProductoViewHolder> {
-
+//********************** Declaracion y inicializacion de Lista de productos ************************
     ArrayList<Productos> listaProductos;
 
 
@@ -37,6 +37,7 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
         return new ProductoViewHolder(view);
     }
 
+//********************** Seteo de datos a lista de productos ***************************************
     @Override
     public void onBindViewHolder(@NonNull ProductoViewHolder holder, int position) {
 
@@ -77,6 +78,7 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
 
     }
 
+//******************** Manda un producto a VerActivity segun id *****************************
     public class ProductoViewHolder extends RecyclerView.ViewHolder {
 
         TextView viewNombre, viewFecha;

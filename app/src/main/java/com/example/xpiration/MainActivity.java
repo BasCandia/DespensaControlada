@@ -4,8 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -19,7 +24,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import entidades.ListaProductosAdapter;
 import entidades.Productos;
@@ -41,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
+
+
+
         setContentView(R.layout.activity_main);
 //****************************** Inicializacion de elementos ***************************************
         context = this;
@@ -51,8 +63,18 @@ public class MainActivity extends AppCompatActivity {
         ListaProductosAdapter adapter = new ListaProductosAdapter(p.mostrarProductos());
         recyclerView.setAdapter(adapter);
 
+//************** Se crea los elementos para activar notificacion a cierto tiempo *******************
+        createNotificationChannel();
+        Intent intent = new Intent(MainActivity.this,ReminderBroadcast.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this,0,intent,0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+        //Tiempo en cuando se mandara la notificacion en milisegundos
+        long Activar = System.currentTimeMillis();
+        long dies = 1000 * 10;
 
 
+        alarmManager.set(AlarmManager.RTC_WAKEUP,Activar + dies,pendingIntent);
 
 
 //****************************** Boton para agregar productos **************************************
@@ -66,6 +88,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+//*** Desde una cierta version de android es requerido crear un canal para enviar notificaciones****
+    private void createNotificationChannel(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            CharSequence name = "Xpiration";
+            String description = "Notificacion de Xpiration";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("ChannelXpiration",name,importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
 }
