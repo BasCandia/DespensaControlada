@@ -165,8 +165,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/iconBorrar"
         app:layout_constraintStart_toEndOf="@+id/BtnGuardar"
-        app:tint="@color/purple_500"
-        app:srcCompat="@drawable/ic_pen" />
+        app:srcCompat="@drawable/ic_paint_brush"
+        app:tint="@color/purple_500" />
 
     <ImageView
         android:id="@+id/iconBorrar"
