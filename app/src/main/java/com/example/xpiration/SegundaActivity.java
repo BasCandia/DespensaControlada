@@ -33,18 +33,13 @@ public class SegundaActivity extends AppCompatActivity {
 
     private Context context; //instancia
 //********************************* Elementos en pantalla ******************************************
-    EditText fecha;
+
     Spinner spinnerC;
     Connection con;
     Button crear;
     TextView nombre;
-    TextView notiNaranja,notiRoja;
+
 //**************** Elementos para seleccionar fecha de forma interactiva ***************************
-    Date now = new Date();
-    DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
-    String vDateYMD = dateFormatYMD.format(now);
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,23 +48,6 @@ public class SegundaActivity extends AppCompatActivity {
         context = this;
 //****************************** Inicializacion de elementos ***************************************
         nombre = findViewById(R.id.Nombre);
-        fecha = findViewById(R.id.FechaCaducidad);
-        notiNaranja = findViewById(R.id.notiNaranja);
-        notiRoja = findViewById(R.id.notiRoja);
-
-//**************** Al hacer click en fecha desplega elemento interactivo ***************************
-        fecha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (view.getId()) {
-                    case R.id.FechaCaducidad:
-                        showDatePickerDialog();
-
-                        break;
-                }
-
-            }
-        });
 
 //****************** funcion para cargar en spinner datos de la tabla  *****************************
         listaCategorias();
@@ -80,39 +58,13 @@ public class SegundaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Productos p = new Productos();
-                p.insertar(context,nombre.getText().toString(),vDateYMD,fecha.getText().toString(),spinnerC.getSelectedItemPosition(),notiNaranja.getText().toString(),notiRoja.getText().toString());
+                p.insertar(context,nombre.getText().toString(),spinnerC.getSelectedItemPosition());
             }
         });
 
     }
 
-//****** obtiene los datos seleccionados interactivamente para la fecha y los formatea *************
-    private void showDatePickerDialog() {
-        DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
 
-                String mesMod,dayMod;
-
-                if(month < 9){
-                    mesMod = "/0";
-                }else{
-                    mesMod = "/";
-                }
-                if(day < 10){
-                    dayMod = "/0";
-                }else{
-                    dayMod = "/";
-                }
-                //month+1 es porque enero es un 0
-                final String selectedDate = year + mesMod + (month+1) + dayMod + day;
-
-                fecha.setText(selectedDate);
-            }
-        });
-
-        newFragment.show(getFragmentManager(), "datePicker");
-    }
 
 //****************** funcion para cargar en spinner datos de la tabla  *****************************
     public void listaCategorias(){

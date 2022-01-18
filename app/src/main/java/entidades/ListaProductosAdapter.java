@@ -42,31 +42,31 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
     public void onBindViewHolder(@NonNull ProductoViewHolder holder, int position) {
 
 
-        Date now = new Date();
-        DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
-        String vDateYMD = dateFormatYMD.format(now);
+     //   Date now = new Date();
+     //   DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
+     //   String vDateYMD = dateFormatYMD.format(now);
 
-        Date nuevo=null;
-        Date comparado=null;
+     //   Date nuevo=null;
+     //   Date comparado=null;
 
-        try {
-            nuevo = dateFormatYMD.parse(vDateYMD);
-            comparado = listaProductos.get(position).getPRODUCTO_FECHA_CADUCIDAD();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+     //   try {
+     //       nuevo = dateFormatYMD.parse(vDateYMD);
+           // comparado = listaProductos.get(position).getPRODUCTO_FECHA_CADUCIDAD();
+     //   } catch (ParseException e) {
+      //      e.printStackTrace();
+     //   }
 
-        int diff = (int)((comparado.getTime() - nuevo.getTime())/86400000);
+     //   int diff = (int)((comparado.getTime() - nuevo.getTime())/86400000);
 
 
         holder.viewNombre.setText(listaProductos.get(position).getPRODUCTO_NOMBRE());
-        holder.viewFecha.setText(diff+" dias para Caducar");
-        if(diff<=listaProductos.get(position).getPRODUCTO_NOTIFICACION_NARANJA()){
-            holder.estado.setImageResource(R.drawable.ic_yellow_circle);
-            if(diff<=listaProductos.get(position).getPRODUCTO_NOTIFICACION_ROJA()){
-                holder.estado.setImageResource(R.drawable.ic_red_circle);
-            }
-        }
+       // holder.viewFecha.setText(diff+" dias para Caducar");
+       // if(diff<=listaProductos.get(position).getPRODUCTO_NOTIFICACION_NARANJA()){
+       //     holder.estado.setImageResource(R.drawable.ic_yellow_circle);
+       //     if(diff<=listaProductos.get(position).getPRODUCTO_NOTIFICACION_ROJA()){
+       //         holder.estado.setImageResource(R.drawable.ic_red_circle);
+      //      }
+     //   }
 
 
 

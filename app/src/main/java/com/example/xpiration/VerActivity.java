@@ -74,12 +74,12 @@ public class VerActivity extends AppCompatActivity {
         if(producto != null){
             nombre.setText(producto.getPRODUCTO_NOMBRE());
             nombre.setInputType(InputType.TYPE_NULL);
-            String modificado = producto.getPRODUCTO_FECHA_CADUCIDAD().toString().replace("-","/");
-            fecha.setText(modificado);
+           // String modificado = producto.getPRODUCTO_FECHA_CADUCIDAD().toString().replace("-","/");
+          //  fecha.setText(modificado);
             fecha.setInputType(InputType.TYPE_NULL);
-            notiNaranja.setText(producto.getPRODUCTO_NOTIFICACION_NARANJA()+"");
+           // notiNaranja.setText(producto.getPRODUCTO_NOTIFICACION_NARANJA()+"");
             notiNaranja.setInputType(InputType.TYPE_NULL);
-            notiRoja.setText(producto.getPRODUCTO_NOTIFICACION_ROJA()+"");
+           // notiRoja.setText(producto.getPRODUCTO_NOTIFICACION_ROJA()+"");
             notiRoja.setInputType(InputType.TYPE_NULL);
             spinnerC.setSelection(producto.getCATEGORIA_ID());
             spinnerC.setEnabled(false);

@@ -77,10 +77,10 @@ public class EditarActivity extends AppCompatActivity {
 
         if(producto != null){
             nombre.setText(producto.getPRODUCTO_NOMBRE());
-            String modificado = producto.getPRODUCTO_FECHA_CADUCIDAD().toString().replace("-","/");
-            fecha.setText(modificado);
-            notiNaranja.setText(producto.getPRODUCTO_NOTIFICACION_NARANJA()+"");
-            notiRoja.setText(producto.getPRODUCTO_NOTIFICACION_ROJA()+"");
+           // String modificado = producto.getPRODUCTO_FECHA_CADUCIDAD().toString().replace("-","/");
+          //  fecha.setText(modificado);
+          //  notiNaranja.setText(producto.getPRODUCTO_NOTIFICACION_NARANJA()+"");
+          //  notiRoja.setText(producto.getPRODUCTO_NOTIFICACION_ROJA()+"");
             spinnerC.setSelection(producto.getCATEGORIA_ID());
 
         }
