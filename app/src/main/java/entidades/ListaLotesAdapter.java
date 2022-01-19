@@ -26,7 +26,7 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
 
 
     public ListaLotesAdapter(ArrayList<Lotes> listaLotes){
-        this.listaLotes = this.listaLotes;
+        this.listaLotes = listaLotes;
     }
 
     @NonNull
@@ -71,7 +71,11 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
 
     @Override
     public int getItemCount() {
-        return listaLotes.size();
+        if(listaLotes.size()==0){
+            return 0;
+        }else {
+            return listaLotes.size();
+        }
 
     }
 
