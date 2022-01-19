@@ -14,9 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.xpiration.R;
 import com.example.xpiration.Submenu;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class ListaLotesAdapter  extends RecyclerView.Adapter<ListaProductosAdapter.ProductoViewHolder>  {
+public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.LotesViewHolder>  {
     //********************** Declaracion y inicializacion de Lista de productos ************************
     ArrayList<Lotes> listaLotes;
 
@@ -28,42 +32,40 @@ public class ListaLotesAdapter  extends RecyclerView.Adapter<ListaProductosAdapt
     @NonNull
     @Override
     public LotesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lista_item_producto, null,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lista_item_lote, null,false);
         return new LotesViewHolder(view);
     }
 
     //********************** Seteo de datos a lista de productos ***************************************
     @Override
-    public void onBindViewHolder(@NonNull ListaProductosAdapter.ProductoViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull LotesViewHolder holder, int position) {
 
 
-        //   Date now = new Date();
-        //   DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
-        //   String vDateYMD = dateFormatYMD.format(now);
+        Date now = new Date();
+        DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
+        String vDateYMD = dateFormatYMD.format(now);
 
-        //   Date nuevo=null;
-        //   Date comparado=null;
+        Date nuevo=null;
+        Date comparado=null;
 
-        //   try {
-        //       nuevo = dateFormatYMD.parse(vDateYMD);
-        // comparado = listaProductos.get(position).getPRODUCTO_FECHA_CADUCIDAD();
-        //   } catch (ParseException e) {
-        //      e.printStackTrace();
-        //   }
+        try {
+            nuevo = dateFormatYMD.parse(vDateYMD);
+            comparado = listaLotes.get(position).getLOTE_FECHA_CADUCIDAD();
+        } catch (ParseException e) {
+           e.printStackTrace();
+        }
 
-        //   int diff = (int)((comparado.getTime() - nuevo.getTime())/86400000);
-
-
-        holder.viewNombre.setText(listaLotes.get(position).getPRODUCTO_NOMBRE());
-        // holder.viewFecha.setText(diff+" dias para Caducar");
-        // if(diff<=listaProductos.get(position).getPRODUCTO_NOTIFICACION_NARANJA()){
-        //     holder.estado.setImageResource(R.drawable.ic_yellow_circle);
-        //     if(diff<=listaProductos.get(position).getPRODUCTO_NOTIFICACION_ROJA()){
-        //         holder.estado.setImageResource(R.drawable.ic_red_circle);
-        //      }
-        //   }
+        int diff = (int)((comparado.getTime() - nuevo.getTime())/86400000);
 
 
+        holder.viewNombre.setText(listaLotes.get(position).getLOTE_NOMBRE());
+        holder.viewFecha.setText(diff+" dias para Caducar");
+        if(diff<=listaLotes.get(position).getLOTE_NOTIFICACION_NARANJA()){
+            holder.estado.setImageResource(R.drawable.ic_yellow_circle);
+            if(diff<=listaLotes.get(position).getLOTE_NOTIFICACION_ROJA()){
+                holder.estado.setImageResource(R.drawable.ic_red_circle);
+            }
+        }
 
     }
 
@@ -81,16 +83,16 @@ public class ListaLotesAdapter  extends RecyclerView.Adapter<ListaProductosAdapt
 
         public LotesViewHolder(@NonNull View itemView) {
             super(itemView);
-            viewNombre = itemView.findViewById(R.id.ProductoNombre);
-            viewFecha = itemView.findViewById(R.id.Caducidad);
-            estado = itemView.findViewById(R.id.IconoEstado);
+            viewNombre = itemView.findViewById(R.id.LoteNombre);
+            viewFecha = itemView.findViewById(R.id.LoteCaducidad);
+            estado = itemView.findViewById(R.id.IconoEstadoLote);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Context context = view.getContext();
                     Intent intent = new Intent(context, Submenu.class);
-                    intent.putExtra("ID", listaLotes.get(getAdapterPosition()).getPRODUCTO_ID());
+                    intent.putExtra("ID", listaLotes.get(getAdapterPosition()).getLOTE_ID());
                     context.startActivity(intent);
                 }
             });

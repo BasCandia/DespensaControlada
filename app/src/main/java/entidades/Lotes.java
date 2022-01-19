@@ -172,4 +172,110 @@ public class Lotes {
             }
     }
 
+    public static boolean Editar(Context context, int ID, String nombre, String fechaIngreso, String fechaCaducidad, String notiNaranja, String notiRoja){
+        //******************** Validaciones para query de edicion ****************************************
+        DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
+        Date nuevo = null;
+        Date comparado = null;
+
+        if(fechaCaducidad.isEmpty()){
+            Toast.makeText(context,"Ingrese una fecha de vencimiento",Toast.LENGTH_SHORT).show();
+        }else {
+            try {
+                nuevo = dateFormatYMD.parse(fechaIngreso);
+                comparado = dateFormatYMD.parse(fechaCaducidad);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            if (comparado.compareTo(nuevo) <= 0) {
+                Toast.makeText(context, "El producto caduca hoy o ya ha caducado", Toast.LENGTH_SHORT).show();
+            } else {
+                if (nombre.length() == 0) {
+                    Toast.makeText(context, "Ingrese Nombre del producto", Toast.LENGTH_SHORT).show();
+                } else {
+                    if((notiNaranja.isEmpty()) || (notiNaranja.compareToIgnoreCase("0") == 0)){
+                        Toast.makeText(context, "Ingrese dias para notificacion Preventiva", Toast.LENGTH_SHORT).show();
+                    }else{
+                        if((notiRoja.isEmpty()) || (notiRoja.compareToIgnoreCase("0") == 0)){
+                            Toast.makeText(context, "Ingrese dias para notificacion Critica", Toast.LENGTH_SHORT).show();
+                        }else{
+//************** inicializacion de conexion, construccion y envio de query *************************
+                            try {
+                                String query = (" UPDATE LOTE SET LOTE_NOMBRE = '" + nombre + "', LOTE_FECHA_INGRESO = '" + fechaIngreso + "', LOTE_FECHA_CADUCIDAD = '" + fechaCaducidad + "', LOTE_NOTIFICACION_NARANJA = " + notiNaranja + ", LOTE_NOTIFICACION_ROJA = " + notiRoja + "WHERE LOTE_ID = " + ID);
+                                ConnectionHelper conexion = new ConnectionHelper();
+                                Connection con = conexion.connectionclass();
+
+                                PreparedStatement pst = con.prepareStatement(query);
+
+                                pst.executeUpdate();
+
+                                Toast.makeText(context, "Producto agregado correctamente", Toast.LENGTH_SHORT).show();
+
+                                Intent intent = new Intent(context, MainActivity.class);
+                                context.startActivity(intent);
+
+                                return true;
+
+
+                            } catch (SQLException e) {
+                                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                return false;
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+        return false;
+    }
+
+    public Lotes verLote(int id){
+        Lotes l = null;
+        try {
+
+            String query1 = "SELECT * FROM LOTE WHERE PRODUCTO_ID = " + id;
+
+            ConnectionHelper conexion = new ConnectionHelper();
+            con = conexion.connectionclass();
+            Statement st = null;
+
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(query1);
+
+
+            while (rs.next()) {
+                l = new Lotes();
+                //l.setPRODUCTO_ID(rs.getInt("PRODUCTO_ID"));
+                l.setLOTE_NOMBRE(rs.getString("LOTE_NOMBRE"));
+                //l.setLOTE_FECHA_INGRESO(rs.getDate("LOTE_FECHA_INGRESO"));
+                l.setLOTE_FECHA_CADUCIDAD(rs.getDate("LOTE_FECHA_CADUCIDAD"));
+                l.setLOTE_NOTIFICACION_NARANJA(rs.getInt("LOTE_NOTIFICACION_NARANJA"));
+                l.setLOTE_NOTIFICACION_ROJA(rs.getInt("LOTE_NOTIFICACION_ROJA"));
+
+            }
+        }catch (SQLException e){
+            System.out.println("Error in sql statement");
+        }
+        return l;
+    }
+
+    public boolean Borrar(int ID){
+        boolean bandera;
+        try{
+            String query = "DELETE FROM LOTE WHERE LOTE_ID="+ID;
+            ConnectionHelper conexion = new ConnectionHelper();
+            con = conexion.connectionclass();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            bandera = true;
+
+        }catch (SQLException e) {
+            bandera = false;
+        }
+
+
+        return bandera;
+    }
+
 }
