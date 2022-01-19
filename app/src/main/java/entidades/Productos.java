@@ -219,6 +219,8 @@ public class Productos {
         return listaProductos;
     }
 
+
+
     public Productos verProducto(int id){
         Productos p = null;
         try {

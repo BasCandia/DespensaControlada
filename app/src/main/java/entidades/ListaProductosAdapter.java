@@ -13,6 +13,7 @@ import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.xpiration.R;
+import com.example.xpiration.Submenu;
 import com.example.xpiration.VerActivity;
 
 import java.text.DateFormat;
@@ -94,7 +95,7 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
                 @Override
                 public void onClick(View view) {
                     Context context = view.getContext();
-                    Intent intent = new Intent(context, VerActivity.class);
+                    Intent intent = new Intent(context, Submenu.class);
                     intent.putExtra("ID",listaProductos.get(getAdapterPosition()).getPRODUCTO_ID());
                     context.startActivity(intent);
                 }

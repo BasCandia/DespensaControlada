@@ -9,10 +9,13 @@ import com.example.xpiration.MainActivity;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Lotes {
@@ -80,6 +83,39 @@ public class Lotes {
 
     public void setLOTE_NOTIFICACION_ROJA(int LOTE_NOTIFICACION_ROJA) {
         this.LOTE_NOTIFICACION_ROJA = LOTE_NOTIFICACION_ROJA;
+    }
+
+    public ArrayList<Lotes> mostrarLotes(int id){
+
+        ArrayList<Lotes> listaLotes = new ArrayList<>();
+        try {
+            Lotes l;
+            String query1 = "SELECT * FROM LOTE WHERE PRODUCTO_ID = "+ id +";";
+
+
+            ConnectionHelper conexion = new ConnectionHelper();
+            con = conexion.connectionclass();
+            Statement st = null;
+
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(query1);
+
+
+            while (rs.next()) {
+                l = new Lotes();
+                l.setPRODUCTO_ID(rs.getInt("PRODUCTO_ID"));
+                l.setLOTE_NOMBRE(rs.getString("LOTE_NOMBRE"));
+                l.setLOTE_FECHA_INGRESO(rs.getDate("LOTE_FECHA_INGRESO"));
+                l.setLOTE_FECHA_CADUCIDAD(rs.getDate("LOTE_FECHA_CADUCIDAD"));
+                l.setLOTE_NOTIFICACION_NARANJA(rs.getInt("LOTE_NOTIFICACION_NARANJA"));
+                l.setLOTE_NOTIFICACION_ROJA(rs.getInt("LOTE_NOTIFICACION_ROJA"));
+                listaLotes.add(l);
+
+            }
+        }catch (SQLException e){
+            System.out.println("Error in sql statment");
+        }
+        return listaLotes;
     }
 
     public void insertar (Context context,String idproducto, String nombre, String fechaIngreso, String fechaCaducidad, String notiNaranja, String notiRoja){

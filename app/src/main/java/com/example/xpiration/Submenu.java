@@ -25,15 +25,32 @@ public class Submenu extends AppCompatActivity {
     RecyclerView recyclerViewLote;
     private Context contextLote;
     Lotes l;
+    int id;
     ArrayList<Lotes> listaLote;
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        contextLote = this;
+        if(savedInstanceState == null){
+            Bundle extras = getIntent().getExtras();
+            if(extras == null){
+                id = Integer.parseInt(null);
+            }else{
+                id = extras.getInt("ID");
+            }
+        }else {
+            id = (int) savedInstanceState.getSerializable("ID");
+        }
+
+        listaLote = l.mostrarLotes(id);
+
         recyclerViewLote = findViewById(R.id.ListaLote);
         recyclerViewLote.setLayoutManager(new LinearLayoutManager(this));
+
+
         //p = new Productos();
         //listaMain = new ArrayList<Productos>();
         //ListaProductosAdapter adapter = new ListaProductosAdapter(p.mostrarProductos());
