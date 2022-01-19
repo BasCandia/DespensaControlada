@@ -71,12 +71,7 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
 
     @Override
     public int getItemCount() {
-        if(listaLotes.size()==0){
-            return 0;
-        }else {
-            return listaLotes.size();
-        }
-
+        return listaLotes.size();
     }
 
     //******************** Manda un producto a VerActivity segun id *****************************

@@ -103,6 +103,7 @@ public class Lotes {
 
             while (rs.next()) {
                 l = new Lotes();
+                l.setLOTE_ID(rs.getInt("LOTE_ID"));
                 l.setPRODUCTO_ID(rs.getInt("PRODUCTO_ID"));
                 l.setLOTE_NOMBRE(rs.getString("LOTE_NOMBRE"));
                 l.setLOTE_FECHA_INGRESO(rs.getDate("LOTE_FECHA_INGRESO"));
@@ -147,7 +148,7 @@ public class Lotes {
                             }else{
 //************** inicializacion de conexion, construccion y envio de query *************************
                                 try {
-                                    String query = "INSERT PRODUCTO VALUES (" + idproducto + ",'" + nombre +"','"+ fechaIngreso + "','" + fechaCaducidad + "',"+notiNaranja+','+notiRoja+");";
+                                    String query = "INSERT LOTE VALUES (" + idproducto + ",'" + nombre +"','"+ fechaIngreso + "','" + fechaCaducidad + "',"+notiNaranja+','+notiRoja+");";
                                     ConnectionHelper conexion = new ConnectionHelper();
                                     Connection con = conexion.connectionclass();
 

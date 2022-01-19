@@ -5,8 +5,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -33,6 +36,7 @@ public class SubmenuActivity extends AppCompatActivity {
         context = this;
         recyclerViewLote = findViewById(R.id.ListaLote);
         recyclerViewLote.setLayoutManager(new LinearLayoutManager(this));
+        masLote = findViewById(R.id.plusLote);
 
         if(savedInstanceState == null){
             Bundle extras = getIntent().getExtras();
@@ -51,6 +55,17 @@ public class SubmenuActivity extends AppCompatActivity {
         ListaLotesAdapter adapter = new ListaLotesAdapter(l.mostrarLotes(id));
 
         recyclerViewLote.setAdapter(adapter);
+
+        masLote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(context, "No existen lotes con id = " + id, Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(context, LoteCrearActivity.class);
+                intent.putExtra("ID",id);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
