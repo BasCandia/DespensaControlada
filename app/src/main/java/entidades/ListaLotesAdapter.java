@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.xpiration.R;
-import com.example.xpiration.Submenu;
+import com.example.xpiration.VerLoteActivity;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -91,7 +91,7 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
                 @Override
                 public void onClick(View view) {
                     Context context = view.getContext();
-                    Intent intent = new Intent(context, Submenu.class);
+                    Intent intent = new Intent(context, VerLoteActivity.class);
                     intent.putExtra("ID", listaLotes.get(getAdapterPosition()).getLOTE_ID());
                     context.startActivity(intent);
                 }

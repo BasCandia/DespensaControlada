@@ -7,21 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.xpiration.R;
-import com.example.xpiration.Submenu;
-import com.example.xpiration.VerActivity;
+import com.example.xpiration.SubmenuActivity;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAdapter.ProductoViewHolder> {
 //********************** Declaracion y inicializacion de Lista de productos ************************
@@ -96,7 +89,7 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
                 @Override
                 public void onClick(View view) {
                     Context context = view.getContext();
-                    Intent intent = new Intent(context, Submenu.class);
+                    Intent intent = new Intent(context, SubmenuActivity.class);
                     intent.putExtra("ID",listaProductos.get(getAdapterPosition()).getPRODUCTO_ID());
                     context.startActivity(intent);
                 }
