@@ -44,6 +44,7 @@ public class EditarLoteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_lote);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         context = this;
 
 //******************* Declaracion y seteo de Elementos ************************

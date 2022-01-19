@@ -90,7 +90,7 @@ public class Lotes {
         ArrayList<Lotes> listaLotes = new ArrayList<>();
         try {
             Lotes l;
-            String query1 = "SELECT * FROM LOTE WHERE PRODUCTO_ID = "+ id +";";
+            String query1 = "SELECT * FROM LOTE WHERE PRODUCTO_ID = "+ id ;
 
 
             ConnectionHelper conexion = new ConnectionHelper();
@@ -235,7 +235,7 @@ public class Lotes {
         Lotes l = null;
         try {
 
-            String query1 = "SELECT * FROM LOTE WHERE PRODUCTO_ID = " + id;
+            String query1 = "SELECT * FROM LOTE WHERE LOTE_ID = " + id;
 
             ConnectionHelper conexion = new ConnectionHelper();
             con = conexion.connectionclass();

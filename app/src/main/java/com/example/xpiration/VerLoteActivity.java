@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.Connection;
 
@@ -37,6 +38,7 @@ public class VerLoteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_lote);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         context = this;
 //******************* Declaracion y seteo de Elementos ************************
@@ -57,6 +59,7 @@ public class VerLoteActivity extends AppCompatActivity {
         }else{
             id = (int) savedInstanceState.getSerializable("ID");
         }
+        //Toast.makeText(context, "lote con id = " + id, Toast.LENGTH_LONG).show();
 
         lotes = new Lotes().verLote(id);
 

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -90,6 +91,7 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
                 @Override
                 public void onClick(View view) {
                     Context context = view.getContext();
+                    //Toast.makeText(context, "lote con id = " + listaLotes.get(getAdapterPosition()).getLOTE_ID(), Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(context, VerLoteActivity.class);
                     intent.putExtra("ID", listaLotes.get(getAdapterPosition()).getLOTE_ID());
                     context.startActivity(intent);
