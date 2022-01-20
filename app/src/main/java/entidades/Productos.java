@@ -69,7 +69,7 @@ public class Productos {
 
 
 //************************ Funcion para insertar query en base de datos ****************************
-    public void insertar (Context context, String nombre, int Categoria){
+    public void insertar (Context context, String nombre, int Categoria,String fechaIngreso){
 //******************** Validaciones para query de insercion ****************************************
 
         if( Categoria == 0) {
@@ -80,7 +80,7 @@ public class Productos {
            } else {
 //************** inicializacion de conexion, construccion y envio de query *************************
                try {
-                   String query = "INSERT PRODUCTO VALUES (" + Categoria + ",'" + nombre +"',null);";
+                   String query = "INSERT PRODUCTO VALUES (" + Categoria + ",'" + nombre +"',null,'"+fechaIngreso+"');";
                    ConnectionHelper conexion = new ConnectionHelper();
                    Connection con = conexion.connectionclass();
 
@@ -190,7 +190,7 @@ public class Productos {
         ArrayList<Productos> listaProductos = new ArrayList<Productos>();
         try {
             Productos p;
-            String query1 = "SELECT * FROM PRODUCTO ORDER BY PRODUCTO_NOMBRE ASC";
+            String query1 = "SELECT * FROM PRODUCTO ORDER BY PRODUCTO_FECHA_INGRESO DESC,PRODUCTO_ID DESC";
 
 
             ConnectionHelper conexion = new ConnectionHelper();
@@ -218,6 +218,39 @@ public class Productos {
         }
         return listaProductos;
     }
+
+    public ArrayList<Lotes> lotesMasViejos(){
+        ArrayList<Lotes> listaLotes = new ArrayList<>();
+        try {
+            Lotes l;
+            String query1 = "SELECT L.PRODUCTO_ID, MIN(L.LOTE_FECHA_CADUCIDAD) FROM LOTE L GROUP BY L.PRODUCTO_ID" ;
+
+            ConnectionHelper conexion = new ConnectionHelper();
+            con = conexion.connectionclass();
+            Statement st = null;
+
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(query1);
+
+
+            while (rs.next()) {
+                l = new Lotes();
+                l.setLOTE_ID(rs.getInt("LOTE_ID"));
+                l.setPRODUCTO_ID(rs.getInt("PRODUCTO_ID"));
+                l.setLOTE_NOMBRE(rs.getString("LOTE_NOMBRE"));
+                l.setLOTE_FECHA_INGRESO(rs.getDate("LOTE_FECHA_INGRESO"));
+                l.setLOTE_FECHA_CADUCIDAD(rs.getDate("LOTE_FECHA_CADUCIDAD"));
+                l.setLOTE_NOTIFICACION_NARANJA(rs.getInt("LOTE_NOTIFICACION_NARANJA"));
+                l.setLOTE_NOTIFICACION_ROJA(rs.getInt("LOTE_NOTIFICACION_ROJA"));
+                listaLotes.add(l);
+
+            }
+        }catch (SQLException e){
+            System.out.println("Error in sql statment");
+        }
+        return listaLotes;
+    }
+
 
 
 

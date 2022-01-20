@@ -39,6 +39,10 @@ public class SegundaActivity extends AppCompatActivity {
     Button crear;
     TextView nombre;
 
+    Date now = new Date();
+    DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
+    String vDateYMD = dateFormatYMD.format(now);
+
 //**************** Elementos para seleccionar fecha de forma interactiva ***************************
 
     @Override
@@ -58,7 +62,7 @@ public class SegundaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Productos p = new Productos();
-                p.insertar(context,nombre.getText().toString(),spinnerC.getSelectedItemPosition());
+                p.insertar(context,nombre.getText().toString(),spinnerC.getSelectedItemPosition(),vDateYMD);
             }
         });
 
