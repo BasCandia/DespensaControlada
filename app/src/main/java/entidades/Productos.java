@@ -190,7 +190,7 @@ public class Productos {
         ArrayList<Productos> listaProductos = new ArrayList<Productos>();
         try {
             Productos p;
-            String query1 = "SELECT * FROM PRODUCTO";
+            String query1 = "SELECT * FROM PRODUCTO ORDER BY PRODUCTO_NOMBRE ASC";
 
 
             ConnectionHelper conexion = new ConnectionHelper();

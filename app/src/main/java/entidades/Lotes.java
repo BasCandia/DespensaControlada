@@ -90,7 +90,7 @@ public class Lotes {
         ArrayList<Lotes> listaLotes = new ArrayList<>();
         try {
             Lotes l;
-            String query1 = "SELECT * FROM LOTE WHERE PRODUCTO_ID = "+ id ;
+            String query1 = "SELECT * FROM LOTE WHERE PRODUCTO_ID = "+ id + " ORDER BY LOTE_FECHA_CADUCIDAD ASC" ;
 
 
             ConnectionHelper conexion = new ConnectionHelper();
