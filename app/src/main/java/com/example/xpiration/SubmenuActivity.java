@@ -32,6 +32,7 @@ public class SubmenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submenu);
+        //Test para mostrarle al Ramza
 
         context = this;
         recyclerViewLote = findViewById(R.id.ListaLote);
