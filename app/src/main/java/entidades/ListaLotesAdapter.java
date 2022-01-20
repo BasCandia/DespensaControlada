@@ -37,7 +37,7 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
         return new LotesViewHolder(view);
     }
 
-    //********************** Seteo de datos a lista de productos ***************************************
+//********************** Seteo de datos a lista de productos ***************************************
     @Override
     public void onBindViewHolder(@NonNull LotesViewHolder holder, int position) {
 
@@ -48,7 +48,7 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
 
         Date nuevo=null;
         Date comparado=null;
-
+//************************* Se obtiene la cantidad de dias para que expire *************************
         try {
             nuevo = dateFormatYMD.parse(vDateYMD);
             comparado = listaLotes.get(position).getLOTE_FECHA_CADUCIDAD();
@@ -61,10 +61,18 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
 
         holder.viewNombre.setText(listaLotes.get(position).getLOTE_NOMBRE());
         holder.viewFecha.setText(diff+" dias para Caducar");
+
+//* Al quedar x dias restantes para que expire se cambian los colores de las notificaciones de manera automatica *
         if(diff<=listaLotes.get(position).getLOTE_NOTIFICACION_NARANJA()){
             holder.estado.setImageResource(R.drawable.ic_yellow_circle);
             if(diff<=listaLotes.get(position).getLOTE_NOTIFICACION_ROJA()){
                 holder.estado.setImageResource(R.drawable.ic_red_circle);
+                if(diff<= 0){ // Si es el dia en el que expira el lote el circulo sera negro
+                    holder.estado.setImageResource(R.drawable.ic_black_circle);
+                    if(diff<= -3){ // Si pasaron 3 dias el lote se borrara de manera automatica
+                        listaLotes.get(position).Borrar(listaLotes.get(position).getLOTE_ID());
+                    }
+                }
             }
         }
 
@@ -75,7 +83,7 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
         return listaLotes.size();
     }
 
-    //******************** Manda un producto a VerActivity segun id *****************************
+//*********************** Manda un Lote a VerLoteActivity segun id *********************************
     public class LotesViewHolder extends RecyclerView.ViewHolder {
 
         TextView viewNombre, viewFecha;
