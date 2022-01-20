@@ -219,37 +219,6 @@ public class Productos {
         return listaProductos;
     }
 
-    public ArrayList<Lotes> lotesMasViejos(){
-        ArrayList<Lotes> listaLotes = new ArrayList<>();
-        try {
-            Lotes l;
-            String query1 = "SELECT L.PRODUCTO_ID, MIN(L.LOTE_FECHA_CADUCIDAD) FROM LOTE L GROUP BY L.PRODUCTO_ID" ;
-
-            ConnectionHelper conexion = new ConnectionHelper();
-            con = conexion.connectionclass();
-            Statement st = null;
-
-            st = con.createStatement();
-            ResultSet rs = st.executeQuery(query1);
-
-
-            while (rs.next()) {
-                l = new Lotes();
-                l.setLOTE_ID(rs.getInt("LOTE_ID"));
-                l.setPRODUCTO_ID(rs.getInt("PRODUCTO_ID"));
-                l.setLOTE_NOMBRE(rs.getString("LOTE_NOMBRE"));
-                l.setLOTE_FECHA_INGRESO(rs.getDate("LOTE_FECHA_INGRESO"));
-                l.setLOTE_FECHA_CADUCIDAD(rs.getDate("LOTE_FECHA_CADUCIDAD"));
-                l.setLOTE_NOTIFICACION_NARANJA(rs.getInt("LOTE_NOTIFICACION_NARANJA"));
-                l.setLOTE_NOTIFICACION_ROJA(rs.getInt("LOTE_NOTIFICACION_ROJA"));
-                listaLotes.add(l);
-
-            }
-        }catch (SQLException e){
-            System.out.println("Error in sql statment");
-        }
-        return listaLotes;
-    }
 
 
 
