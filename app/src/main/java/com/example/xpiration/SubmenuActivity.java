@@ -20,8 +20,8 @@ import entidades.Lotes;
 
 public class SubmenuActivity extends AppCompatActivity {
 
+//********************************* Elementos en pantalla **************************************
     FloatingActionButton masLote;
-    ImageView estadoLote;
     RecyclerView recyclerViewLote;
     private Context context;
     Lotes l;
@@ -32,13 +32,12 @@ public class SubmenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submenu);
-        //Test para mostrarle al Ramza
-
+//****************************** Inicializacion de elementos ***************************************
         context = this;
         recyclerViewLote = findViewById(R.id.ListaLote);
         recyclerViewLote.setLayoutManager(new LinearLayoutManager(this));
         masLote = findViewById(R.id.plusLote);
-
+//**** Se recibe desde la view anterior el id del producto seleccionado para mostrar sus lotes *****
         if(savedInstanceState == null){
             Bundle extras = getIntent().getExtras();
             if(extras == null){
@@ -57,6 +56,7 @@ public class SubmenuActivity extends AppCompatActivity {
 
         recyclerViewLote.setAdapter(adapter);
 
+//****************************** Boton para agregar Lotes ******************************************
         masLote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

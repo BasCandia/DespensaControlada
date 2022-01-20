@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Lotes {
+//*************************** Declaracion de variables de Lotes ************************************
     private int LOTE_ID;
     private int PRODUCTO_ID;
     private String LOTE_NOMBRE;
@@ -29,6 +30,7 @@ public class Lotes {
 
     Connection con;
 
+//************************** Getter and setter de Lotes ********************************************
     public int getLOTE_ID() {
         return LOTE_ID;
     }
@@ -119,6 +121,7 @@ public class Lotes {
         return listaLotes;
     }
 
+//************************ Funcion para insertar query en base de datos ****************************
     public void insertar (Context context,String idproducto, String nombre, String fechaIngreso, String fechaCaducidad, String notiNaranja, String notiRoja){
 //******************** Validaciones para query de insercion ****************************************
             DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
@@ -173,8 +176,9 @@ public class Lotes {
             }
     }
 
+//************************ Funcion para editar query en base de datos ******************************
     public static boolean Editar(Context context, int ID, String nombre, String fechaIngreso, String fechaCaducidad, String notiNaranja, String notiRoja){
-        //******************** Validaciones para query de edicion ****************************************
+//******************** Validaciones para query de edicion ******************************************
         DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
         Date nuevo = null;
         Date comparado = null;
@@ -261,6 +265,7 @@ public class Lotes {
         return l;
     }
 
+//************************ Funcion para borrar query en base de datos ******************************
     public boolean Borrar(int ID){
         boolean bandera;
         try{

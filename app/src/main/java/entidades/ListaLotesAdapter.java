@@ -22,9 +22,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.LotesViewHolder>  {
-    //********************** Declaracion y inicializacion de Lista de productos ************************
+//********************** Declaracion y inicializacion de Lista de Lotes ************************
     ArrayList<Lotes> listaLotes;
-
 
     public ListaLotesAdapter(ArrayList<Lotes> listaLotes){
         this.listaLotes = listaLotes;
@@ -37,7 +36,7 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
         return new LotesViewHolder(view);
     }
 
-//********************** Seteo de datos a lista de productos ***************************************
+//********************** Seteo de datos a lista de Lotes ***************************************
     @Override
     public void onBindViewHolder(@NonNull LotesViewHolder holder, int position) {
 
