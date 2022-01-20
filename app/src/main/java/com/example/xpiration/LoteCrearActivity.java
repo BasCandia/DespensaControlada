@@ -77,8 +77,22 @@ public class LoteCrearActivity extends AppCompatActivity {
         crear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Agregar valores por defecto para las notificaciones
+                String n,r;
+                if(notiNaranja.getHint().equals("Por Defecto 7")){
+                    n = "7";
+                }else{
+                    n = notiNaranja.getText().toString();
+                }
+
+                if(notiRoja.getHint().equals("Por Defecto 2")){
+                    r = "2";
+                }else{
+                    r = notiRoja.getText().toString();
+                }
+
                 Lotes l = new Lotes();
-                l.insertar(context,String.valueOf(id),nombre.getText().toString(),vDateYMD,fecha.getText().toString(),notiNaranja.getText().toString(),notiRoja.getText().toString());
+                l.insertar(context,String.valueOf(id),nombre.getText().toString(),vDateYMD,fecha.getText().toString(),n,r);
 
             }
         });
