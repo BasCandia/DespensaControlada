@@ -68,6 +68,7 @@
                 android:value=".MainActivity" />
         </activity>
 
+        <receiver android:name=".ReminderBroadcast"/>
     </application>
 
 </manifest>

@@ -53,8 +53,6 @@ public class MainActivity extends AppCompatActivity {
     private Context context;
     Productos p;
     ArrayList<Productos> listaMain;
-    private PendingIntent pendingIntent;
-    private final static int NOTIFICACION_ID = 0;
     ListaProductosAdapter adapter;
 
     @Override
@@ -69,17 +67,17 @@ public class MainActivity extends AppCompatActivity {
         buildRecyclerView();
 
 //************** Se crea los elementos para activar notificacion a cierto tiempo *******************
-        setPendingIntent();
         createNotificationChannel();
-        createNotification();
-
-        //AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Intent intent = new Intent(MainActivity.this,ReminderBroadcast.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this,0,intent,0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         //Tiempo en cuando se mandara la notificacion en milisegundos
         long Activar = System.currentTimeMillis();
         long dies = 1000 * 10;
 
-        //alarmManager.set(AlarmManager.RTC_WAKEUP,Activar + dies,pendingIntent);
+
+        alarmManager.set(AlarmManager.RTC_WAKEUP,Activar + dies,pendingIntent);
 
 
 //****************************** Boton para agregar productos **************************************
@@ -145,35 +143,15 @@ public class MainActivity extends AppCompatActivity {
     private void createNotificationChannel(){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             CharSequence name = "Xpiration";
-            //String description = "Notificacion de Xpiration";
-            NotificationChannel notificationChannel = new NotificationChannel("ChannelXpiration",name,NotificationManager.IMPORTANCE_DEFAULT);
-            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            notificationManager.createNotificationChannel(notificationChannel);
+            String description = "Notificacion de Xpiration";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("ChannelXpiration",name,importance);
+            channel.setDescription(description);
 
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
         }
     }
-
-        private void setPendingIntent(){
-          Intent intent = new Intent(this,SegundaActivity.class);
-            TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-            stackBuilder.addParentStack(SegundaActivity.class);
-            stackBuilder.addNextIntent(intent);
-            pendingIntent = stackBuilder.getPendingIntent(1,PendingIntent.FLAG_UPDATE_CURRENT);
-            //pendingIntent = PendingIntent.getBroadcast(MainActivity.this,0,intent,0);
-        }
-
-        private void createNotification(){
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(),"ChannelXpiration")
-                    .setSmallIcon(R.drawable.ic_apple_alt)
-                    .setContentTitle("Xpiration")
-                    .setContentText("Recuerda revisar la lista de cosas a expirar")
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-            builder.setContentIntent(pendingIntent);
-
-            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
-            notificationManager.notify(NOTIFICACION_ID,builder.build());
-        }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
