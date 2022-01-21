@@ -15,9 +15,11 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private Context context;
     Productos p;
     ArrayList<Productos> listaMain;
+    ListaProductosAdapter adapter;
 
 
 
@@ -64,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         p = new Productos();
         listaMain = new ArrayList<Productos>();
-        ListaProductosAdapter adapter = new ListaProductosAdapter(p.mostrarProductos());
+        adapter = new ListaProductosAdapter(p.mostrarProductos());
         recyclerView.setAdapter(adapter);
 
 //************** Se crea los elementos para activar notificacion a cierto tiempo *******************
@@ -110,8 +113,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-
         inflater.inflate(R.menu.menu,menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                adapter.getFilter().filter(s);
+                return false;
+            }
+        });
         return true;
     }
 }

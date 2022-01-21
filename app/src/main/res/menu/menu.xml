@@ -4,13 +4,15 @@
 
     <item
         android:title="Search"
+        android:id="@+id/action_search"
         android:icon="@drawable/ic_baseline_search_24"
-        app:showAsAction="ifRoom"
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="android.widget.SearchView"
         />
     <item
         android:title="More"
         android:icon="@drawable/ic_baseline_more_vert_24"
-        app:showAsAction="ifRoom"
+        app:showAsAction="never"
         />
 
 
