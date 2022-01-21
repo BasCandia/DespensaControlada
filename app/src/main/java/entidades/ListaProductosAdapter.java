@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,19 +16,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.xpiration.R;
 import com.example.xpiration.SubmenuActivity;
 
+import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
-public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAdapter.ProductoViewHolder> {
+public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAdapter.ProductoViewHolder> implements Filterable {
 //********************** Declaracion y inicializacion de Lista de productos ************************
     ArrayList<Productos> listaProductos;
+    ArrayList<Productos> listaProductosFull;
 
 
     public ListaProductosAdapter(ArrayList<Productos> listaProductos){
         this.listaProductos = listaProductos;
+        listaProductosFull = new ArrayList<>(listaProductos);
+
     }
 
     @NonNull
@@ -101,4 +108,41 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
 
         }
     }
+
+    @Override
+    public Filter getFilter() {
+        return filtro;
+    }
+
+    private Filter filtro = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            ArrayList<Productos> listaFiltrada = new ArrayList<>();
+
+            if(charSequence == null || charSequence.length() == 0){
+                listaFiltrada.addAll(listaProductosFull);
+            }else{
+                String patronFiltro = charSequence.toString().toLowerCase().trim();
+
+                for(Productos prod : listaProductosFull) {
+                    if(prod.getPRODUCTO_NOMBRE().toLowerCase().contains(patronFiltro)){
+                       listaFiltrada.add(prod);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = listaFiltrada;
+
+            return results;
+
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            listaProductos.clear();
+            listaProductos.addAll((ArrayList) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 }
