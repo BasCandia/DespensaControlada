@@ -26,7 +26,7 @@
                 app:srcCompat="@drawable/ic_apple_alt" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="299dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:paddingLeft="30px"
@@ -35,16 +35,24 @@
 
                 <TextView
                     android:id="@+id/ProductoNombre"
-                    android:layout_width="168dp"
-                    android:layout_height="21dp"
+                    android:layout_width="234dp"
+                    android:layout_height="wrap_content"
                     android:text="TextView" />
+
 
                 <TextView
                     android:id="@+id/Caducidad"
-                    android:layout_width="191dp"
-                    android:layout_height="21dp"
+                    android:layout_width="233dp"
+                    android:layout_height="wrap_content"
                     android:text="TextView" />
+
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/image_delete"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_trash_alt"></ImageView>
 
         </LinearLayout>
 
