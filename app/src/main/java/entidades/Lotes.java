@@ -27,6 +27,7 @@ public class Lotes {
     private Date LOTE_FECHA_CADUCIDAD;
     private int LOTE_NOTIFICACION_NARANJA; //preventiva
     private int LOTE_NOTIFICACION_ROJA; //critica
+    private String PRODUCTO_NOMBRE;
 
     Connection con;
 
@@ -87,13 +88,21 @@ public class Lotes {
         this.LOTE_NOTIFICACION_ROJA = LOTE_NOTIFICACION_ROJA;
     }
 
+    public String getPRODUCTO_NOMBRE() {
+        return PRODUCTO_NOMBRE;
+    }
+
+    public void setPRODUCTO_NOMBRE(String PRODUCTO_NOMBRE) {
+        this.PRODUCTO_NOMBRE = PRODUCTO_NOMBRE;
+    }
+
     public ArrayList<Lotes> mostrarLotes(int id){
 
         ArrayList<Lotes> listaLotes = new ArrayList<>();
         try {
             Lotes l;
-            String query1 = "SELECT * FROM LOTE WHERE PRODUCTO_ID = "+ id + " ORDER BY LOTE_FECHA_CADUCIDAD ASC" ;
-
+            String query1 = "SELECT L.*,P.PRODUCTO_NOMBRE FROM LOTE L, PRODUCTO P WHERE L.PRODUCTO_ID = P.PRODUCTO_ID AND L.PRODUCTO_ID ="+ id + " ORDER BY LOTE_FECHA_CADUCIDAD ASC" ;
+            //SELECT L.*,P.PRODUCTO_NOMBRE FROM LOTE L, PRODUCTO P WHERE L.PRODUCTO_ID = P.PRODUCTO_ID AND L.PRODUCTO_ID = 1 ORDER BY LOTE_FECHA_CADUCIDAD ASC
 
             ConnectionHelper conexion = new ConnectionHelper();
             con = conexion.connectionclass();
@@ -112,6 +121,7 @@ public class Lotes {
                 l.setLOTE_FECHA_CADUCIDAD(rs.getDate("LOTE_FECHA_CADUCIDAD"));
                 l.setLOTE_NOTIFICACION_NARANJA(rs.getInt("LOTE_NOTIFICACION_NARANJA"));
                 l.setLOTE_NOTIFICACION_ROJA(rs.getInt("LOTE_NOTIFICACION_ROJA"));
+                l.setPRODUCTO_NOMBRE(rs.getString("PRODUCTO_NOMBRE"));
                 listaLotes.add(l);
 
             }

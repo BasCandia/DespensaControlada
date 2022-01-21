@@ -87,7 +87,7 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
             super(itemView);
             viewNombre = itemView.findViewById(R.id.ProductoNombre);
             viewFecha = itemView.findViewById(R.id.Caducidad);
-            estado = itemView.findViewById(R.id.IconoEstado);
+           // estado = itemView.findViewById(R.id.IconoEstado);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

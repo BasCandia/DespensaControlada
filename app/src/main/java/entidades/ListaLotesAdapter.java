@@ -60,6 +60,7 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
 
         holder.viewNombre.setText(listaLotes.get(position).getLOTE_NOMBRE());
         holder.viewFecha.setText(diff+" dias para Caducar");
+        holder.productoNombre.setText(listaLotes.get(position).getPRODUCTO_NOMBRE());
 
 //* Al quedar x dias restantes para que expire se cambian los colores de las notificaciones de manera automatica *
         if(diff<=listaLotes.get(position).getLOTE_NOTIFICACION_NARANJA()){
@@ -85,7 +86,7 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
 //*********************** Manda un Lote a VerLoteActivity segun id *********************************
     public class LotesViewHolder extends RecyclerView.ViewHolder {
 
-        TextView viewNombre, viewFecha;
+        TextView viewNombre, viewFecha,productoNombre;
         ImageView estado;
 
         public LotesViewHolder(@NonNull View itemView) {
@@ -93,6 +94,7 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
             viewNombre = itemView.findViewById(R.id.LoteNombre);
             viewFecha = itemView.findViewById(R.id.LoteCaducidad);
             estado = itemView.findViewById(R.id.IconoEstadoLote);
+            productoNombre = itemView.findViewById(R.id.LoteNombreProducto);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
