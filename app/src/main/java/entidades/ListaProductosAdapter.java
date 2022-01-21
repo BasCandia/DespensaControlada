@@ -28,6 +28,7 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
 //********************** Declaracion y inicializacion de Lista de productos ************************
     ArrayList<Productos> listaProductos;
     ArrayList<Productos> listaProductosFull;
+    private OnItemClickListener mListener;
 
 
     public ListaProductosAdapter(ArrayList<Productos> listaProductos){
@@ -40,8 +41,9 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
     @Override
     public ProductoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lista_item_producto, null,false);
-        return new ProductoViewHolder(view);
+        return new ProductoViewHolder(view, mListener);
     }
+
 
 //********************** Seteo de datos a lista de productos ***************************************
     @Override
@@ -84,17 +86,27 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
 
     }
 
+    public interface OnItemClickListener {
+        void onDeleteClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListener = listener;
+    }
+
 //******************** Manda un producto a VerActivity segun id *****************************
     public class ProductoViewHolder extends RecyclerView.ViewHolder {
 
         TextView viewNombre, viewFecha;
         ImageView estado;
+        ImageView borrar;
 
-        public ProductoViewHolder(@NonNull View itemView) {
+        public ProductoViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             viewNombre = itemView.findViewById(R.id.ProductoNombre);
             viewFecha = itemView.findViewById(R.id.Caducidad);
            // estado = itemView.findViewById(R.id.IconoEstado);
+            borrar = itemView.findViewById(R.id.image_delete);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -105,6 +117,19 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
                     context.startActivity(intent);
                 }
             });
+
+            borrar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onDeleteClick(position);
+                        }
+                    }
+                }
+            });
+
 
         }
     }

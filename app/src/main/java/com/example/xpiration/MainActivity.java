@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -61,17 +63,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("Lista de productos");
 
-
-
         setContentView(R.layout.activity_main);
-//****************************** Inicializacion de elementos ***************************************
         context = this;
-        recyclerView = findViewById(R.id.ListaProductos);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        p = new Productos();
-        listaMain = new ArrayList<Productos>();
-        adapter = new ListaProductosAdapter(p.mostrarProductos());
-        recyclerView.setAdapter(adapter);
+
+        buildRecyclerView();
 
 //************** Se crea los elementos para activar notificacion a cierto tiempo *******************
         setPendingIntent();
@@ -97,6 +92,53 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void buildRecyclerView(){
+        //****************************** Inicializacion de elementos ***************************************
+
+        recyclerView = findViewById(R.id.ListaProductos);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        p = new Productos();
+        listaMain = new ArrayList<Productos>(p.mostrarProductos());
+        adapter = new ListaProductosAdapter(listaMain);
+        recyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new ListaProductosAdapter.OnItemClickListener() {
+            @Override
+            public void onDeleteClick(int position) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                alert.setTitle("Borrar producto");
+                alert.setMessage("¿Estas seguro de que quieres borrar el producto " + listaMain.get(position).getPRODUCTO_NOMBRE() +"? Esto borrara todos los lotes relacionados con este producto");
+                alert.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                        listaMain.get(position).Borrar(listaMain.get(position).getPRODUCTO_ID());
+                        removeItem(position);
+
+                    }
+                });
+                alert.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // close dialog
+                        dialog.cancel();
+                    }
+                });
+                alert.show();
+
+
+
+
+            }
+        });
+
+    }
+
+    public void removeItem(int position){
+        listaMain.remove(position);
+        adapter.notifyItemRemoved(position);
     }
 
 //*** Desde una cierta version de android es requerido crear un canal para enviar notificaciones****

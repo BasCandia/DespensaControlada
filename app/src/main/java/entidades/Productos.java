@@ -175,13 +175,11 @@ public class Productos {
             con = conexion.connectionclass();
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
-            bandera = true;
+            bandera=true;
 
         }catch (SQLException e) {
-            bandera = false;
+            bandera=false;
         }
-
-
         return bandera;
     }
 
