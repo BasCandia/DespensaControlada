@@ -10,7 +10,8 @@
         app:actionViewClass="android.widget.SearchView"
         />
     <item
-        android:title="More"
+        android:title="Lotes por caducar"
+        android:id="@+id/lotes_caducar"
         android:icon="@drawable/ic_baseline_more_vert_24"
         app:showAsAction="never"
         />

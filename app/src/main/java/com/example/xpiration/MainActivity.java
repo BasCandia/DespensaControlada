@@ -161,12 +161,18 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu,menu);
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
+        MenuItem lotesCaducar= menu.findItem(R.id.lotes_caducar);
 
+        lotesCaducar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent caducar = new Intent(context,VistaNotificacionActivity.class);
+                context.startActivity(caducar);
+                return false;
+            }
+        });
 
         SearchView searchView = (SearchView) searchItem.getActionView();
-
-
-
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
