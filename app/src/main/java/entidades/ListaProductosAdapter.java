@@ -16,13 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.xpiration.R;
 import com.example.xpiration.SubmenuActivity;
 
-import java.lang.reflect.Array;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAdapter.ProductoViewHolder> implements Filterable {
 //********************** Declaracion y inicializacion de Lista de productos ************************
@@ -68,6 +62,7 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
 
 
         holder.viewNombre.setText(listaProductos.get(position).getPRODUCTO_NOMBRE());
+        holder.viewCantidadLotes.setText("Cantidad de lotes: "+listaProductos.get(position).getCantidadLotes());
        // holder.viewFecha.setText(diff+" dias para Caducar");
        // if(diff<=listaProductos.get(position).loteMasViejo().getLOTE_NOTIFICACION_NARANJA()){
        //     holder.estado.setImageResource(R.drawable.ic_yellow_circle);
@@ -97,14 +92,14 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
 //******************** Manda un producto a VerActivity segun id *****************************
     public class ProductoViewHolder extends RecyclerView.ViewHolder {
 
-        TextView viewNombre, viewFecha;
+        TextView viewNombre, viewCantidadLotes;
         ImageView estado;
         ImageView borrar;
 
         public ProductoViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             viewNombre = itemView.findViewById(R.id.ProductoNombre);
-            viewFecha = itemView.findViewById(R.id.Caducidad);
+            viewCantidadLotes = itemView.findViewById(R.id.CantidadLote);
            // estado = itemView.findViewById(R.id.IconoEstado);
             borrar = itemView.findViewById(R.id.image_delete);
 

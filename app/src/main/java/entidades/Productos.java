@@ -28,6 +28,7 @@ public class Productos {
     //private Date PRODUCTO_FECHA_INGRESO;
     //private Date PRODUCTO_FECHA_CADUCIDAD;
     private String PRODUCTO_URL_IMG;
+    private String CantidadLotes = "0";
     //private int PRODUCTO_NOTIFICACION_NARANJA; //preventiva
     //private int PRODUCTO_NOTIFICACION_ROJA; //critica
 
@@ -67,8 +68,15 @@ public class Productos {
         this.PRODUCTO_URL_IMG = PRODUCTO_URL_IMG;
     }
 
+    public String getCantidadLotes() {
+        return CantidadLotes;
+    }
 
-//************************ Funcion para insertar query en base de datos ****************************
+    public void setCantidadLotes(String cantidadLotes) {
+        CantidadLotes = cantidadLotes;
+    }
+
+    //************************ Funcion para insertar query en base de datos ****************************
     public void insertar (Context context, String nombre, int Categoria,String fechaIngreso){
 //******************** Validaciones para query de insercion ****************************************
 
@@ -188,7 +196,7 @@ public class Productos {
         ArrayList<Productos> listaProductos = new ArrayList<Productos>();
         try {
             Productos p;
-            String query1 = "SELECT * FROM PRODUCTO ORDER BY PRODUCTO_FECHA_INGRESO DESC,PRODUCTO_ID DESC";
+            String query1 = "SELECT P.*,(SELECT COUNT(1) FROM LOTE L WHERE P.PRODUCTO_ID = L.PRODUCTO_ID) AS CANTIDADLOTES FROM PRODUCTO P ORDER BY PRODUCTO_FECHA_INGRESO DESC,PRODUCTO_ID DESC";
 
 
             ConnectionHelper conexion = new ConnectionHelper();
@@ -204,6 +212,7 @@ public class Productos {
                p.setPRODUCTO_ID(rs.getInt("PRODUCTO_ID"));
                p.setCATEGORIA_ID(rs.getInt("CATEGORIA_ID"));
                p.setPRODUCTO_NOMBRE(rs.getString("PRODUCTO_NOMBRE"));
+               p.setCantidadLotes(rs.getString("CANTIDADLOTES"));
             //   p.setPRODUCTO_FECHA_CADUCIDAD(rs.getDate("PRODUCTO_FECHA_CADUCIDAD"));
             //   p.setPRODUCTO_NOTIFICACION_NARANJA(rs.getInt("PRODUCTO_NOTIFICACION_NARANJA"));
             //    p.setPRODUCTO_NOTIFICACION_ROJA(rs.getInt("PRODUCTO_NOTIFICACION_ROJA"));
