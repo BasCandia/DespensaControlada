@@ -43,35 +43,40 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
     @Override
     public void onBindViewHolder(@NonNull ProductoViewHolder holder, int position) {
 
-
-        //Date now = new Date();
-        //DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
-        //String vDateYMD = dateFormatYMD.format(now);
-
-        //Date nuevo=null;
-        //Date comparado=null;
-
-        //try {
-        //    nuevo = dateFormatYMD.parse(vDateYMD);
-        //    comparado = listaProductos.get(position).loteMasViejo().;
-        //} catch (ParseException e) {
-        //   e.printStackTrace();
-        //}
-
-       // int diff = (int)((comparado.getTime() - nuevo.getTime())/86400000);
-
-
         holder.viewNombre.setText(listaProductos.get(position).getPRODUCTO_NOMBRE());
         holder.viewCantidadLotes.setText("Cantidad de lotes: "+listaProductos.get(position).getCantidadLotes());
-       // holder.viewFecha.setText(diff+" dias para Caducar");
-       // if(diff<=listaProductos.get(position).loteMasViejo().getLOTE_NOTIFICACION_NARANJA()){
-       //     holder.estado.setImageResource(R.drawable.ic_yellow_circle);
-       //     if(diff<=listaProductos.get(position).loteMasViejo().getLOTE_NOTIFICACION_ROJA()){
-       //         holder.estado.setImageResource(R.drawable.ic_red_circle);
-       //     }
-       // }
 
-
+        //Agregar iconos a los productos por categoria
+        int categoria = listaProductos.get(position).getCATEGORIA_ID();
+        switch(categoria){
+            case 1:
+                holder.icon.setImageResource(R.drawable.ic_milk);
+                break;
+            case 2:
+                holder.icon.setImageResource(R.drawable.ic_apple_alt);
+                break;
+            case 3:
+                holder.icon.setImageResource(R.drawable.ic_meat);
+                break;
+            case 4:
+                holder.icon.setImageResource(R.drawable.ic_grain);
+                break;
+            case 5:
+                holder.icon.setImageResource(R.drawable.ic_bread);
+                break;
+            case 6:
+                holder.icon.setImageResource(R.drawable.ic_legume);
+                break;
+            case 7:
+                holder.icon.setImageResource(R.drawable.ic_oil);
+                break;
+            case 8:
+                holder.icon.setImageResource(R.drawable.ic_soda);
+                break;
+            case 9:
+                holder.icon.setImageResource(R.drawable.ic_dots);
+                break;
+        }
 
     }
 
@@ -95,6 +100,7 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
         TextView viewNombre, viewCantidadLotes;
         ImageView estado;
         ImageView borrar;
+        ImageView icon;
 
         public ProductoViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
@@ -102,6 +108,7 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
             viewCantidadLotes = itemView.findViewById(R.id.CantidadLote);
            // estado = itemView.findViewById(R.id.IconoEstado);
             borrar = itemView.findViewById(R.id.image_delete);
+            icon = itemView.findViewById(R.id.ImagenProducto);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -124,7 +131,6 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
                     }
                 }
             });
-
 
         }
     }
