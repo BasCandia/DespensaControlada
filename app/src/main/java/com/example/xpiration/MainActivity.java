@@ -76,9 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
         Calendar today = Calendar.getInstance();
         today.setTimeInMillis(System.currentTimeMillis());
-        if (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) >= 9) {
-            today.add(Calendar.DAY_OF_YEAR, 1); // add, not set!
-        }
+
 
         today.set(Calendar.HOUR_OF_DAY, 9);
         today.set(Calendar.MINUTE, 0);
