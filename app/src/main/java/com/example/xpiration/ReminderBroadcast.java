@@ -1,5 +1,6 @@
 package com.example.xpiration;
 
+import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
@@ -25,7 +26,9 @@ public class ReminderBroadcast extends BroadcastReceiver {
                 .setSmallIcon(R.drawable.ic_apple_alt)
                 .setContentTitle("Xpiration")
                 .setContentText("Recuerda revisar la lista de cosas a expirar")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                .setVibrate(new long[]{1000,1000,1000,1000,1000})
+                .setDefaults(Notification.DEFAULT_SOUND)
+                .setPriority(NotificationCompat.PRIORITY_HIGH);
 
         builder.setContentIntent(pendingIntent);
 

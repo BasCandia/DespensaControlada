@@ -280,7 +280,7 @@ public class Lotes {
         ArrayList<Lotes> listaLotes = new ArrayList<>();
         try {
             Lotes l;
-            String query1 = "SELECT L.*,P.PRODUCTO_NOMBRE FROM LOTE L, PRODUCTO P WHERE L.PRODUCTO_ID = P.PRODUCTO_ID ORDER BY LOTE_FECHA_CADUCIDAD ASC" ;
+            String query1 = "SELECT L.*,P.PRODUCTO_NOMBRE FROM LOTE L, PRODUCTO P WHERE L.PRODUCTO_ID = P.PRODUCTO_ID AND DATEDIFF(DAY,GETDATE(),L.LOTE_FECHA_CADUCIDAD) <= LOTE_NOTIFICACION_NARANJA ORDER BY LOTE_FECHA_CADUCIDAD ASC" ;
 
             ConnectionHelper conexion = new ConnectionHelper();
             con = conexion.connectionclass();
