@@ -26,9 +26,9 @@ public class ReminderBroadcast extends BroadcastReceiver {
                 .setSmallIcon(R.drawable.ic_apple_alt)
                 .setContentTitle("Xpiration")
                 .setContentText("Recuerda revisar la lista de cosas a expirar")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setVibrate(new long[]{1000,1000,1000,1000,1000})
-                .setDefaults(Notification.DEFAULT_SOUND)
-                .setPriority(NotificationCompat.PRIORITY_HIGH);
+                .setDefaults(Notification.DEFAULT_SOUND);
 
         builder.setContentIntent(pendingIntent);
 
