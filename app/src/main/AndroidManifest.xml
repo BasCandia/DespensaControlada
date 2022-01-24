@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Xpiration">
-
+        <activity
+            android:name=".VistaNotificacionActivity"
+            android:exported="false" />
         <activity
             android:name=".SubmenuActivity"
             android:exported="false" />
@@ -68,9 +70,7 @@
                 android:value=".MainActivity" />
         </activity>
 
-        <receiver android:name=".ReminderBroadcast"/>
-
-
+        <receiver android:name=".ReminderBroadcast" />
     </application>
 
 </manifest>

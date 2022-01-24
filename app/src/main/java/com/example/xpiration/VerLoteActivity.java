@@ -83,7 +83,7 @@ public class VerLoteActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(VerLoteActivity.this);
-                builder.setMessage("¿Desea eliminar este producto?");
+                builder.setMessage("¿Desea eliminar este lote?");
 
                 builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
                     @Override

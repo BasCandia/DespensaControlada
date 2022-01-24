@@ -14,9 +14,9 @@ public class ReminderBroadcast extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         PendingIntent pendingIntent;
-        Intent intentB = new Intent(context,SegundaActivity.class);
+        Intent intentB = new Intent(context,VistaNotificacionActivity.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-        stackBuilder.addParentStack(SegundaActivity.class);
+        stackBuilder.addParentStack(VistaNotificacionActivity.class);
         stackBuilder.addNextIntent(intentB);
         pendingIntent = stackBuilder.getPendingIntent(1,PendingIntent.FLAG_UPDATE_CURRENT);
 

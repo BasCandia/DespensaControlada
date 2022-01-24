@@ -275,6 +275,40 @@ public class Lotes {
         return l;
     }
 
+    public ArrayList<Lotes> mostrarTodoLotes(){
+
+        ArrayList<Lotes> listaLotes = new ArrayList<>();
+        try {
+            Lotes l;
+            String query1 = "SELECT L.*,P.PRODUCTO_NOMBRE FROM LOTE L, PRODUCTO P WHERE L.PRODUCTO_ID = P.PRODUCTO_ID ORDER BY LOTE_FECHA_CADUCIDAD ASC" ;
+
+            ConnectionHelper conexion = new ConnectionHelper();
+            con = conexion.connectionclass();
+            Statement st = null;
+
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(query1);
+
+
+            while (rs.next()) {
+                l = new Lotes();
+                l.setLOTE_ID(rs.getInt("LOTE_ID"));
+                l.setPRODUCTO_ID(rs.getInt("PRODUCTO_ID"));
+                l.setLOTE_NOMBRE(rs.getString("LOTE_NOMBRE"));
+                l.setLOTE_FECHA_INGRESO(rs.getDate("LOTE_FECHA_INGRESO"));
+                l.setLOTE_FECHA_CADUCIDAD(rs.getDate("LOTE_FECHA_CADUCIDAD"));
+                l.setLOTE_NOTIFICACION_NARANJA(rs.getInt("LOTE_NOTIFICACION_NARANJA"));
+                l.setLOTE_NOTIFICACION_ROJA(rs.getInt("LOTE_NOTIFICACION_ROJA"));
+                l.setPRODUCTO_NOMBRE(rs.getString("PRODUCTO_NOMBRE"));
+                listaLotes.add(l);
+
+            }
+        }catch (SQLException e){
+            System.out.println("Error in sql statment");
+        }
+        return listaLotes;
+    }
+
 //************************ Funcion para borrar query en base de datos ******************************
     public boolean Borrar(int ID){
         boolean bandera;

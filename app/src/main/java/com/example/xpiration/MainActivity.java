@@ -161,7 +161,12 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu,menu);
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
+
+
         SearchView searchView = (SearchView) searchItem.getActionView();
+
+
+
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
