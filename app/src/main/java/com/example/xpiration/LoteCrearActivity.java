@@ -34,6 +34,7 @@ public class LoteCrearActivity extends AppCompatActivity {
     TextView notiNaranja,notiRoja;
     int id;
     private String newStr = "";
+    String NombreProducto = "";
 
 
     Date now = new Date();
@@ -55,13 +56,17 @@ public class LoteCrearActivity extends AppCompatActivity {
             Bundle extras = getIntent().getExtras();
             if(extras == null){
                 id = Integer.parseInt(null);
+                NombreProducto = null;
             }else{
                 id = extras.getInt("ID");
+                NombreProducto = extras.getString("Nombre");
             }
         }else{
             id = (int) savedInstanceState.getSerializable("ID");
+            NombreProducto = (String) savedInstanceState.getSerializable("Nombre");
         }
 
+        getSupportActionBar().setTitle(NombreProducto);
         fecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

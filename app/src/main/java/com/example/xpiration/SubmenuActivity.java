@@ -63,6 +63,7 @@ public class SubmenuActivity extends AppCompatActivity {
                 //Toast.makeText(context, "No existen lotes con id = " + id, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(context, LoteCrearActivity.class);
                 intent.putExtra("ID",id);
+                intent.putExtra("Nombre",adapter.nombreproducto);
                 startActivity(intent);
             }
         });

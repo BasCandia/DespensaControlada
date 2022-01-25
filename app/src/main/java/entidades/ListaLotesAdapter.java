@@ -24,6 +24,7 @@ import java.util.Date;
 public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.LotesViewHolder>  {
 //********************** Declaracion y inicializacion de Lista de Lotes ************************
     ArrayList<Lotes> listaLotes;
+    public String nombreproducto = "";
 
     public ListaLotesAdapter(ArrayList<Lotes> listaLotes){
         this.listaLotes = listaLotes;
@@ -61,6 +62,7 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
         holder.viewNombre.setText(listaLotes.get(position).getLOTE_NOMBRE());
         holder.viewFecha.setText(diff+" dias para Caducar");
         holder.productoNombre.setText(listaLotes.get(position).getPRODUCTO_NOMBRE());
+        this.nombreproducto = listaLotes.get(position).getPRODUCTO_NOMBRE();
 
 //* Al quedar x dias restantes para que expire se cambian los colores de las notificaciones de manera automatica *
         if(diff<=listaLotes.get(position).getLOTE_NOTIFICACION_NARANJA()){
