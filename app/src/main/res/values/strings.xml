@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Xpiration</string>
+    <string name="app_name">DespensaControlada</string>
     <string name="NombreProducto">Nombre de Producto</string>
     <string name="CodigoBarra">Codigo de Barra</string>
     <string name="FechaCaducidad">Fecha de Caducidad</string>
