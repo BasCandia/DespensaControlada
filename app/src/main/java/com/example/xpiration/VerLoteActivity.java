@@ -15,6 +15,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.sql.Connection;
 
 import entidades.Lotes;
@@ -25,7 +28,8 @@ public class VerLoteActivity extends AppCompatActivity {
 
     EditText fecha;
     Button guardar;
-    TextView nombre;
+
+    EditText nombre;
     TextView notiNaranja,notiRoja;
     ImageView editar;
     ImageView borrar;
@@ -42,10 +46,10 @@ public class VerLoteActivity extends AppCompatActivity {
 
         context = this;
 //******************* Declaracion y seteo de Elementos ************************
-        nombre = findViewById(R.id.Nombre);
-        fecha = findViewById(R.id.FechaCaducidad);
-        notiNaranja = findViewById(R.id.notiNaranja);
-        notiRoja = findViewById(R.id.notiRoja);
+        nombre = findViewById(R.id.NombreEditLote);
+        fecha = findViewById(R.id.FechaCaducidadEdit);
+        notiNaranja = findViewById(R.id.notiNaranjaEdit);
+        notiRoja = findViewById(R.id.notiRojaEdit);
         guardar = findViewById(R.id.BtnGuardar);
         borrar = findViewById(R.id.iconBorrar);
 

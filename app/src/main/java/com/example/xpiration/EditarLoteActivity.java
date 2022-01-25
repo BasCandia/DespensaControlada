@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.sql.Connection;
 
@@ -30,6 +33,7 @@ import entidades.Lotes;
 public class EditarLoteActivity extends AppCompatActivity {
     //********************************* Elementos en pantalla ******************************************
     EditText fecha;
+    TextInputLayout fechainput;
     Button guardar;
     TextView nombre;
     TextView notiNaranja,notiRoja;
@@ -40,6 +44,8 @@ public class EditarLoteActivity extends AppCompatActivity {
     Connection con;
     private Context context;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,10 +54,11 @@ public class EditarLoteActivity extends AppCompatActivity {
         context = this;
 
 //******************* Declaracion y seteo de Elementos ************************
-        nombre = findViewById(R.id.Nombre);
-        fecha = findViewById(R.id.FechaCaducidad);
-        notiNaranja = findViewById(R.id.notiNaranja);
-        notiRoja = findViewById(R.id.notiRoja);
+        nombre = findViewById(R.id.NombreEditLote);
+        fechainput = findViewById(R.id.FechaCaducidadInput);
+        fecha = findViewById(R.id.FechaCaducidadEdit);
+        notiNaranja = findViewById(R.id.notiNaranjaEdit);
+        notiRoja = findViewById(R.id.notiRojaEdit);
         guardar = findViewById(R.id.BtnGuardar);
         editar = findViewById(R.id.IconEditar);
         borrar = findViewById(R.id.iconBorrar);
@@ -81,16 +88,23 @@ public class EditarLoteActivity extends AppCompatActivity {
 
         }
 //******************* Elementos para seleccionar fecha de forma interactiva ************************
+
+
         fecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 switch (view.getId()) {
-                    case R.id.FechaCaducidad:
+                    case R.id.FechaCaducidadEdit:
                         showDatePickerDialog();
                         break;
                 }
+
             }
         });
+
+
+
+
 
 //***************************** Boton para Editar **************************************************
         guardar.setOnClickListener(new View.OnClickListener() {

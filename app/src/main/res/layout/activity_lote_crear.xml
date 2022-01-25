@@ -14,6 +14,9 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="15dp"
         android:ems="10"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:background="@drawable/custom_input"
         android:hint="Por Defecto 7"
         android:inputType="number"
         android:minHeight="48dp"
@@ -30,6 +33,9 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="15dp"
         android:ems="10"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:background="@drawable/custom_input"
         android:hint="Por Defecto 2"
         android:inputType="number"
         android:minHeight="48dp"
@@ -46,6 +52,9 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="15dp"
         android:ems="10"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:background="@drawable/custom_input"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,6 +71,9 @@
         android:layout_marginEnd="15dp"
         android:clickable="true"
         android:ems="10"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:background="@drawable/custom_input"
         android:focusable="false"
         android:inputType="date"
         android:maxLines="1"
@@ -75,13 +87,11 @@
         android:id="@+id/LoteCrear"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_marginStart="47dp"
-        android:layout_marginEnd="259dp"
-        android:layout_marginBottom="43dp"
-        android:text="@string/BtnSegunda"
+        android:layout_marginBottom="30dp"
+        android:text="@string/BtnGuardar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"></Button>
 
     <TextView
         android:id="@+id/textView"
@@ -130,5 +140,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notiNaranja" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
