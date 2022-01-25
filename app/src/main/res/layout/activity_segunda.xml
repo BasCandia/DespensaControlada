@@ -9,21 +9,26 @@
     tools:context=".SegundaActivity">
 
 
-    <EditText
-        android:id="@+id/Nombre"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/NombreTexto"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="15dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-
+        android:hint="@string/NombreProducto"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/Nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Spinner
         android:id="@+id/Categorias"
@@ -36,43 +41,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="66dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="315dp"
-        android:layout_marginEnd="31dp"
-        android:layout_marginBottom="40dp"
-        android:contentDescription="@string/DescCamara"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_camera" />
-
     <Button
         android:id="@+id/BtnGuardar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="173dp"
-        android:layout_marginBottom="39dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="30dp"
         android:text="@string/BtnSegunda"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:text="@string/NombreProducto"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView4"
@@ -84,6 +61,6 @@
         android:text="@string/Categoria"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Nombre" />
+        app:layout_constraintTop_toBottomOf="@+id/NombreTexto" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
