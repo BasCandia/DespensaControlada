@@ -6,6 +6,8 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -42,6 +44,7 @@ public class SegundaActivity extends AppCompatActivity {
     Date now = new Date();
     DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
     String vDateYMD = dateFormatYMD.format(now);
+    private String newStr = "";
 
 //**************** Elementos para seleccionar fecha de forma interactiva ***************************
 
@@ -66,6 +69,30 @@ public class SegundaActivity extends AppCompatActivity {
             }
         });
 
+        nombre.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Do nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String str = s.toString();
+                if (str.isEmpty()) {
+                    nombre.append(newStr);
+                    newStr = "";
+                } else if (!str.equals(newStr)) {
+                    // Replace the regex as per requirement
+                    newStr = str.replaceAll("[^A-Za-z0-9\\s]", "");
+                    nombre.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Do nothing
+            }
+        });
     }
 
 

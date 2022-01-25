@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -31,6 +33,7 @@ public class LoteCrearActivity extends AppCompatActivity {
     TextView nombre;
     TextView notiNaranja,notiRoja;
     int id;
+    private String newStr = "";
 
 
     Date now = new Date();
@@ -69,6 +72,81 @@ public class LoteCrearActivity extends AppCompatActivity {
                         break;
                 }
 
+            }
+        });
+
+        nombre.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Do nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String str = s.toString();
+                if (str.isEmpty()) {
+                    nombre.append(newStr);
+                    newStr = "";
+                } else if (!str.equals(newStr)) {
+                    // Replace the regex as per requirement
+                    newStr = str.replaceAll("[^A-Za-z0-9\\s]", "");
+                    nombre.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Do nothing
+            }
+        });
+
+        notiNaranja.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Do nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String str = s.toString();
+                if (str.isEmpty()) {
+                    notiNaranja.append(newStr);
+                    newStr = "";
+                } else if (!str.equals(newStr)) {
+                    // Replace the regex as per requirement
+                    newStr = str.replaceAll("[^0-9]", "");
+                    notiNaranja.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Do nothing
+            }
+        });
+
+        notiRoja.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Do nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String str = s.toString();
+                if (str.isEmpty()) {
+                    notiRoja.append(newStr);
+                    newStr = "";
+                } else if (!str.equals(newStr)) {
+                    // Replace the regex as per requirement
+                    newStr = str.replaceAll("[^0-9]", "");
+                    notiRoja.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Do nothing
             }
         });
 
