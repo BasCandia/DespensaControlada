@@ -134,11 +134,11 @@
         android:layout_marginStart="64dp"
         android:layout_marginEnd="62dp"
         android:layout_marginBottom="43dp"
-        android:src="@drawable/ic_paint_brush"
+        android:src="@drawable/ic_pen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/iconBorrar"
         app:layout_constraintStart_toEndOf="@+id/BtnGuardar"
-        app:srcCompat="@drawable/ic_paint_brush"
+        app:srcCompat="@drawable/ic_pen"
         app:tint="@color/purple_500" />
 
     <ImageView
