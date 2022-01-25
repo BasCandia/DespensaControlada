@@ -70,13 +70,17 @@ public class VerLoteActivity extends AppCompatActivity {
         if(lotes != null){
             nombre.setText(lotes.getLOTE_NOMBRE());
             nombre.setInputType(InputType.TYPE_NULL);
+            nombre.setFocusable(false);
             String modificado = lotes.getLOTE_FECHA_CADUCIDAD().toString().replace("-","/");
             fecha.setText(modificado);
             fecha.setInputType(InputType.TYPE_NULL);
+            fecha.setFocusable(false);
             notiNaranja.setText(lotes.getLOTE_NOTIFICACION_NARANJA()+"");
             notiNaranja.setInputType(InputType.TYPE_NULL);
+            notiNaranja.setFocusable(false);
             notiRoja.setText(lotes.getLOTE_NOTIFICACION_ROJA()+"");
             notiRoja.setInputType(InputType.TYPE_NULL);
+            notiRoja.setFocusable(false);
 
             guardar.setVisibility(View.INVISIBLE);
 

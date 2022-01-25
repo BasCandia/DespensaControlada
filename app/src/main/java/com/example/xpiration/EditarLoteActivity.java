@@ -55,10 +55,13 @@ public class EditarLoteActivity extends AppCompatActivity {
 
 //******************* Declaracion y seteo de Elementos ************************
         nombre = findViewById(R.id.NombreEditLote);
+        nombre.setFocusable(true);
         fechainput = findViewById(R.id.FechaCaducidadInput);
         fecha = findViewById(R.id.FechaCaducidadEdit);
         notiNaranja = findViewById(R.id.notiNaranjaEdit);
+        notiNaranja.setFocusable(true);
         notiRoja = findViewById(R.id.notiRojaEdit);
+        notiRoja.setFocusable(true);
         guardar = findViewById(R.id.BtnGuardar);
         editar = findViewById(R.id.IconEditar);
         borrar = findViewById(R.id.iconBorrar);

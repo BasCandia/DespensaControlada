@@ -62,7 +62,7 @@
         android:layout_marginEnd="15dp"
         android:hint="Dias para notificacion Preventiva"
         android:clickable="true"
-        android:focusable="false"
+
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -86,7 +86,6 @@
         android:layout_marginEnd="15dp"
         android:hint="Dias para notificacion Critica"
         android:clickable="true"
-        android:focusable="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

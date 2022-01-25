@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.sql.Connection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -32,6 +34,7 @@ public class LoteCrearActivity extends AppCompatActivity {
     Button crear;
     TextView nombre;
     TextView notiNaranja,notiRoja;
+    TextInputLayout notiNaranjainput,notiRojainput;
     int id;
     private String newStr = "";
     String NombreProducto = "";
@@ -47,10 +50,13 @@ public class LoteCrearActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lote_crear);
         context = this;
 //****************************** Inicializacion de elementos ***************************************
-        nombre = findViewById(R.id.Nombre);
-        fecha = findViewById(R.id.FechaCaducidad);
-        notiNaranja = findViewById(R.id.notiNaranja);
-        notiRoja = findViewById(R.id.notiRoja);
+        nombre = findViewById(R.id.NombreEditLote);
+        fecha = findViewById(R.id.FechaCaducidadEdit);
+        notiNaranja = findViewById(R.id.notiNaranjaEdit);
+        notiRoja = findViewById(R.id.notiRojaEdit);
+        notiNaranjainput = findViewById(R.id.notiNaranja);
+        notiRojainput = findViewById(R.id.notiRoja);
+
 
         if(savedInstanceState == null){
             Bundle extras = getIntent().getExtras();
@@ -67,11 +73,12 @@ public class LoteCrearActivity extends AppCompatActivity {
         }
 
         getSupportActionBar().setTitle(NombreProducto);
+
         fecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 switch (view.getId()) {
-                    case R.id.FechaCaducidad:
+                    case R.id.FechaCaducidadEdit:
                         showDatePickerDialog();
 
                         break;
@@ -80,81 +87,7 @@ public class LoteCrearActivity extends AppCompatActivity {
             }
         });
 
-//************ Evita la insercion de caracteres especiales por seguridad ***************************
-        nombre.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Do nothing
-            }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String str = s.toString();
-                if (str.isEmpty()) {
-                    nombre.append(newStr);
-                    newStr = "";
-                } else if (!str.equals(newStr)) {
-                    // Replace the regex as per requirement
-                    newStr = str.replaceAll("[^A-Za-z0-9\\s]", "");
-                    nombre.setText("");
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // Do nothing
-            }
-        });
-//******************** Evita la insercion de caracteres por seguridad ******************************
-        notiNaranja.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Do nothing
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String str = s.toString();
-                if (str.isEmpty()) {
-                    notiNaranja.append(newStr);
-                    newStr = "";
-                } else if (!str.equals(newStr)) {
-                    // Replace the regex as per requirement
-                    newStr = str.replaceAll("[^0-9]", "");
-                    notiNaranja.setText("");
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // Do nothing
-            }
-        });
-//******************** Evita la insercion de caracteres por seguridad ******************************
-        notiRoja.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Do nothing
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String str = s.toString();
-                if (str.isEmpty()) {
-                    notiRoja.append(newStr);
-                    newStr = "";
-                } else if (!str.equals(newStr)) {
-                    // Replace the regex as per requirement
-                    newStr = str.replaceAll("[^0-9]", "");
-                    notiRoja.setText("");
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // Do nothing
-            }
-        });
 
 //************* boton para enviar la insercion y pasar a ventana principal *************************
         crear = findViewById(R.id.LoteCrear);
@@ -163,13 +96,13 @@ public class LoteCrearActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //Agregar valores por defecto para las notificaciones
                 String n,r;
-                if(notiNaranja.getHint().equals("Por Defecto 7")){
+                if(notiNaranja.getText().toString().isEmpty()){
                     n = "7";
                 }else{
                     n = notiNaranja.getText().toString();
                 }
 
-                if(notiRoja.getHint().equals("Por Defecto 2")){
+                if(notiRoja.getText().toString().isEmpty()){
                     r = "2";
                 }else{
                     r = notiRoja.getText().toString();

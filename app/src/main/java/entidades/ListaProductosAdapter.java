@@ -25,6 +25,7 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
     private OnItemClickListener mListener;
 
 
+
     public ListaProductosAdapter(ArrayList<Productos> listaProductos){
         this.listaProductos = listaProductos;
         listaProductosFull = new ArrayList<>(listaProductos);
@@ -101,6 +102,7 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
         ImageView estado;
         ImageView borrar;
         ImageView icon;
+
 
         public ProductoViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
