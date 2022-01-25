@@ -72,17 +72,18 @@ public class MainActivity extends AppCompatActivity {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this,0,intent,0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-        //Cuando se abre por primera vez la aplicacion, seteo una notificacion diaria a las 9:00 para que se revisen las cosas por expirar
+        //Cuando se abre por primera vez la aplicacion, seteo una notificacion diaria a las 9:00 del dia siguiente para que se revisen las cosas por expirar
 
-        Calendar today = Calendar.getInstance();
-        today.setTimeInMillis(System.currentTimeMillis());
+        Calendar calendar = Calendar.getInstance();
 
+        calendar.set(Calendar.HOUR_OF_DAY, 9);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
 
-        today.set(Calendar.HOUR_OF_DAY, 9);
-        today.set(Calendar.MINUTE, 0);
-        today.set(Calendar.SECOND, 0);
+        calendar.add(Calendar.DATE, 1);
 
-        alarmManager.setRepeating( AlarmManager.RTC_WAKEUP, today.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent );
+        alarmManager.setInexactRepeating( AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent );
 
 
 //****************************** Boton para agregar productos **************************************
