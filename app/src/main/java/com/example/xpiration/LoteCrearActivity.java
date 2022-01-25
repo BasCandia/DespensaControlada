@@ -75,6 +75,7 @@ public class LoteCrearActivity extends AppCompatActivity {
             }
         });
 
+//************ Evita la insercion de caracteres especiales por seguridad ***************************
         nombre.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -99,7 +100,7 @@ public class LoteCrearActivity extends AppCompatActivity {
                 // Do nothing
             }
         });
-
+//******************** Evita la insercion de caracteres por seguridad ******************************
         notiNaranja.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -124,7 +125,7 @@ public class LoteCrearActivity extends AppCompatActivity {
                 // Do nothing
             }
         });
-
+//******************** Evita la insercion de caracteres por seguridad ******************************
         notiRoja.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

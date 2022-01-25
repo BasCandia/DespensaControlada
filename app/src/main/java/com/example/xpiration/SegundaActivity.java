@@ -68,7 +68,7 @@ public class SegundaActivity extends AppCompatActivity {
                 p.insertar(context,nombre.getText().toString(),spinnerC.getSelectedItemPosition(),vDateYMD);
             }
         });
-
+//************ Evita la insercion de caracteres especiales por seguridad ***************************
         nombre.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
