@@ -25,7 +25,7 @@ public class Productos {
     private int PRODUCTO_ID;
     private int CATEGORIA_ID;
     private String PRODUCTO_NOMBRE;
-    //private Date PRODUCTO_FECHA_INGRESO;
+    private Date PRODUCTO_FECHA_INGRESO;
     //private Date PRODUCTO_FECHA_CADUCIDAD;
     private String PRODUCTO_URL_IMG;
     private String CantidadLotes = "0";
@@ -74,6 +74,14 @@ public class Productos {
 
     public void setCantidadLotes(String cantidadLotes) {
         CantidadLotes = cantidadLotes;
+    }
+
+    public Date getPRODUCTO_FECHA_INGRESO() {
+        return PRODUCTO_FECHA_INGRESO;
+    }
+
+    public void setPRODUCTO_FECHA_INGRESO(Date PRODUCTO_FECHA_INGRESO) {
+        this.PRODUCTO_FECHA_INGRESO = PRODUCTO_FECHA_INGRESO;
     }
 
     //************************ Funcion para insertar query en base de datos ****************************
@@ -220,6 +228,7 @@ public class Productos {
                p.setCATEGORIA_ID(rs.getInt("CATEGORIA_ID"));
                p.setPRODUCTO_NOMBRE(rs.getString("PRODUCTO_NOMBRE"));
                p.setCantidadLotes(rs.getString("CANTIDADLOTES"));
+               p.setPRODUCTO_FECHA_INGRESO(rs.getDate("PRODUCTO_FECHA_INGRESO"));
             //   p.setPRODUCTO_FECHA_CADUCIDAD(rs.getDate("PRODUCTO_FECHA_CADUCIDAD"));
             //   p.setPRODUCTO_NOTIFICACION_NARANJA(rs.getInt("PRODUCTO_NOTIFICACION_NARANJA"));
             //    p.setPRODUCTO_NOTIFICACION_ROJA(rs.getInt("PRODUCTO_NOTIFICACION_ROJA"));

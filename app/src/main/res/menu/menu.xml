@@ -15,6 +15,27 @@
         android:icon="@drawable/ic_baseline_more_vert_24"
         app:showAsAction="never"
         />
+    <item
+        android:title="Ordernar por"
+        android:id="@+id/Ordernar"
+        android:icon="@drawable/ic_baseline_more_vert_24"
+        app:showAsAction="never"
+        >
+        <menu>
+            <item
+                android:title="Fecha de Creacion"
+                android:id="@+id/OrdenCreacion"
+                />
+            <item
+                android:title="Categoria"
+                android:id="@+id/OrdenCategoria"
+                />
+            <item
+                android:title="Alfabetico"
+                android:id="@+id/OrdenAlfabetico"
+                />
+        </menu>
+    </item>>
 
 
 </menu>

@@ -1,5 +1,6 @@
 package com.example.xpiration;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -39,6 +40,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 import entidades.ListaProductosAdapter;
@@ -157,6 +160,52 @@ public class MainActivity extends AppCompatActivity {
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.OrdenCreacion:
+                ordenCreacion();
+                break;
+
+            case R.id.OrdenCategoria:
+                ordenCategoria();
+                break;
+
+            case R.id.OrdenAlfabetico:
+                ordenAlfabetico();
+                break;
+        }
+        adapter.notifyDataSetChanged();
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void ordenCreacion(){
+        Collections.sort(listaMain, new Comparator<Productos>() {
+            @Override
+            public int compare(Productos p1, Productos p2) {
+                return new Integer(p2.getPRODUCTO_ID()).compareTo(new Integer(p1.getPRODUCTO_ID()));
+            }
+        });
+    }
+
+    public void ordenCategoria(){
+        Collections.sort(listaMain, new Comparator<Productos>() {
+            @Override
+            public int compare(Productos p1, Productos p2) {
+                return new Integer(p1.getCATEGORIA_ID()).compareTo(new Integer(p2.getCATEGORIA_ID()));
+            }
+        });
+    }
+
+    public void ordenAlfabetico(){
+        Collections.sort(listaMain, new Comparator<Productos>() {
+            @Override
+            public int compare(Productos p1, Productos p2) {
+                return new String(p1.getPRODUCTO_NOMBRE()).compareToIgnoreCase(new String(p2.getPRODUCTO_NOMBRE()));
+            }
+        });
     }
 
     @Override
