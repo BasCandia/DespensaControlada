@@ -27,6 +27,7 @@ public class VistaNotificacionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vista_notificacion);
+        getSupportActionBar().setTitle("Lotes cerca de caducar");
 
 //****************************** Inicializacion de elementos ***************************************
         context = this;

@@ -81,7 +81,7 @@ public class VerLoteActivity extends AppCompatActivity {
             notiRoja.setText(lotes.getLOTE_NOTIFICACION_ROJA()+"");
             notiRoja.setInputType(InputType.TYPE_NULL);
             notiRoja.setFocusable(false);
-
+            getSupportActionBar().setTitle("Lote de "+lotes.getPRODUCTO_NOMBRE());
             guardar.setVisibility(View.INVISIBLE);
 
 

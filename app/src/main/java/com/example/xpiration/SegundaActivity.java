@@ -53,6 +53,7 @@ public class SegundaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_segunda);
         context = this;
+        getSupportActionBar().setTitle("Crear producto");
 //****************************** Inicializacion de elementos ***************************************
         nombre = findViewById(R.id.Nombre);
 

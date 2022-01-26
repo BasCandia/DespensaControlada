@@ -32,6 +32,7 @@ public class SubmenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submenu);
+        getSupportActionBar().setTitle("Lista de Lotes");
 //****************************** Inicializacion de elementos ***************************************
         context = this;
         recyclerViewLote = findViewById(R.id.ListaLote);
@@ -63,7 +64,6 @@ public class SubmenuActivity extends AppCompatActivity {
                 //Toast.makeText(context, "No existen lotes con id = " + id, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(context, LoteCrearActivity.class);
                 intent.putExtra("ID",id);
-                intent.putExtra("Nombre",adapter.nombreproducto);
                 startActivity(intent);
             }
         });

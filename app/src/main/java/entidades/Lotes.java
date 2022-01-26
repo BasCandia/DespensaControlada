@@ -249,7 +249,7 @@ public class Lotes {
         Lotes l = null;
         try {
 
-            String query1 = "SELECT * FROM LOTE WHERE LOTE_ID = " + id;
+            String query1 = "SELECT L.*,P.PRODUCTO_NOMBRE FROM LOTE L,PRODUCTO P WHERE L.PRODUCTO_ID = P.PRODUCTO_ID AND L.LOTE_ID =" + id;
 
             ConnectionHelper conexion = new ConnectionHelper();
             con = conexion.connectionclass();
@@ -257,7 +257,6 @@ public class Lotes {
 
             st = con.createStatement();
             ResultSet rs = st.executeQuery(query1);
-
 
             while (rs.next()) {
                 l = new Lotes();
@@ -267,8 +266,9 @@ public class Lotes {
                 l.setLOTE_FECHA_CADUCIDAD(rs.getDate("LOTE_FECHA_CADUCIDAD"));
                 l.setLOTE_NOTIFICACION_NARANJA(rs.getInt("LOTE_NOTIFICACION_NARANJA"));
                 l.setLOTE_NOTIFICACION_ROJA(rs.getInt("LOTE_NOTIFICACION_ROJA"));
-
+                l.setPRODUCTO_NOMBRE(rs.getString("PRODUCTO_NOMBRE"));
             }
+
         }catch (SQLException e){
             System.out.println("Error in sql statement");
         }

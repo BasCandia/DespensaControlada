@@ -88,7 +88,7 @@ public class EditarLoteActivity extends AppCompatActivity {
             fecha.setText(modificado);
             notiNaranja.setText(lotes.getLOTE_NOTIFICACION_NARANJA()+"");
             notiRoja.setText(lotes.getLOTE_NOTIFICACION_ROJA()+"");
-
+            getSupportActionBar().setTitle("Lote de "+lotes.getPRODUCTO_NOMBRE());
         }
 //******************* Elementos para seleccionar fecha de forma interactiva ************************
 

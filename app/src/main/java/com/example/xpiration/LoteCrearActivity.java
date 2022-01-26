@@ -17,6 +17,9 @@ import android.widget.TextView;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,8 +40,6 @@ public class LoteCrearActivity extends AppCompatActivity {
     TextInputLayout notiNaranjainput,notiRojainput;
     int id;
     private String newStr = "";
-    String NombreProducto = "";
-
 
     Date now = new Date();
     DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
@@ -62,17 +63,27 @@ public class LoteCrearActivity extends AppCompatActivity {
             Bundle extras = getIntent().getExtras();
             if(extras == null){
                 id = Integer.parseInt(null);
-                NombreProducto = null;
             }else{
                 id = extras.getInt("ID");
-                NombreProducto = extras.getString("Nombre");
             }
         }else{
             id = (int) savedInstanceState.getSerializable("ID");
-            NombreProducto = (String) savedInstanceState.getSerializable("Nombre");
         }
 
-        getSupportActionBar().setTitle(NombreProducto);
+
+        try {
+            String query1 = "SELECT PRODUCTO_NOMBRE FROM PRODUCTO WHERE PRODUCTO_ID ="+id;
+            ConnectionHelper conexion = new ConnectionHelper();
+            con = conexion.connectionclass();
+            Statement st = null;
+
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(query1);
+            rs.next();
+            getSupportActionBar().setTitle("Agregar lote de "+rs.getString("PRODUCTO_NOMBRE"));
+        }catch (SQLException e){
+            System.out.println("Error in sql statment");
+        }
 
         fecha.setOnClickListener(new View.OnClickListener() {
             @Override
