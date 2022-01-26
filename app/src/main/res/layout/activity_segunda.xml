@@ -27,19 +27,28 @@
             android:id="@+id/Nombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:singleLine="true"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Spinner
-        android:id="@+id/Categorias"
-        android:layout_width="0dp"
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"
-        android:minHeight="48dp"
+        android:layout_marginEnd="15dp"
+        app:cardCornerRadius="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/Categorias"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/BtnGuardar"
@@ -51,12 +60,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+     <TextView
         android:id="@+id/textView4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="102dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
         android:text="@string/Categoria"
         app:layout_constraintEnd_toEndOf="parent"

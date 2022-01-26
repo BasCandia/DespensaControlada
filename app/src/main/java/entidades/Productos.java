@@ -77,8 +77,11 @@ public class Productos {
     }
 
     //************************ Funcion para insertar query en base de datos ****************************
-    public void insertar (Context context, String nombre, int Categoria,String fechaIngreso){
+    public void insertar (Context context, String n, int Categoria,String fechaIngreso){
 //******************** Validaciones para query de insercion ****************************************
+
+        //validar el no ingreso de caracteres especiales
+        String nombre = n.replaceAll("[-+.^:,'(){}]","");
 
         if( Categoria == 0) {
             Toast.makeText(context,"Seleccione una Categoria",Toast.LENGTH_SHORT).show();
@@ -112,12 +115,16 @@ public class Productos {
 
 
 //************************ Funcion para editar query en base de datos ****************************
-    public boolean Editar (Context context,int ID, String nombre, String fechaIngreso, String fechaCaducidad,int Categoria, String notiNaranja, String notiRoja){
+    public boolean Editar (Context context,int ID, String n, String fechaIngreso, String fechaCaducidad,int Categoria, String notiNaranja, String notiRoja){
         //******************** Validaciones para query de edicion ****************************************
 
         DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
         Date nuevo = null;
         Date comparado = null;
+
+
+        //validar el no ingreso de caracteres especiales
+        String nombre = n.replaceAll("[-+.^:,'(){}/]","");
 
 
         if( Categoria == 0) {

@@ -69,31 +69,7 @@ public class SegundaActivity extends AppCompatActivity {
                 p.insertar(context,nombre.getText().toString(),spinnerC.getSelectedItemPosition(),vDateYMD);
             }
         });
-//************ Evita la insercion de caracteres especiales por seguridad ***************************
-        nombre.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Do nothing
-            }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String str = s.toString();
-                if (str.isEmpty()) {
-                    nombre.append(newStr);
-                    newStr = "";
-                } else if (!str.equals(newStr)) {
-                    // Replace the regex as per requirement
-                    newStr = str.replaceAll("[^A-Za-z0-9\\s]", "");
-                    nombre.setText("");
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // Do nothing
-            }
-        });
     }
 
 

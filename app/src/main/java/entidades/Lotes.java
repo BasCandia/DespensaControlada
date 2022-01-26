@@ -132,11 +132,14 @@ public class Lotes {
     }
 
 //************************ Funcion para insertar query en base de datos ****************************
-    public void insertar (Context context,String idproducto, String nombre, String fechaIngreso, String fechaCaducidad, String notiNaranja, String notiRoja){
+    public void insertar (Context context,String idproducto, String n, String fechaIngreso, String fechaCaducidad, String notiNaranja, String notiRoja){
 //******************** Validaciones para query de insercion ****************************************
             DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
             Date nuevo = null;
             Date comparado = null;
+
+
+            String nombre = n.replaceAll("[-+.^:,'(){}/]","");
 
             if(fechaCaducidad.isEmpty()){
                 Toast.makeText(context,"Ingrese una fecha de vencimiento",Toast.LENGTH_SHORT).show();
@@ -187,11 +190,13 @@ public class Lotes {
     }
 
 //************************ Funcion para editar query en base de datos ******************************
-    public static boolean Editar(Context context, int ID, String nombre, String fechaIngreso, String fechaCaducidad, String notiNaranja, String notiRoja){
+    public static boolean Editar(Context context, int ID, String n, String fechaIngreso, String fechaCaducidad, String notiNaranja, String notiRoja){
 //******************** Validaciones para query de edicion ******************************************
         DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
         Date nuevo = null;
         Date comparado = null;
+
+        String nombre = n.replaceAll("[-+.^:,'(){}/]","");
 
         if(fechaCaducidad.isEmpty()){
             Toast.makeText(context,"Ingrese una fecha de vencimiento",Toast.LENGTH_SHORT).show();
