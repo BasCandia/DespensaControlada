@@ -7,6 +7,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -123,6 +126,55 @@ public class LoteCrearActivity extends AppCompatActivity {
                 l.insertar(context,String.valueOf(id),nombre.getText().toString(),vDateYMD,fecha.getText().toString(),n,r);
 
             }
+        });
+
+//*********** Validacion para que no se pueda pegar texto, temas de seguridad **********************
+        notiNaranja.setOnLongClickListener(
+                new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {return true;}
+                });
+        notiNaranja.setCustomSelectionActionModeCallback(new ActionMode.Callback() {
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {return false;}
+            public void onDestroyActionMode(ActionMode mode) {}
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {return false;}
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {return false;}
+        });
+
+        notiRoja.setOnLongClickListener(
+                new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {return true;}
+                });
+        notiRoja.setCustomSelectionActionModeCallback(new ActionMode.Callback() {
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {return false;}
+            public void onDestroyActionMode(ActionMode mode) {}
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {return false;}
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {return false;}
+        });
+
+        fecha.setOnLongClickListener(
+                new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {return true;}
+                });
+        fecha.setCustomSelectionActionModeCallback(new ActionMode.Callback() {
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {return false;}
+            public void onDestroyActionMode(ActionMode mode) {}
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {return false;}
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {return false;}
+        });
+
+        nombre.setOnLongClickListener(
+                new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {return true;}
+                });
+        nombre.setCustomSelectionActionModeCallback(new ActionMode.Callback() {
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {return false;}
+            public void onDestroyActionMode(ActionMode mode) {}
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {return false;}
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {return false;}
         });
 
     }

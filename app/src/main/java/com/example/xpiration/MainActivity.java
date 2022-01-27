@@ -125,7 +125,8 @@ public class MainActivity extends AppCompatActivity {
                         listaMain.get(position).Borrar(listaMain.get(position).getPRODUCTO_ID());
                         removeItem(position);
                         adapter.updateArray(listaMain);
-
+                        //Intent intent = new Intent(MainActivity.this,MainActivity.class);
+                        //context.startActivity(intent);
                     }
                 });
                 alert.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {

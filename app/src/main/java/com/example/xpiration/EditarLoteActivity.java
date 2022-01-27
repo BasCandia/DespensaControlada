@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -127,8 +130,54 @@ public class EditarLoteActivity extends AppCompatActivity {
             }
         });
 
+//*********** Validacion para que no se pueda pegar texto, temas de seguridad **********************
+        notiNaranja.setOnLongClickListener(
+                new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {return true;}
+                });
+        notiNaranja.setCustomSelectionActionModeCallback(new ActionMode.Callback() {
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {return false;}
+            public void onDestroyActionMode(ActionMode mode) {}
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {return false;}
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {return false;}
+        });
 
+        notiRoja.setOnLongClickListener(
+                new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {return true;}
+                });
+        notiRoja.setCustomSelectionActionModeCallback(new ActionMode.Callback() {
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {return false;}
+            public void onDestroyActionMode(ActionMode mode) {}
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {return false;}
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {return false;}
+        });
 
+        fecha.setOnLongClickListener(
+                new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {return true;}
+                });
+        fecha.setCustomSelectionActionModeCallback(new ActionMode.Callback() {
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {return false;}
+            public void onDestroyActionMode(ActionMode mode) {}
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {return false;}
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {return false;}
+        });
+
+        nombre.setOnLongClickListener(
+                new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {return true;}
+                });
+        nombre.setCustomSelectionActionModeCallback(new ActionMode.Callback() {
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {return false;}
+            public void onDestroyActionMode(ActionMode mode) {}
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {return false;}
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {return false;}
+        });
     }
 
 

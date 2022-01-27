@@ -172,7 +172,7 @@ public class Lotes {
 
                                     pst.executeUpdate();
 
-                                    Toast.makeText(context, "Producto agregado correctamente", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "Lote agregado correctamente", Toast.LENGTH_SHORT).show();
 
                                     Intent intent = new Intent(context, MainActivity.class);
                                     context.startActivity(intent);
@@ -229,7 +229,7 @@ public class Lotes {
 
                                 pst.executeUpdate();
 
-                                Toast.makeText(context, "Producto agregado correctamente", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Lote editado correctamente", Toast.LENGTH_SHORT).show();
 
                                 Intent intent = new Intent(context, MainActivity.class);
                                 context.startActivity(intent);

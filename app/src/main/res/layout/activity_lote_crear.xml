@@ -24,8 +24,7 @@
             android:id="@+id/NombreEditLote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            />
+            android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -36,8 +35,8 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
-        android:hint="Fecha de Caducidad"
         android:clickable="true"
+        android:hint="Fecha de Caducidad"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,11 +46,10 @@
             android:id="@+id/FechaCaducidadEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusable="false"
             android:clickable="true"
+            android:focusable="false"
             android:inputType="date"
-            android:singleLine="true"
-            />
+            android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -62,8 +60,8 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
-        android:hint="Dias para notificacion Preventiva"
         android:clickable="true"
+        android:hint="Dias para notificacion Preventiva"
         app:helperText="Por defecto 7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -74,8 +72,8 @@
             android:id="@+id/notiNaranjaEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            />
+            android:inputType="number"
+            android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -86,8 +84,8 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
-        android:hint="Dias para notificacion Critica"
         android:clickable="true"
+        android:hint="Dias para notificacion Critica"
 
         app:helperText="Por defecto 2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -99,13 +97,9 @@
             android:id="@+id/notiRojaEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            />
+            android:inputType="number"
+            android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
 
 
     <Button
@@ -117,11 +111,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"></Button>
-
-
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -69,7 +72,18 @@ public class SegundaActivity extends AppCompatActivity {
                 p.insertar(context,nombre.getText().toString(),spinnerC.getSelectedItemPosition(),vDateYMD);
             }
         });
-
+//*********** Validacion para que no se pueda pegar texto, temas de seguridad **********************
+        nombre.setOnLongClickListener(
+                new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {return true;}
+                });
+        nombre.setCustomSelectionActionModeCallback(new ActionMode.Callback() {
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {return false;}
+            public void onDestroyActionMode(ActionMode mode) {}
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {return false;}
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {return false;}
+        });
     }
 
 
