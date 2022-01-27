@@ -32,6 +32,11 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
 
     }
 
+    public void updateArray(ArrayList<Productos> lista){
+        this.listaProductos = lista;
+        listaProductosFull = new ArrayList<>(lista);
+    }
+
     @NonNull
     @Override
     public ProductoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -136,6 +141,8 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
 
         }
     }
+
+
 
     @Override
     public Filter getFilter() {

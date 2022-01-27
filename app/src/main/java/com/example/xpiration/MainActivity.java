@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
                         // continue with delete
                         listaMain.get(position).Borrar(listaMain.get(position).getPRODUCTO_ID());
                         removeItem(position);
+                        adapter.updateArray(listaMain);
 
                     }
                 });
