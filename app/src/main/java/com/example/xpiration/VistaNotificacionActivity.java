@@ -1,5 +1,6 @@
 package com.example.xpiration;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,6 +32,7 @@ public class VistaNotificacionActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Lotes cerca de caducar");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
 //****************************** Inicializacion de elementos ***************************************
         context = this;
         recyclerViewLote = findViewById(R.id.ListaLote);
@@ -46,5 +49,15 @@ public class VistaNotificacionActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            Intent intent = new Intent(context,MainActivity.class);
+            context.startActivity(intent);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
