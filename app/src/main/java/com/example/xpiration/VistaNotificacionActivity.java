@@ -28,6 +28,7 @@ public class VistaNotificacionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vista_notificacion);
         getSupportActionBar().setTitle("Lotes cerca de caducar");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 //****************************** Inicializacion de elementos ***************************************
         context = this;
@@ -43,7 +44,6 @@ public class VistaNotificacionActivity extends AppCompatActivity {
 
         recyclerViewLote.setAdapter(adapter);
 
-//****************************** Boton para agregar Lotes ******************************************
 
 
     }
