@@ -62,7 +62,7 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
         holder.viewNombre.setText(listaLotes.get(position).getLOTE_NOMBRE());
         holder.viewFecha.setText(diff+" dias para Caducar");
         holder.productoNombre.setText(listaLotes.get(position).getPRODUCTO_NOMBRE());
-
+        //holder.merma.setVisibility(View.INVISIBLE);
 
 //* Al quedar x dias restantes para que expire se cambian los colores de las notificaciones de manera automatica *
         if(diff<=listaLotes.get(position).getLOTE_NOTIFICACION_NARANJA()){
@@ -71,12 +71,21 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
                 holder.estado.setImageResource(R.drawable.ic_red_circle);
                 if(diff<= 0){ // Si es el dia en el que expira el lote el circulo sera negro
                     holder.estado.setImageResource(R.drawable.ic_black_circle);
+                    holder.merma.setVisibility(View.VISIBLE);
                     if(diff<= -3){ // Si pasaron 3 dias el lote se borrara de manera automatica
                         listaLotes.get(position).Borrar(listaLotes.get(position).getLOTE_ID());
                     }
                 }
             }
         }
+
+        holder.merma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listaLotes.get(position).Mermar(listaLotes.get(position).getLOTE_ID());
+                Toast.makeText(view.getContext(), "Lote agregado a Merma", Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 
@@ -89,7 +98,7 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
     public class LotesViewHolder extends RecyclerView.ViewHolder {
 
         TextView viewNombre, viewFecha,productoNombre;
-        ImageView estado;
+        ImageView estado,merma;
 
         public LotesViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -97,6 +106,7 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
             viewFecha = itemView.findViewById(R.id.LoteCaducidad);
             estado = itemView.findViewById(R.id.IconoEstadoLote);
             productoNombre = itemView.findViewById(R.id.LoteNombreProducto);
+            merma = itemView.findViewById(R.id.Merma);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -108,6 +118,7 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
                     context.startActivity(intent);
                 }
             });
+
 
         }
     }

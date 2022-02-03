@@ -28,6 +28,7 @@ public class Lotes {
     private int LOTE_NOTIFICACION_NARANJA; //preventiva
     private int LOTE_NOTIFICACION_ROJA; //critica
     private String PRODUCTO_NOMBRE;
+    private char LOTE_EN_MERMA;
 
     Connection con;
 
@@ -94,6 +95,14 @@ public class Lotes {
 
     public void setPRODUCTO_NOMBRE(String PRODUCTO_NOMBRE) {
         this.PRODUCTO_NOMBRE = PRODUCTO_NOMBRE;
+    }
+
+    public char getLOTE_EN_MERMA() {
+        return LOTE_EN_MERMA;
+    }
+
+    public void setLOTE_EN_MERMA(char LOTE_EN_MERMA) {
+        this.LOTE_EN_MERMA = LOTE_EN_MERMA;
     }
 
     public ArrayList<Lotes> mostrarLotes(int id){
@@ -164,7 +173,7 @@ public class Lotes {
                             }else{
 //************** inicializacion de conexion, construccion y envio de query *************************
                                 try {
-                                    String query = "INSERT LOTE VALUES (" + idproducto + ",'" + nombre +"','"+ fechaIngreso + "','" + fechaCaducidad + "',"+notiNaranja+','+notiRoja+");";
+                                    String query = "INSERT LOTE VALUES (" + idproducto + ",'" + nombre +"','"+ fechaIngreso + "','" + fechaCaducidad + "',"+notiNaranja+','+notiRoja+",'N');";
                                     ConnectionHelper conexion = new ConnectionHelper();
                                     Connection con = conexion.connectionclass();
 
@@ -331,6 +340,24 @@ public class Lotes {
 
 
         return bandera;
+    }
+
+    public void Mermar(int ID){
+        try{
+            String query = "UPDATE LOTE SET LOTE_EN_MERMA = 'S' WHERE LOTE_ID="+ID;
+            ConnectionHelper conexion = new ConnectionHelper();
+            Connection con = conexion.connectionclass();
+
+            PreparedStatement pst = con.prepareStatement(query);
+
+            pst.executeUpdate();
+
+
+
+        }catch (SQLException e) {
+            //Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+        }
     }
 
 }
