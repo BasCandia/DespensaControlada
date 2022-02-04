@@ -217,12 +217,22 @@ public class MainActivity extends AppCompatActivity {
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
         MenuItem lotesCaducar= menu.findItem(R.id.lotes_caducar);
+        MenuItem lotesMerma = menu.findItem(R.id.lotes_merma);
 
         lotesCaducar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 Intent caducar = new Intent(context,VistaNotificacionActivity.class);
                 context.startActivity(caducar);
+                return false;
+            }
+        });
+
+        lotesMerma.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent merma = new Intent(context,VistaMermaActivity.class);
+                context.startActivity(merma);
                 return false;
             }
         });

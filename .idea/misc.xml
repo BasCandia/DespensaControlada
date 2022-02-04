@@ -11,8 +11,6 @@
         <entry key="..\:/Users/bcand/AndroidStudioProjects/Xpiration/app/src/main/res/drawable/ic_green_circle.xml" value="0.3828125" />
         <entry key="..\:/Users/bcand/AndroidStudioProjects/Xpiration/app/src/main/res/drawable/ic_grip_horizontal.xml" value="0.3828125" />
         <entry key="..\:/Users/bcand/AndroidStudioProjects/Xpiration/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3828125" />
-        <entry key="..\:/Users/bcand/AndroidStudioProjects/Xpiration/app/src/main/res/drawable/ic_meat.xml" value="0.3828125" />
-        <entry key="..\:/Users/bcand/AndroidStudioProjects/Xpiration/app/src/main/res/drawable/ic_merma.xml" value="0.3828125" />
         <entry key="..\:/Users/bcand/AndroidStudioProjects/Xpiration/app/src/main/res/drawable/ic_paint_brush.xml" value="0.3828125" />
         <entry key="..\:/Users/bcand/AndroidStudioProjects/Xpiration/app/src/main/res/drawable/ic_plus.xml" value="0.3828125" />
         <entry key="..\:/Users/bcand/AndroidStudioProjects/Xpiration/app/src/main/res/layout/activity_lote_crear.xml" value="0.26875" />
@@ -21,7 +19,7 @@
         <entry key="..\:/Users/bcand/AndroidStudioProjects/Xpiration/app/src/main/res/layout/activity_submenu.xml" value="0.2640625" />
         <entry key="..\:/Users/bcand/AndroidStudioProjects/Xpiration/app/src/main/res/layout/activity_ver_lote.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/bcand/AndroidStudioProjects/Xpiration/app/src/main/res/layout/activity_ver_producto.xml" value="0.33" />
-        <entry key="..\:/Users/bcand/AndroidStudioProjects/Xpiration/app/src/main/res/layout/lista_item_lote.xml" value="0.67" />
+        <entry key="..\:/Users/bcand/AndroidStudioProjects/Xpiration/app/src/main/res/layout/lista_item_lote.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/bcand/AndroidStudioProjects/Xpiration/app/src/main/res/layout/lista_item_producto.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/bcand/AndroidStudioProjects/Xpiration/app/src/main/res/menu/menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/bcand/AndroidStudioProjects/Xpiration/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3828125" />
@@ -44,6 +42,8 @@
         <entry key="..\:/Users/matin/AndroidStudioProjects/Xpiration/app/src/main/res/layout/activity_segunda.xml" value="0.33" />
         <entry key="..\:/Users/matin/AndroidStudioProjects/Xpiration/app/src/main/res/layout/activity_ver_lote.xml" value="0.33" />
         <entry key="..\:/Users/matin/AndroidStudioProjects/Xpiration/app/src/main/res/layout/activity_ver_producto.xml" value="0.24791666666666667" />
+        <entry key="..\:/Users/matin/AndroidStudioProjects/Xpiration/app/src/main/res/layout/activity_vista_merma.xml" value="0.35260416666666666" />
+        <entry key="..\:/Users/matin/AndroidStudioProjects/Xpiration/app/src/main/res/layout/activity_vista_notificacion.xml" value="0.3" />
         <entry key="..\:/Users/matin/AndroidStudioProjects/Xpiration/app/src/main/res/layout/content_main.xml" value="0.27760416666666665" />
         <entry key="..\:/Users/matin/AndroidStudioProjects/Xpiration/app/src/main/res/layout/lista_item_lote.xml" value="0.27760416666666665" />
         <entry key="..\:/Users/matin/AndroidStudioProjects/Xpiration/app/src/main/res/layout/lista_item_producto.xml" value="0.5" />
