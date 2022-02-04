@@ -86,7 +86,7 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
         holder.merma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listaLotes.get(position).Mermar(listaLotes.get(position).getLOTE_ID());
+                listaLotes.get(holder.getAdapterPosition()).Mermar(listaLotes.get(holder.getAdapterPosition()).getLOTE_ID());
                 Toast.makeText(view.getContext(), "Lote agregado a Merma", Toast.LENGTH_LONG).show();
                 holder.merma.setVisibility(View.INVISIBLE);
             }
