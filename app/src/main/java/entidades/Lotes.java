@@ -131,6 +131,7 @@ public class Lotes {
                 l.setLOTE_NOTIFICACION_NARANJA(rs.getInt("LOTE_NOTIFICACION_NARANJA"));
                 l.setLOTE_NOTIFICACION_ROJA(rs.getInt("LOTE_NOTIFICACION_ROJA"));
                 l.setPRODUCTO_NOMBRE(rs.getString("PRODUCTO_NOMBRE"));
+                l.setLOTE_EN_MERMA(rs.getString("LOTE_EN_MERMA").charAt(0));
                 listaLotes.add(l);
 
             }
@@ -281,6 +282,7 @@ public class Lotes {
                 l.setLOTE_NOTIFICACION_NARANJA(rs.getInt("LOTE_NOTIFICACION_NARANJA"));
                 l.setLOTE_NOTIFICACION_ROJA(rs.getInt("LOTE_NOTIFICACION_ROJA"));
                 l.setPRODUCTO_NOMBRE(rs.getString("PRODUCTO_NOMBRE"));
+                l.setLOTE_EN_MERMA(rs.getString("LOTE_EN_MERMA").charAt(0));
             }
 
         }catch (SQLException e){
@@ -314,6 +316,7 @@ public class Lotes {
                 l.setLOTE_NOTIFICACION_NARANJA(rs.getInt("LOTE_NOTIFICACION_NARANJA"));
                 l.setLOTE_NOTIFICACION_ROJA(rs.getInt("LOTE_NOTIFICACION_ROJA"));
                 l.setPRODUCTO_NOMBRE(rs.getString("PRODUCTO_NOMBRE"));
+                l.setLOTE_EN_MERMA(rs.getString("LOTE_EN_MERMA").charAt(0));
                 listaLotes.add(l);
 
             }
@@ -329,7 +332,7 @@ public class Lotes {
         ArrayList<Lotes> listaLotes = new ArrayList<>();
         try {
             Lotes l;
-            String query1 = "SELECT * FROM LOTE WHERE LOTE_EN_MERMA = 'S' ORDER BY LOTE_FECHA_CADUCIDAD ASC " ;
+            String query1 = "SELECT L.*,P.PRODUCTO_NOMBRE FROM LOTE L, PRODUCTO P WHERE L.LOTE_EN_MERMA = 'S' AND  L.PRODUCTO_ID = P.PRODUCTO_ID AND DATEDIFF(DAY,GETDATE(),L.LOTE_FECHA_CADUCIDAD) <= LOTE_NOTIFICACION_NARANJA ORDER BY LOTE_FECHA_CADUCIDAD ASC\n" ;
 
             ConnectionHelper conexion = new ConnectionHelper();
             con = conexion.connectionclass();
@@ -349,6 +352,7 @@ public class Lotes {
                 l.setLOTE_NOTIFICACION_NARANJA(rs.getInt("LOTE_NOTIFICACION_NARANJA"));
                 l.setLOTE_NOTIFICACION_ROJA(rs.getInt("LOTE_NOTIFICACION_ROJA"));
                 l.setPRODUCTO_NOMBRE(rs.getString("PRODUCTO_NOMBRE"));
+                l.setLOTE_EN_MERMA(rs.getString("LOTE_EN_MERMA").charAt(0));
                 listaLotes.add(l);
 
             }

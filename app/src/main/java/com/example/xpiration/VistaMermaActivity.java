@@ -34,17 +34,12 @@ public class VistaMermaActivity extends AppCompatActivity {
 
         //****************************** Inicializacion de elementos ***************************************
         context = this;
-        recyclerViewLote = findViewById(R.id.ListaLote);
+        recyclerViewLote = findViewById(R.id.ListaMerma);
         recyclerViewLote.setLayoutManager(new LinearLayoutManager(this));
 
 
         l = new Lotes();
         listaLote = new ArrayList<Lotes>();
-
-
-        Toast.makeText(context, " Cantidad de lotes " + l.MermaLotes().size()  , Toast.LENGTH_SHORT).show();
-
-
 
         ListaLotesAdapter adapter = new ListaLotesAdapter(l.MermaLotes());
 

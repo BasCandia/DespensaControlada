@@ -70,8 +70,12 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
             if(diff<=listaLotes.get(position).getLOTE_NOTIFICACION_ROJA()){
                 holder.estado.setImageResource(R.drawable.ic_red_circle);
                 if(diff<= 0){ // Si es el dia en el que expira el lote el circulo sera negro
+
+                    if(listaLotes.get(position).getLOTE_EN_MERMA()=='N'){
+                        holder.merma.setVisibility(View.VISIBLE);
+                    }
+
                     holder.estado.setImageResource(R.drawable.ic_black_circle);
-                    holder.merma.setVisibility(View.VISIBLE);
                     if(diff<= -3){ // Si pasaron 3 dias el lote se borrara de manera automatica
                         listaLotes.get(position).Borrar(listaLotes.get(position).getLOTE_ID());
                     }
@@ -84,6 +88,7 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
             public void onClick(View view) {
                 listaLotes.get(position).Mermar(listaLotes.get(position).getLOTE_ID());
                 Toast.makeText(view.getContext(), "Lote agregado a Merma", Toast.LENGTH_LONG).show();
+                holder.merma.setVisibility(View.INVISIBLE);
             }
         });
 
