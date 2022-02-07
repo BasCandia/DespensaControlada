@@ -22,6 +22,12 @@
         app:showAsAction="never"
         />
     <item
+        android:title="Generar reporte"
+        android:id="@+id/generar_reporte"
+        android:icon="@drawable/ic_baseline_more_vert_24"
+        app:showAsAction="never"
+        />
+    <item
         android:title="Ordernar por"
         android:id="@+id/Ordernar"
         android:icon="@drawable/ic_baseline_more_vert_24"

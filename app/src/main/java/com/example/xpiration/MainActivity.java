@@ -2,12 +2,15 @@ package com.example.xpiration;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.app.TaskStackBuilder;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
@@ -16,8 +19,10 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.StrictMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,8 +34,17 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
+import java.io.File;
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -98,6 +112,9 @@ public class MainActivity extends AppCompatActivity {
                 context.startActivity(intent);
             }
         });
+
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
 
     }
 
@@ -217,6 +234,7 @@ public class MainActivity extends AppCompatActivity {
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
         MenuItem lotesCaducar= menu.findItem(R.id.lotes_caducar);
+        MenuItem reporte = menu.findItem(R.id.generar_reporte);
         MenuItem lotesMerma = menu.findItem(R.id.lotes_merma);
 
         lotesCaducar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -237,6 +255,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        reporte.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+
+                buttonCreateExcel();
+
+                return false;
+            }
+        });
+
         SearchView searchView = (SearchView) searchItem.getActionView();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -253,4 +281,60 @@ public class MainActivity extends AppCompatActivity {
         });
         return true;
     }
+
+    public void buttonCreateExcel(){
+        File filePath = new File(Environment.getExternalStorageDirectory() + "/Test.xls");
+        HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
+        HSSFSheet hssfSheet = hssfWorkbook.createSheet("Hoja a");
+
+        HSSFRow hssfRow = hssfSheet.createRow(0);
+        HSSFCell hssfCell = hssfRow.createCell(0);
+
+        hssfCell.setCellValue("Test");
+
+        try {
+            if (!filePath.exists()){
+                filePath.createNewFile();
+            }
+
+            FileOutputStream fileOutputStream= new FileOutputStream(filePath);
+            hssfWorkbook.write(fileOutputStream);
+
+            if (fileOutputStream!=null){
+                fileOutputStream.flush();
+                fileOutputStream.close();
+            }
+        } catch (Exception e) {
+            Toast.makeText(context, "A ocurrido un error al crear el excel", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
+    /*
+    private void askForPermission(String permission, Integer requestCode) {
+        if (ContextCompat.checkSelfPermission(context, permission)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    MainActivity.this, permission)) {
+
+                //This is called if user has denied the permission before
+                //In this case I am just asking the permission again
+                ActivityCompat.requestPermissions(MainActivity.this,
+                        new String[]{permission}, requestCode);
+
+            } else {
+                ActivityCompat.requestPermissions(MainActivity.this,
+                        new String[]{permission}, requestCode);
+            }
+        } else {
+            Toast.makeText(this, permission + " is already granted.",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+     */
+
+
 }
