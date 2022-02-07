@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -16,7 +17,11 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 import entidades.Lotes;
@@ -31,10 +36,19 @@ public class ExcelExporter {
 
 
     public static void buttonCreateExcel(Context context){
-        File filePath = new File(Environment.getExternalStorageDirectory() + "/Test.xls");
-        HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
-        HSSFSheet hssfSheet = hssfWorkbook.createSheet("Productos y LotesX");
+        Date now = new Date();
+        DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
+        String vDateYMD = dateFormatYMD.format(now);
 
+        Date nuevo=null;
+        Date comparado=null;
+
+        File filePath = null;
+
+            filePath = new File(Environment.getExternalStorageDirectory() + "/Reporte_a_"+vDateYMD.replaceAll("/","_")+".xls");
+
+        HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
+        HSSFSheet hssfSheet = hssfWorkbook.createSheet("Productos y Lotes");
 
         ArrayList<Productos> listaProductos;
         Productos p = new Productos();
@@ -50,6 +64,10 @@ public class ExcelExporter {
         TituloCell.setCellValue("Nombre Lote");
         TituloCell = TituloRow.createCell(3);
         TituloCell.setCellValue("Fecha caducidad Lote");
+        TituloCell = TituloRow.createCell(4);
+        TituloCell.setCellValue("Dias para caducar");
+
+
 
         int x = 1;
         int y = 0;
@@ -76,12 +94,57 @@ public class ExcelExporter {
                 loteCellA = loteRow.createCell(y);
                 loteCellA.setCellValue(listaLotes.get(j).getLOTE_FECHA_CADUCIDAD().toString());
 
+                try {
+                    nuevo = dateFormatYMD.parse(vDateYMD);
+                    comparado = listaLotes.get(j).getLOTE_FECHA_CADUCIDAD();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                int diff = (int)((comparado.getTime() - nuevo.getTime())/86400000);
+
+                y++;
+                loteCellA = loteRow.createCell(y);
+                loteCellA.setCellValue(diff);
+
                 x++;
             }
             y= 0;
         }
 
-        ArrayList<Lotes> listaMerma ;
+        HSSFSheet hssfSheetp2 = hssfWorkbook.createSheet("Lotes por Caducar");
+
+        HSSFRow TituloRowp2 = hssfSheetp2.createRow(0);
+        HSSFCell TituloCellp2 = TituloRowp2.createCell(0);
+
+        TituloCellp2.setCellValue("ID Lote");
+        TituloCellp2 = TituloRowp2.createCell(1);
+        TituloCellp2.setCellValue("Nombre Lote");
+        TituloCellp2 = TituloRowp2.createCell(2);
+        TituloCellp2.setCellValue("Fecha caducidad Lote");
+
+        x=1;
+        y=0;
+        Lotes lp2 = new Lotes();
+        ArrayList<Lotes> listaLotesp2 = new ArrayList<>(lp2.mostrarTodoLotes());
+        for (int i=0 ; i < listaLotesp2.size();i++) {
+            HSSFRow loteRowp2 = hssfSheetp2.createRow(x);
+            HSSFCell loteCellp2 = loteRowp2.createCell(y);
+
+            loteCellp2.setCellValue(listaLotesp2.get(i).getLOTE_ID());
+
+            y++;
+            loteCellp2 = loteRowp2.createCell(y);
+            loteCellp2.setCellValue(listaLotesp2.get(i).getLOTE_NOMBRE());
+
+            y++;
+            loteCellp2 = loteRowp2.createCell(y);
+            loteCellp2.setCellValue(listaLotesp2.get(i).getLOTE_FECHA_CADUCIDAD().toString());
+
+            x++;
+            y= 0;
+        }
+
+            ArrayList<Lotes> listaMerma ;
 
         try {
             if (!filePath.exists()){
@@ -100,4 +163,6 @@ public class ExcelExporter {
             e.printStackTrace();
         }
     }
+
+
 }
