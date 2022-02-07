@@ -1,5 +1,6 @@
 package com.example.xpiration;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -33,6 +35,7 @@ public class SubmenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submenu);
         getSupportActionBar().setTitle("Lista de Lotes");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //****************************** Inicializacion de elementos ***************************************
         context = this;
         recyclerViewLote = findViewById(R.id.ListaLote);
@@ -69,6 +72,15 @@ public class SubmenuActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            Intent intent = new Intent(context,MainActivity.class);
+            context.startActivity(intent);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
