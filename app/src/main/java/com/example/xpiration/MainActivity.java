@@ -259,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
 
-                buttonCreateExcel();
+                ExcelExporter.buttonCreateExcel(context);
 
                 return false;
             }
@@ -282,59 +282,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void buttonCreateExcel(){
-        File filePath = new File(Environment.getExternalStorageDirectory() + "/Test.xls");
-        HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
-        HSSFSheet hssfSheet = hssfWorkbook.createSheet("Hoja a");
-
-        HSSFRow hssfRow = hssfSheet.createRow(0);
-        HSSFCell hssfCell = hssfRow.createCell(0);
-
-        hssfCell.setCellValue("Test");
-
-        try {
-            if (!filePath.exists()){
-                filePath.createNewFile();
-            }
-
-            FileOutputStream fileOutputStream= new FileOutputStream(filePath);
-            hssfWorkbook.write(fileOutputStream);
-
-            if (fileOutputStream!=null){
-                fileOutputStream.flush();
-                fileOutputStream.close();
-            }
-        } catch (Exception e) {
-            Toast.makeText(context, "A ocurrido un error al crear el excel", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-    }
-
-    /*
-    private void askForPermission(String permission, Integer requestCode) {
-        if (ContextCompat.checkSelfPermission(context, permission)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(
-                    MainActivity.this, permission)) {
-
-                //This is called if user has denied the permission before
-                //In this case I am just asking the permission again
-                ActivityCompat.requestPermissions(MainActivity.this,
-                        new String[]{permission}, requestCode);
-
-            } else {
-                ActivityCompat.requestPermissions(MainActivity.this,
-                        new String[]{permission}, requestCode);
-            }
-        } else {
-            Toast.makeText(this, permission + " is already granted.",
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
-
-     */
 
 
 }

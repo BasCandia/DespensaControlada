@@ -18,7 +18,7 @@ public class ConnectionHelper {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
             Class.forName("net.sourceforge.jtds.jdbc.Driver").newInstance();
-            connect = DriverManager.getConnection("jdbc:jtds:sqlserver://192.168.1.119:1433;databaseName=xpiration;user=sa;password=Darktruenox0123;");
+            connect = DriverManager.getConnection("jdbc:jtds:sqlserver://192.168.1.119:1433;databaseName=xpiration3;user=sa;password=Darktruenox0123;");
         }catch (Exception ex){
 
 

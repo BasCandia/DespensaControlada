@@ -4,9 +4,23 @@ import android.content.Context;
 import android.os.Environment;
 import android.widget.Toast;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.IndexedColors;
+
 import java.io.File;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Locale;
 
+import entidades.Lotes;
+import entidades.Productos;
 import jxl.Workbook;
 import jxl.WorkbookSettings;
 import jxl.write.Label;
@@ -14,56 +28,76 @@ import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 
 public class ExcelExporter {
-    public static void export(Context context) {
 
 
+    public static void buttonCreateExcel(Context context){
+        File filePath = new File(Environment.getExternalStorageDirectory() + "/Test.xls");
+        HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
+        HSSFSheet hssfSheet = hssfWorkbook.createSheet("Productos y LotesX");
 
-        File sd = Environment.getExternalStorageDirectory();
-        String csvFile = "yourFile.xls";
 
-        File directory = new File(sd.getAbsolutePath());
+        ArrayList<Productos> listaProductos;
+        Productos p = new Productos();
+        listaProductos = new ArrayList<>(p.mostrarProductos());
 
-        //create directory if not exist
-        if (!directory.isDirectory()) {
-            directory.mkdirs();
+        HSSFRow TituloRow = hssfSheet.createRow(0);
+        HSSFCell TituloCell = TituloRow.createCell(0);
+
+        TituloCell.setCellValue("Nombre Producto");
+        TituloCell = TituloRow.createCell(1);
+        TituloCell.setCellValue("ID Lote");
+        TituloCell = TituloRow.createCell(2);
+        TituloCell.setCellValue("Nombre Lote");
+        TituloCell = TituloRow.createCell(3);
+        TituloCell.setCellValue("Fecha caducidad Lote");
+
+        int x = 1;
+        int y = 0;
+        for (int i= 0;i<listaProductos.size();i++){
+            HSSFRow productoRow = hssfSheet.createRow(x);
+            HSSFCell productoCell = productoRow.createCell(y);
+            productoCell.setCellValue(listaProductos.get(i).getPRODUCTO_NOMBRE());
+
+            x++;
+            ArrayList<Lotes> listaLotes ;
+            Lotes l = new Lotes();
+            listaLotes = new ArrayList<>(l.mostrarLotes(listaProductos.get(i).getPRODUCTO_ID()));
+            for(int j = 0; j < listaLotes.size();j++){
+                y=1;
+                HSSFRow loteRow = hssfSheet.createRow(x);
+                HSSFCell loteCellA = loteRow.createCell(y);
+                loteCellA.setCellValue(listaLotes.get(j).getLOTE_ID());
+
+                y++;
+                loteCellA = loteRow.createCell(y);
+                loteCellA.setCellValue(listaLotes.get(j).getLOTE_NOMBRE());
+
+                y++;
+                loteCellA = loteRow.createCell(y);
+                loteCellA.setCellValue(listaLotes.get(j).getLOTE_FECHA_CADUCIDAD().toString());
+
+                x++;
+            }
+            y= 0;
         }
+
+        ArrayList<Lotes> listaMerma ;
+
         try {
+            if (!filePath.exists()){
+                filePath.createNewFile();
+            }
 
-            //file path
-            File file = new File(directory, csvFile);
-            WorkbookSettings wbSettings = new WorkbookSettings();
-            wbSettings.setLocale(new Locale(Locale.GERMAN.getLanguage(), Locale.GERMAN.getCountry()));
-            WritableWorkbook workbook;
-            workbook = Workbook.createWorkbook(file, wbSettings);
+            FileOutputStream fileOutputStream= new FileOutputStream(filePath);
+            hssfWorkbook.write(fileOutputStream);
 
-            //Excel sheetA first sheetA
-            WritableSheet sheetA = workbook.createSheet("sheet A", 0);
-
-            // column and row titles
-            sheetA.addCell(new Label(0, 0, "sheet A 1"));
-            sheetA.addCell(new Label(1, 0, "sheet A 2"));
-            sheetA.addCell(new Label(0, 1, "sheet A 3"));
-            sheetA.addCell(new Label(1, 1, "sheet A 4"));
-
-            //Excel sheetB represents second sheet
-            WritableSheet sheetB = workbook.createSheet("sheet B", 1);
-
-            // column and row titles
-            sheetB.addCell(new Label(0, 0, "sheet B 1"));
-            sheetB.addCell(new Label(1, 0, "sheet B 2"));
-            sheetB.addCell(new Label(0, 1, "sheet B 3"));
-            sheetB.addCell(new Label(1, 1, "sheet B 4"));
-
-            // close workbook
-            workbook.write();
-            workbook.close();
-            Toast.makeText(context, "Excel creado correctamente", Toast.LENGTH_SHORT).show();
-
+            if (fileOutputStream!=null){
+                fileOutputStream.flush();
+                fileOutputStream.close();
+            }
         } catch (Exception e) {
-            e.printStackTrace();
             Toast.makeText(context, "A ocurrido un error al crear el excel", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         }
-
-
     }
 }
