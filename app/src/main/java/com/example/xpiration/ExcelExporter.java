@@ -58,14 +58,22 @@ public class ExcelExporter {
         HSSFCell TituloCell = TituloRow.createCell(0);
 
         TituloCell.setCellValue("Nombre Producto");
+        hssfSheet.setColumnWidth(0,("Nombre Producto").length() * 250 );
         TituloCell = TituloRow.createCell(1);
         TituloCell.setCellValue("ID Lote");
+        hssfSheet.setColumnWidth(1,("ID Lote").length() * 250 );
         TituloCell = TituloRow.createCell(2);
         TituloCell.setCellValue("Nombre Lote");
+        hssfSheet.setColumnWidth(2,("Nombre Lote").length() * 250 );
         TituloCell = TituloRow.createCell(3);
         TituloCell.setCellValue("Fecha caducidad Lote");
+        hssfSheet.setColumnWidth(3,("Fecha caducidad Lote").length() * 250 );
         TituloCell = TituloRow.createCell(4);
         TituloCell.setCellValue("Dias para caducar");
+        hssfSheet.setColumnWidth(4,("Dias para caducar").length() * 250 );
+
+
+
 
 
 
@@ -117,10 +125,20 @@ public class ExcelExporter {
         HSSFCell TituloCellp2 = TituloRowp2.createCell(0);
 
         TituloCellp2.setCellValue("ID Lote");
+        hssfSheetp2.setColumnWidth(0,("ID Lote").length() * 250 );
         TituloCellp2 = TituloRowp2.createCell(1);
         TituloCellp2.setCellValue("Nombre Lote");
+        hssfSheetp2.setColumnWidth(1,("Nombre Lote").length() * 250 );
         TituloCellp2 = TituloRowp2.createCell(2);
         TituloCellp2.setCellValue("Fecha caducidad Lote");
+        hssfSheetp2.setColumnWidth(2,("Fecha caducidad Lote").length() * 250 );
+        TituloCellp2 = TituloRowp2.createCell(3);
+        TituloCellp2.setCellValue("Dias para caducar");
+        hssfSheetp2.setColumnWidth(3,("Dias para caducar").length() * 250 );
+
+
+
+
 
         x=1;
         y=0;
@@ -139,6 +157,18 @@ public class ExcelExporter {
             y++;
             loteCellp2 = loteRowp2.createCell(y);
             loteCellp2.setCellValue(listaLotesp2.get(i).getLOTE_FECHA_CADUCIDAD().toString());
+
+            try {
+                nuevo = dateFormatYMD.parse(vDateYMD);
+                comparado = listaLotesp2.get(i).getLOTE_FECHA_CADUCIDAD();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            int diff = (int)((comparado.getTime() - nuevo.getTime())/86400000);
+
+            y++;
+            loteCellp2 = loteRowp2.createCell(y);
+            loteCellp2.setCellValue(diff);
 
             x++;
             y= 0;
