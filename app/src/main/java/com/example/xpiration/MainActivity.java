@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -260,6 +261,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 ExcelExporter exporter = new ExcelExporter();
                 exporter.buttonCreateExcel(context);
+                sendReport(exporter.getPath());
 
                 return false;
             }
@@ -280,6 +282,35 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return true;
+    }
+
+    public void sendReport(String path){
+
+        Date now = new Date();
+        DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
+        String vDateYMD = dateFormatYMD.format(now);
+
+        try {
+            File root= Environment.getExternalStorageDirectory();
+            String filelocation= root.getAbsolutePath() + path;
+
+            Intent intentEmail = new Intent(Intent.ACTION_SEND);
+            intentEmail.putExtra(Intent.EXTRA_EMAIL,"bcandia.0123@gmail.com");
+            intentEmail.putExtra(Intent.EXTRA_SUBJECT,"Reporte Merma " + vDateYMD.replaceAll("/","_"));
+            intentEmail.putExtra(Intent.EXTRA_TEXT,"Sistema de mensajeria automatico de la aplicacion");
+            intentEmail.putExtra(Intent.EXTRA_STREAM, filelocation);
+
+            intentEmail.setType("message/rfc822");
+            if(  intentEmail.resolveActivity(getPackageManager()) != null){
+                startActivity(intentEmail);
+            }else{
+                Toast.makeText(context, "No existe una aplicacion para enviar correos", Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception e){
+            System.out.println("is exception raises during sending mail"+e);
+        }
+
+
     }
 
 
