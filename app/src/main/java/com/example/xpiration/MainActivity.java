@@ -258,8 +258,8 @@ public class MainActivity extends AppCompatActivity {
         reporte.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-
-                ExcelExporter.buttonCreateExcel(context);
+                ExcelExporter exporter = new ExcelExporter();
+                exporter.buttonCreateExcel(context);
 
                 return false;
             }

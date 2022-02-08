@@ -34,20 +34,25 @@ import jxl.write.WritableWorkbook;
 
 public class ExcelExporter {
 
-
-    public static void buttonCreateExcel(Context context){
+File filePath = null;
+    public void buttonCreateExcel(Context context){
         Date now = new Date();
         DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
         String vDateYMD = dateFormatYMD.format(now);
 
         Date nuevo=null;
         Date comparado=null;
+//******************* Creacion de archivo si no existe o reemplazo si existe ***********************
 
-        File filePath = null;
 
-            filePath = new File(Environment.getExternalStorageDirectory() + "/Reporte_a_"+vDateYMD.replaceAll("/","_")+".xls");
+        filePath = new File(Environment.getExternalStorageDirectory() + "/Reporte_a_"+vDateYMD.replaceAll("/","_")+".xls");
+
 
         HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
+
+
+
+//********************************* Creacion de pagina *********************************************
         HSSFSheet hssfSheet = hssfWorkbook.createSheet("Productos y Lotes");
 
         ArrayList<Productos> listaProductos;
@@ -57,6 +62,8 @@ public class ExcelExporter {
         HSSFRow TituloRow = hssfSheet.createRow(0);
         HSSFCell TituloCell = TituloRow.createCell(0);
 
+
+//********************************* Encabezado *****************************************************
         TituloCell.setCellValue("Nombre Producto");
         hssfSheet.setColumnWidth(0,("Nombre Producto").length() * 250 );
         TituloCell = TituloRow.createCell(1);
@@ -72,11 +79,7 @@ public class ExcelExporter {
         TituloCell.setCellValue("Dias para caducar");
         hssfSheet.setColumnWidth(4,("Dias para caducar").length() * 250 );
 
-
-
-
-
-
+//********* Se insertan datos en las filas y columnas correspondientes a productos y lotes *********
         int x = 1;
         int y = 0;
         for (int i= 0;i<listaProductos.size();i++){
@@ -119,11 +122,13 @@ public class ExcelExporter {
             y= 0;
         }
 
+//**************************************** Segunda pagina **************************************************************
         HSSFSheet hssfSheetp2 = hssfWorkbook.createSheet("Lotes por Caducar");
 
         HSSFRow TituloRowp2 = hssfSheetp2.createRow(0);
         HSSFCell TituloCellp2 = TituloRowp2.createCell(0);
 
+//********************************* Encabezado *****************************************************
         TituloCellp2.setCellValue("ID Lote");
         hssfSheetp2.setColumnWidth(0,("ID Lote").length() * 250 );
         TituloCellp2 = TituloRowp2.createCell(1);
@@ -136,10 +141,7 @@ public class ExcelExporter {
         TituloCellp2.setCellValue("Dias para caducar");
         hssfSheetp2.setColumnWidth(3,("Dias para caducar").length() * 250 );
 
-
-
-
-
+//********* Se insertan datos en las filas y columnas correspondientes a lotes por caducar *********
         x=1;
         y=0;
         Lotes lp2 = new Lotes();
@@ -174,7 +176,59 @@ public class ExcelExporter {
             y= 0;
         }
 
-            ArrayList<Lotes> listaMerma ;
+//**************************************** Tercera pagina ******************************************
+        Lotes lp3 = new Lotes();
+        ArrayList<Lotes> listaMerma = new ArrayList<>(lp3.MermaLotes());
+
+        HSSFSheet hssfSheetp3 = hssfWorkbook.createSheet("Lotes en Merma");
+//********************************* Encabezado *****************************************************
+        HSSFRow TituloRowp3 = hssfSheetp3.createRow(0);
+        HSSFCell TituloCellp3 = TituloRowp3.createCell(0);
+        TituloCellp3.setCellValue("ID Lote");
+        hssfSheetp3.setColumnWidth(0,("ID Lote").length() * 250 );
+        TituloCellp3 = TituloRowp3.createCell(1);
+        TituloCellp3.setCellValue("Nombre Lote");
+        hssfSheetp3.setColumnWidth(1,("Nombre Lote").length() * 250 );
+        TituloCellp3 = TituloRowp3.createCell(2);
+        TituloCellp3.setCellValue("Fecha caducidad Lote");
+        hssfSheetp3.setColumnWidth(2,("Fecha caducidad Lote").length() * 250 );
+        TituloCellp3 = TituloRowp3.createCell(3);
+        TituloCellp3.setCellValue("Dias para caducar");
+        hssfSheetp3.setColumnWidth(3,("Dias para caducar").length() * 250 );
+
+//********* Se insertan datos en las filas y columnas correspondientes a lotes en merma ************
+        x=1;
+        y=0;
+        for (int i=0 ; i < listaMerma.size();i++) {
+            HSSFRow loteRowp3 = hssfSheetp3.createRow(x);
+            HSSFCell loteCellp3 = loteRowp3.createCell(y);
+
+            loteCellp3.setCellValue(listaLotesp2.get(i).getLOTE_ID());
+
+            y++;
+            loteCellp3 = loteRowp3.createCell(y);
+            loteCellp3.setCellValue(listaLotesp2.get(i).getLOTE_NOMBRE());
+
+            y++;
+            loteCellp3 = loteRowp3.createCell(y);
+            loteCellp3.setCellValue(listaLotesp2.get(i).getLOTE_FECHA_CADUCIDAD().toString());
+
+            try {
+                nuevo = dateFormatYMD.parse(vDateYMD);
+                comparado = listaLotesp2.get(i).getLOTE_FECHA_CADUCIDAD();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            int diff = (int)((comparado.getTime() - nuevo.getTime())/86400000);
+
+            y++;
+            loteCellp3 = loteRowp3.createCell(y);
+            loteCellp3.setCellValue(diff);
+
+            x++;
+            y= 0;
+        }
+
 
         try {
             if (!filePath.exists()){
@@ -193,6 +247,8 @@ public class ExcelExporter {
             e.printStackTrace();
         }
     }
-
+    public String getPath(){
+        return this.filePath.getPath();
+    }
 
 }
