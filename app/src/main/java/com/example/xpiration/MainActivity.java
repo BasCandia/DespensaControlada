@@ -29,6 +29,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SearchView;
@@ -261,7 +262,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 ExcelExporter exporter = new ExcelExporter();
                 exporter.buttonCreateExcel(context);
-                sendReport(exporter.getPath());
+                sendReport(exporter.getFileName());
 
                 return false;
             }
@@ -284,23 +285,36 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void sendReport(String path){
+    public void sendReport(String fileName){
 
         Date now = new Date();
         DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
         String vDateYMD = dateFormatYMD.format(now);
 
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        String mimeTypeForXLSFile = mime.getMimeTypeFromExtension(".xls");
+
+
+        Uri uri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), fileName ));
+
+
+
+
+
         try {
-            File root= Environment.getExternalStorageDirectory();
-            String filelocation= root.getAbsolutePath() + path;
+
 
             Intent intentEmail = new Intent(Intent.ACTION_SEND);
-            intentEmail.putExtra(Intent.EXTRA_EMAIL,"bcandia.0123@gmail.com");
+            intentEmail.setType(mimeTypeForXLSFile);
+
+            intentEmail.putExtra(Intent.EXTRA_EMAIL, new String[]{"bcandia.0123@gmail.com"} );
             intentEmail.putExtra(Intent.EXTRA_SUBJECT,"Reporte Merma " + vDateYMD.replaceAll("/","_"));
             intentEmail.putExtra(Intent.EXTRA_TEXT,"Sistema de mensajeria automatico de la aplicacion");
-            intentEmail.putExtra(Intent.EXTRA_STREAM, filelocation);
+            intentEmail.putExtra(Intent.EXTRA_STREAM, uri);
 
-            intentEmail.setType("message/rfc822");
+
+
+            Toast.makeText(context, uri.getPath(), Toast.LENGTH_SHORT).show();
             if(  intentEmail.resolveActivity(getPackageManager()) != null){
                 startActivity(intentEmail);
             }else{

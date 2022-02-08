@@ -35,6 +35,8 @@ import jxl.write.WritableWorkbook;
 public class ExcelExporter {
 
 File filePath = null;
+    String fileName;
+
     public void buttonCreateExcel(Context context){
         Date now = new Date();
         DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
@@ -44,8 +46,8 @@ File filePath = null;
         Date comparado=null;
 //******************* Creacion de archivo si no existe o reemplazo si existe ***********************
 
-
-        filePath = new File(Environment.getExternalStorageDirectory() + "/Reporte_a_"+vDateYMD.replaceAll("/","_")+".xls");
+        fileName ="Reporte_a_"+vDateYMD.replaceAll("/","_")+".xls";
+        filePath = new File(Environment.getExternalStorageDirectory() + "/" + fileName);
 
 
         HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
@@ -249,6 +251,10 @@ File filePath = null;
     }
     public String getPath(){
         return this.filePath.getPath();
+    }
+
+    public  String getFileName(){
+        return this.fileName;
     }
 
 }
