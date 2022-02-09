@@ -302,7 +302,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             Intent intentEmail = new Intent(Intent.ACTION_SEND);
-            intentEmail.setType("text/plain");
+            intentEmail.setType("message/rfc822");
 
             intentEmail.putExtra(Intent.EXTRA_EMAIL, new String[]{"bcandia.0123@gmail.com"} );
             intentEmail.putExtra(Intent.EXTRA_SUBJECT,"Reporte Merma " + vDateYMD.replaceAll("/","_"));
