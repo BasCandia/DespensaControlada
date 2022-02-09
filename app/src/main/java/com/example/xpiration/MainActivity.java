@@ -298,23 +298,18 @@ public class MainActivity extends AppCompatActivity {
         Uri uri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), fileName ));
 
 
-
-
-
         try {
 
 
             Intent intentEmail = new Intent(Intent.ACTION_SEND);
-            intentEmail.setType(mimeTypeForXLSFile);
+            intentEmail.setType("text/plain");
 
             intentEmail.putExtra(Intent.EXTRA_EMAIL, new String[]{"bcandia.0123@gmail.com"} );
             intentEmail.putExtra(Intent.EXTRA_SUBJECT,"Reporte Merma " + vDateYMD.replaceAll("/","_"));
-            intentEmail.putExtra(Intent.EXTRA_TEXT,"Sistema de mensajeria automatico de la aplicacion");
-            intentEmail.putExtra(Intent.EXTRA_STREAM, uri);
+            intentEmail.putExtra(Intent.EXTRA_TEXT,"Adjunte Reporte de nombre '" +  fileName + "'");
+            intentEmail.putExtra(Intent.EXTRA_STREAM, uri.getPath());
 
-
-
-            Toast.makeText(context, uri.getPath(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Se a generado el reporte. Ruta: " +  uri.getPath(), Toast.LENGTH_SHORT).show();
             if(  intentEmail.resolveActivity(getPackageManager()) != null){
                 startActivity(intentEmail);
             }else{
