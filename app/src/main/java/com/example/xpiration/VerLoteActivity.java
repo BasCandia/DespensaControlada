@@ -13,15 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.sql.Connection;
 
 import entidades.Lotes;
-import entidades.Productos;
 
 public class VerLoteActivity extends AppCompatActivity {
     //********************************* Elementos en pantalla ******************************************

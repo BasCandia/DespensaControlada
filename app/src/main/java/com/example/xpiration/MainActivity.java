@@ -3,10 +3,6 @@ package com.example.xpiration;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.core.app.TaskStackBuilder;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,34 +20,21 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.StrictMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -304,7 +287,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intentEmail = new Intent(Intent.ACTION_SEND);
             intentEmail.setType("message/rfc822");
 
-            intentEmail.putExtra(Intent.EXTRA_EMAIL, new String[]{"bcandia.0123@gmail.com"} );
+            intentEmail.putExtra(Intent.EXTRA_EMAIL, new String[]{"sup.rnr.merma@gmail.com"} );
             intentEmail.putExtra(Intent.EXTRA_SUBJECT,"Reporte Merma " + vDateYMD.replaceAll("/","_"));
             intentEmail.putExtra(Intent.EXTRA_TEXT,"Adjunte Reporte de nombre '" +  fileName + "'");
             intentEmail.putExtra(Intent.EXTRA_STREAM, uri.getPath());

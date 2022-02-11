@@ -11,22 +11,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.SearchView;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 
 import entidades.ListaLotesAdapter;
 import entidades.Lotes;
-import entidades.Productos;
 
 public class VistaNotificacionActivity extends AppCompatActivity {
 

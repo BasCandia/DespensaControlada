@@ -2,12 +2,10 @@ package entidades;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.xpiration.ConnectionHelper;
 import com.example.xpiration.MainActivity;
-import com.example.xpiration.SegundaActivity;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
