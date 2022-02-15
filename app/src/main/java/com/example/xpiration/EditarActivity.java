@@ -28,6 +28,9 @@ import java.util.Date;
 import entidades.Productos;
 
 public class EditarActivity extends AppCompatActivity {
+// - Esta clase se genero en el proceso de Desarrollo pero por diseño se opto por no ser utilizada -
+// Clase para editar el contenido de los productos, los elementos mostrados pero bloqueados en la clase
+// VerActivity son desbloqueados en esta y permiten ser modificados y updateados en la BD
 
 //********************************* Elementos en pantalla ******************************************
     EditText fecha;
@@ -48,7 +51,7 @@ public class EditarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ver_producto);
         context = this;
 
-//******************* Declaracion y seteo de Elementos ************************
+//******************* Declaracion y seteo de Elementos *********************************************
         nombre = findViewById(R.id.Nombre);
         fecha = findViewById(R.id.FechaCaducidad);
         notiNaranja = findViewById(R.id.notiNaranja);
@@ -60,7 +63,7 @@ public class EditarActivity extends AppCompatActivity {
         editar.setVisibility(View.INVISIBLE);
         borrar.setVisibility(View.INVISIBLE);
         listaCategorias();
-
+//En la vista anterior se envia un parametro al generar la vista, las siguientes lineas recuperan este dato
         if(savedInstanceState == null){
             Bundle extras = getIntent().getExtras();
             if(extras == null){
@@ -71,18 +74,17 @@ public class EditarActivity extends AppCompatActivity {
         }else{
             id = (int) savedInstanceState.getSerializable("ID");
         }
-
+//Recupero los datos del producto y se muestran en el formulario para que el usuario los modifique
         producto = new Productos().verProducto(id);
-
         if(producto != null){
             nombre.setText(producto.getPRODUCTO_NOMBRE());
            // String modificado = producto.getPRODUCTO_FECHA_CADUCIDAD().toString().replace("-","/");
-          //  fecha.setText(modificado);
-          //  notiNaranja.setText(producto.getPRODUCTO_NOTIFICACION_NARANJA()+"");
-          //  notiRoja.setText(producto.getPRODUCTO_NOTIFICACION_ROJA()+"");
+           // fecha.setText(modificado);
+           // notiNaranja.setText(producto.getPRODUCTO_NOTIFICACION_NARANJA()+"");
+           // notiRoja.setText(producto.getPRODUCTO_NOTIFICACION_ROJA()+"");
             spinnerC.setSelection(producto.getCATEGORIA_ID());
-
         }
+
 //******************* Elementos para seleccionar fecha de forma interactiva ************************
         fecha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,11 +101,10 @@ public class EditarActivity extends AppCompatActivity {
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Date now = new Date();
+                Date now = new Date(); //Se obtiene la fecha del dispositivo y se le da el formato decidido
                 DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
                 String vDateYMD = dateFormatYMD.format(now);
-                //Toast.makeText(context,vDateYMD,Toast.LENGTH_SHORT).show();
-                //Toast.makeText(context,fecha.getText().toString(),Toast.LENGTH_SHORT).show();
+                //Si los datos se ingresaron como se esperan se edita, caso contrario se envia mensaje a usuario
                 boolean resultado = producto.Editar(context,id,nombre.getText().toString(),vDateYMD,fecha.getText().toString(),spinnerC.getSelectedItemPosition(),notiNaranja.getText().toString(),notiRoja.getText().toString());
                 if(resultado){
                     verRegistro();
@@ -112,12 +113,9 @@ public class EditarActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
     }
 
-
+// Si fue editado correctamente lo devolvemos a la visual del producto
     private void verRegistro(){
         Intent intent = new Intent(this,VerActivity.class);
         intent.putExtra("ID",id);
@@ -156,7 +154,6 @@ public class EditarActivity extends AppCompatActivity {
         DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-
                 String mesMod,dayMod;
 
                 if(month < 9){
@@ -171,11 +168,9 @@ public class EditarActivity extends AppCompatActivity {
                 }
                 //month+1 es porque enero es un 0
                 final String selectedDate = year + mesMod + (month+1) + dayMod + day;
-
                 fecha.setText(selectedDate);
             }
         });
-
         newFragment.show(getFragmentManager(), "datePicker");
     }
 }

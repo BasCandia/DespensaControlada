@@ -21,26 +21,23 @@ import entidades.Lotes;
 import entidades.Productos;
 
 public class ExcelExporter {
+// Esta clase genera un reporte en excel con toda la informacion al dia en la base de datos
 
-File filePath = null;
+    File filePath = null;
     String fileName;
 
     public void buttonCreateExcel(Context context){
+        //Se obtiene la fecha del dispositivo y se le da el formato decidido
         Date now = new Date();
         DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
         String vDateYMD = dateFormatYMD.format(now);
-
         Date nuevo=null;
         Date comparado=null;
 //******************* Creacion de archivo si no existe o reemplazo si existe ***********************
-
         fileName ="Reporte_a_"+vDateYMD.replaceAll("/","_")+".xls";
         filePath = new File(Environment.getExternalStorageDirectory() + "/" + fileName);
 
-
         HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
-
-
 
 //********************************* Creacion de pagina *********************************************
         HSSFSheet hssfSheet = hssfWorkbook.createSheet("Productos y Lotes");
@@ -51,7 +48,9 @@ File filePath = null;
 
         HSSFRow TituloRow = hssfSheet.createRow(0);
         HSSFCell TituloCell = TituloRow.createCell(0);
-
+        // HSSFRow son las fila dentro de la pagina
+        // HSSFCell son las columnas dentro de la pagina
+        // Trabaja definiendo datos de las columnas pertenecientes a x fila
 
 //********************************* Encabezado *****************************************************
         TituloCell.setCellValue("Nombre Producto");
@@ -219,7 +218,6 @@ File filePath = null;
             y= 0;
         }
 
-
         try {
             if (!filePath.exists()){
                 filePath.createNewFile();
@@ -237,6 +235,7 @@ File filePath = null;
             e.printStackTrace();
         }
     }
+
     public String getPath(){
         return this.filePath.getPath();
     }

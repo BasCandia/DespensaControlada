@@ -10,6 +10,9 @@ import androidx.annotation.NonNull;
 import java.util.Calendar;
 
 public class DatePickerFragment extends DialogFragment {
+// Clase que permite seleccionar fecha a travez de una ventana interactiva, esta debe ser utilizada cada
+// vez que se quiera implementar la seleccion interactiva de fecha
+
 //***************************** Seleccion interactiva de fecha *************************************
     private DatePickerDialog.OnDateSetListener listener;
 
@@ -23,6 +26,7 @@ public class DatePickerFragment extends DialogFragment {
         this.listener = listener;
     }
 
+//******************** Tratado de datos seleccionados **********************************************
     @Override
     @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {

@@ -27,10 +27,9 @@ import java.util.Date;
 import entidades.Lotes;
 
 public class LoteCrearActivity extends AppCompatActivity {
-
+// Clase para Crear Lotes pertenecientes a x producto
     private Context context; //instancia
 //********************************* Elementos en pantalla ******************************************
-
     Connection con;
     EditText fecha;
     Button crear;
@@ -39,7 +38,7 @@ public class LoteCrearActivity extends AppCompatActivity {
     TextInputLayout notiNaranjainput,notiRojainput;
     int id;
     private String newStr = "";
-
+    //Se obtiene la fecha del dispositivo y se le da el formato decidido
     Date now = new Date();
     DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
     String vDateYMD = dateFormatYMD.format(now);
@@ -56,8 +55,7 @@ public class LoteCrearActivity extends AppCompatActivity {
         notiRoja = findViewById(R.id.notiRojaEdit);
         notiNaranjainput = findViewById(R.id.notiNaranja);
         notiRojainput = findViewById(R.id.notiRoja);
-
-
+// En la vista anterior se envia un parametro al generar la vista, las siguientes lineas recuperan este dato
         if(savedInstanceState == null){
             Bundle extras = getIntent().getExtras();
             if(extras == null){
@@ -69,13 +67,12 @@ public class LoteCrearActivity extends AppCompatActivity {
             id = (int) savedInstanceState.getSerializable("ID");
         }
 
-
+// Query para mostrar en el titulo a que tipo de producto pertenece el lote que se creara
         try {
             String query1 = "SELECT PRODUCTO_NOMBRE FROM PRODUCTO WHERE PRODUCTO_ID ="+id;
             ConnectionHelper conexion = new ConnectionHelper();
             con = conexion.connectionclass();
             Statement st = null;
-
             st = con.createStatement();
             ResultSet rs = st.executeQuery(query1);
             rs.next();
@@ -83,23 +80,19 @@ public class LoteCrearActivity extends AppCompatActivity {
         }catch (SQLException e){
             System.out.println("Error in sql statment");
         }
-
+//******************* Elementos para seleccionar fecha de forma interactiva ************************
         fecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 switch (view.getId()) {
                     case R.id.FechaCaducidadEdit:
                         showDatePickerDialog();
-
                         break;
                 }
-
             }
         });
 
-
-
-//************* boton para enviar la insercion y pasar a ventana principal *************************
+//************* boton para enviar la insercion,crear el lote y pasar a ventana principal *************************
         crear = findViewById(R.id.LoteCrear);
         crear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,11 +113,11 @@ public class LoteCrearActivity extends AppCompatActivity {
 
                 Lotes l = new Lotes();
                 l.insertar(context,String.valueOf(id),nombre.getText().toString(),vDateYMD,fecha.getText().toString(),n,r);
-
             }
         });
 
-//*********** Validacion para que no se pueda pegar texto, temas de seguridad **********************
+// Las siguientes lineas deshabilitan los menus para seleccionar,copiar y pegar al mantener presionado para todos los elementos
+// del formulario para evitar que se ingrese codigo malicioso.
         notiNaranja.setOnLongClickListener(
                 new View.OnLongClickListener() {
                     @Override
@@ -175,14 +168,12 @@ public class LoteCrearActivity extends AppCompatActivity {
 
     }
 
-    //****** obtiene los datos seleccionados interactivamente para la fecha y los formatea *************
+//****** obtiene los datos seleccionados interactivamente para la fecha y los formatea *************
     private void showDatePickerDialog() {
         DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-
                 String mesMod,dayMod;
-
                 if(month < 9){
                     mesMod = "/0";
                 }else{
@@ -195,11 +186,9 @@ public class LoteCrearActivity extends AppCompatActivity {
                 }
                 //month+1 es porque enero es un 0
                 final String selectedDate = year + mesMod + (month+1) + dayMod + day;
-
                 fecha.setText(selectedDate);
             }
         });
-
         newFragment.show(getFragmentManager(), "datePicker");
     }
 }

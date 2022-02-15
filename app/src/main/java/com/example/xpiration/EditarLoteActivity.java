@@ -29,7 +29,10 @@ import entidades.Lotes;
 
 
 public class EditarLoteActivity extends AppCompatActivity {
-    //********************************* Elementos en pantalla ******************************************
+// Clase para editar el contenido de los Lotes, los elementos mostrados pero bloqueados en la clase
+// VerLoteActivity son desbloqueados en esta y permiten ser modificados y updateados en la BD
+
+//********************************* Elementos en pantalla ******************************************
     EditText fecha;
     TextInputLayout fechainput;
     Button guardar;
@@ -42,16 +45,13 @@ public class EditarLoteActivity extends AppCompatActivity {
     Connection con;
     private Context context;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_lote);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         context = this;
 
-//******************* Declaracion y seteo de Elementos ************************
+//*************************** Declaracion y seteo de Elementos *************************************
         nombre = findViewById(R.id.NombreEditLote);
         nombre.setFocusable(true);
         fechainput = findViewById(R.id.FechaCaducidadInput);
@@ -66,7 +66,7 @@ public class EditarLoteActivity extends AppCompatActivity {
         editar.setVisibility(View.INVISIBLE);
         borrar.setVisibility(View.INVISIBLE);
 
-
+//En la vista anterior se envia un parametro al generar la vista, las siguientes lineas recuperan este dato
         if(savedInstanceState == null){
             Bundle extras = getIntent().getExtras();
             if(extras == null){
@@ -78,8 +78,8 @@ public class EditarLoteActivity extends AppCompatActivity {
             id = (int) savedInstanceState.getSerializable("ID");
         }
 
+//Recupero los datos del Lote y se muestran en el formulario para que el usuario los modifique
         lotes = new Lotes().verLote(id);
-
         if(lotes != null){
             nombre.setText(lotes.getLOTE_NOMBRE());
             String modificado = lotes.getLOTE_FECHA_CADUCIDAD().toString().replace("-","/");
@@ -89,8 +89,6 @@ public class EditarLoteActivity extends AppCompatActivity {
             getSupportActionBar().setTitle("Lote de "+lotes.getPRODUCTO_NOMBRE());
         }
 //******************* Elementos para seleccionar fecha de forma interactiva ************************
-
-
         fecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,13 +97,8 @@ public class EditarLoteActivity extends AppCompatActivity {
                         showDatePickerDialog();
                         break;
                 }
-
             }
         });
-
-
-
-
 
 //***************************** Boton para Editar **************************************************
         guardar.setOnClickListener(new View.OnClickListener() {
@@ -114,8 +107,6 @@ public class EditarLoteActivity extends AppCompatActivity {
                 Date now = new Date();
                 DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
                 String vDateYMD = dateFormatYMD.format(now);
-                //Toast.makeText(context,vDateYMD,Toast.LENGTH_SHORT).show();
-                //Toast.makeText(context,fecha.getText().toString(),Toast.LENGTH_SHORT).show();
                 boolean resultado = Lotes.Editar(context,id,nombre.getText().toString(),vDateYMD,fecha.getText().toString(),notiNaranja.getText().toString(),notiRoja.getText().toString());
                 if(resultado){
                     verRegistro();
@@ -125,7 +116,8 @@ public class EditarLoteActivity extends AppCompatActivity {
             }
         });
 
-//*********** Validacion para que no se pueda pegar texto, temas de seguridad **********************
+// Las siguientes lineas deshabilitan los menus para seleccionar,copiar y pegar al mantener presionado para todos los elementos
+// del formulario para evitar que se ingrese codigo malicioso.
         notiNaranja.setOnLongClickListener(
                 new View.OnLongClickListener() {
                     @Override
@@ -175,21 +167,18 @@ public class EditarLoteActivity extends AppCompatActivity {
         });
     }
 
-
+// Si fue editado correctamente lo devolvemos a la visual del Lote
     private void verRegistro(){
         Intent intent = new Intent(this,VerLoteActivity.class);
         intent.putExtra("ID",id);
         startActivity(intent);
     }
 
-
-
-    //**************** Elementos para seleccionar fecha de forma interactiva ***************************
+//**************** Elementos para seleccionar fecha de forma interactiva ***************************
     private void showDatePickerDialog() {
         DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-
                 String mesMod,dayMod;
 
                 if(month < 9){
@@ -204,11 +193,9 @@ public class EditarLoteActivity extends AppCompatActivity {
                 }
                 //month+1 es porque enero es un 0
                 final String selectedDate = year + mesMod + (month+1) + dayMod + day;
-
                 fecha.setText(selectedDate);
             }
         });
-
         newFragment.show(getFragmentManager(), "datePicker");
     }
 }
