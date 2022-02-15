@@ -35,19 +35,20 @@ public class VerActivity extends AppCompatActivity {
     TextView notiNaranja,notiRoja;
     ImageView editar;
     ImageView borrar;
-    Context context;
 
+    //******************************* Definicion de Parametros *************************************
     int id;
     Productos producto;
     Connection con;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_producto);
-
         context = this;
-//******************* Declaracion y seteo de Elementos ************************
+
+        //******************* Declaracion y seteo de Elementos ************************
         nombre = findViewById(R.id.Nombre);
         fecha = findViewById(R.id.FechaCaducidad);
         notiNaranja = findViewById(R.id.notiNaranja);
@@ -57,6 +58,7 @@ public class VerActivity extends AppCompatActivity {
         borrar = findViewById(R.id.iconBorrar);
         listaCategorias();
 
+        //En la vista anterior se envia un parametro al generar la vista, las siguientes lineas recuperan este dato
         if(savedInstanceState == null){
             Bundle extras = getIntent().getExtras();
             if(extras == null){

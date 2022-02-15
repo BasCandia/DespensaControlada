@@ -30,15 +30,15 @@ public class SegundaActivity extends AppCompatActivity {
 
     private Context context; //instancia
 //********************************* Elementos en pantalla ******************************************
-
     Spinner spinnerC;
     Connection con;
     Button crear;
     TextView nombre;
 
-    Date now = new Date();
-    DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
-    String vDateYMD = dateFormatYMD.format(now);
+
+    Date now = new Date(); //Se utiliza la fecha y hora del dispositivo para obtener la fecha actual
+    DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");  //se crea un formato de fecha
+    String vDateYMD = dateFormatYMD.format(now); //se utiliza el formato en la fecha actual del dispositivo
     private String newStr = "";
 
 //**************** Elementos para seleccionar fecha de forma interactiva ***************************

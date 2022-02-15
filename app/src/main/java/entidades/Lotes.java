@@ -160,7 +160,7 @@ public class Lotes {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                if (comparado.compareTo(nuevo) <= 0) {
+                if (comparado.compareTo(nuevo) <= -2) {
                     Toast.makeText(context, "El producto caduca hoy o ya ha caducado", Toast.LENGTH_SHORT).show();
                 } else {
                     if (nombre.length() == 0) {
@@ -217,7 +217,7 @@ public class Lotes {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            if (comparado.compareTo(nuevo) <= 0) {
+            if (comparado.compareTo(nuevo) <= -2) {
                 Toast.makeText(context, "El producto caduca hoy o ya ha caducado", Toast.LENGTH_SHORT).show();
             } else {
                 if (nombre.length() == 0) {

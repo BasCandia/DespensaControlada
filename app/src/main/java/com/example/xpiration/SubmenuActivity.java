@@ -31,15 +31,16 @@ public class SubmenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Inicializacion de parametros del menu (Nombre superior del menu)
         setContentView(R.layout.activity_submenu);
         getSupportActionBar().setTitle("Lista de Lotes");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//****************************** Inicializacion de elementos ***************************************
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar Boton para volver atras
+    //****************************** Inicializacion de elementos ***************************************
         context = this;
         recyclerViewLote = findViewById(R.id.ListaLote);
         recyclerViewLote.setLayoutManager(new LinearLayoutManager(this));
         masLote = findViewById(R.id.plusLote);
-//**** Se recibe desde la view anterior el id del producto seleccionado para mostrar sus lotes *****
+    //**** Se recibe desde la view anterior el id del producto seleccionado para mostrar sus lotes *****
         if(savedInstanceState == null){
             Bundle extras = getIntent().getExtras();
             if(extras == null){
@@ -50,15 +51,14 @@ public class SubmenuActivity extends AppCompatActivity {
         }else {
             id = (int) savedInstanceState.getSerializable("ID");
         }
-        //esto se puede cambiar
+
+        //Se Inicializa el RecyclerView con los datos de la lista de lostes en el adapter
         l = new Lotes();
         listaLote = new ArrayList<Lotes>();
-
         ListaLotesAdapter adapter = new ListaLotesAdapter(l.mostrarLotes(id));
-
         recyclerViewLote.setAdapter(adapter);
 
-//****************************** Boton para agregar Lotes ******************************************
+    //****************************** Boton para agregar Lotes ******************************************
         masLote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,8 +71,9 @@ public class SubmenuActivity extends AppCompatActivity {
 
 
     }
-
+    //******************Funcion que maneja las funciones del menu por defecto***********************
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //Boton de la esquina superior izquierda que devuelve al menu principal
         if(item.getItemId() == android.R.id.home){
             Intent intent = new Intent(context,MainActivity.class);
             context.startActivity(intent);

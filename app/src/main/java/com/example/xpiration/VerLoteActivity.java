@@ -19,19 +19,18 @@ import java.sql.Connection;
 import entidades.Lotes;
 
 public class VerLoteActivity extends AppCompatActivity {
-    //********************************* Elementos en pantalla ******************************************
-
+    //******************************* Elementos en pantalla ****************************************
     EditText fecha;
     Button guardar;
-
     EditText nombre;
     TextView notiNaranja,notiRoja;
     ImageView editar;
     ImageView borrar;
+    //******************************* Definicion de Parametros *************************************
     Context context;
     int id;
     Lotes lotes;
-    Connection con;
+    Connection con;  //Coneccion con la Base de datos
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,7 @@ public class VerLoteActivity extends AppCompatActivity {
         //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         context = this;
-//******************* Declaracion y seteo de Elementos ************************
+        //************************ Declaracion y seteo de Elementos *******************************
         nombre = findViewById(R.id.NombreEditLote);
         fecha = findViewById(R.id.FechaCaducidadEdit);
         notiNaranja = findViewById(R.id.notiNaranjaEdit);
@@ -48,6 +47,7 @@ public class VerLoteActivity extends AppCompatActivity {
         guardar = findViewById(R.id.BtnGuardar);
         borrar = findViewById(R.id.iconBorrar);
 
+        //En la vista anterior se envia un parametro al generar la vista, las siguientes lineas recuperan este dato
         if(savedInstanceState == null){
             Bundle extras = getIntent().getExtras();
             if(extras == null){
@@ -62,6 +62,7 @@ public class VerLoteActivity extends AppCompatActivity {
 
         lotes = new Lotes().verLote(id);
 
+        //Asignacion de parametros a los elementos que se ven por pantalla
         if(lotes != null){
             nombre.setText(lotes.getLOTE_NOMBRE());
             nombre.setInputType(InputType.TYPE_NULL);
@@ -108,7 +109,6 @@ public class VerLoteActivity extends AppCompatActivity {
                 });
                 AlertDialog dialog = builder.create();
                 dialog.show();
-
 
             }
         });

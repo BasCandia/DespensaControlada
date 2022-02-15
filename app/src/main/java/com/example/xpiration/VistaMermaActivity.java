@@ -21,37 +21,40 @@ public class VistaMermaActivity extends AppCompatActivity {
     private Context context;
     Lotes l;
     ArrayList<Lotes> listaLote;
+    ListaLotesAdapter adapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Inicializacion de parametros del menu (Nombre superior del menu)
         setContentView(R.layout.activity_vista_merma);
-
         getSupportActionBar().setTitle("Merma de productos");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar Boton para volver atras
 
-        //****************************** Inicializacion de elementos ***************************************
+        //Inicializacion de elementos
         context = this;
-        recyclerViewLote = findViewById(R.id.ListaMerma);
-        recyclerViewLote.setLayoutManager(new LinearLayoutManager(this));
-
-
         l = new Lotes();
-        listaLote = new ArrayList<Lotes>();
-
-        ListaLotesAdapter adapter = new ListaLotesAdapter(l.MermaLotes());
-
-        recyclerViewLote.setAdapter(adapter);
-
+        listaLote = new ArrayList<Lotes>(l.MermaLotes());
+        seteoParametros(); //llamado a la funcion para utliziar el RecyclerView con el adapter
 
     }
+    //**************Funcion que inicializa los parametros del Adapter y Recycler View***************
+    public void seteoParametros(){
+        recyclerViewLote = findViewById(R.id.ListaMerma);
+        recyclerViewLote.setLayoutManager(new LinearLayoutManager(this)); //Se utiliza el LinearLayoutManager que viene por defecto
+        adapter = new ListaLotesAdapter(listaLote); //se le ingresan todos los datos al adapter
+        recyclerViewLote.setAdapter(adapter);  //Se ingresan los datos al Recyclerview utilizando un el adapter
+    }
 
+    //******************Funcion que maneja las funciones del menu por defecto***********************
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //Boton de la esquina superior izquierda que devuelve al menu principal
         if(item.getItemId() == android.R.id.home){
-            Intent intent = new Intent(context,MainActivity.class);
-            context.startActivity(intent);
-            finish();
+            Intent intent = new Intent(context,MainActivity.class); //Creamos la instancia del menu principal
+            context.startActivity(intent); //Comenzamos la instancia
+            finish(); //Se finaliza la instancia actual (VistaMerma)
         }
         return super.onOptionsItemSelected(item);
     }
