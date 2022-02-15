@@ -19,12 +19,12 @@ import com.example.xpiration.SubmenuActivity;
 import java.util.ArrayList;
 
 public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAdapter.ProductoViewHolder> implements Filterable {
+// Clase para mostrar los datos de la lista de productos en la vista principal
+
 //********************** Declaracion y inicializacion de Lista de productos ************************
     ArrayList<Productos> listaProductos;
     ArrayList<Productos> listaProductosFull;
     private OnItemClickListener mListener;
-
-
 
     public ListaProductosAdapter(ArrayList<Productos> listaProductos){
         this.listaProductos = listaProductos;
@@ -44,11 +44,9 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
         return new ProductoViewHolder(view, mListener);
     }
 
-
 //********************** Seteo de datos a lista de productos ***************************************
     @Override
     public void onBindViewHolder(@NonNull ProductoViewHolder holder, int position) {
-
         holder.viewNombre.setText(listaProductos.get(position).getPRODUCTO_NOMBRE());
         holder.viewCantidadLotes.setText("Cantidad de lotes: "+listaProductos.get(position).getCantidadLotes());
 
@@ -83,13 +81,11 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
                 holder.icon.setImageResource(R.drawable.ic_dots);
                 break;
         }
-
     }
 
     @Override
     public int getItemCount() {
         return listaProductos.size();
-
     }
 
     public interface OnItemClickListener {
@@ -102,18 +98,15 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
 
 //******************** Manda un producto a VerActivity segun id *****************************
     public class ProductoViewHolder extends RecyclerView.ViewHolder {
-
         TextView viewNombre, viewCantidadLotes;
         ImageView estado;
         ImageView borrar;
         ImageView icon;
 
-
         public ProductoViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             viewNombre = itemView.findViewById(R.id.ProductoNombre);
             viewCantidadLotes = itemView.findViewById(R.id.CantidadLote);
-           // estado = itemView.findViewById(R.id.IconoEstado);
             borrar = itemView.findViewById(R.id.image_delete);
             icon = itemView.findViewById(R.id.ImagenProducto);
 
@@ -142,8 +135,6 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
         }
     }
 
-
-
     @Override
     public Filter getFilter() {
         return filtro;
@@ -158,7 +149,6 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
                 listaFiltrada.addAll(listaProductosFull);
             }else{
                 String patronFiltro = charSequence.toString().toLowerCase().trim();
-
                 for(Productos prod : listaProductosFull) {
                     if(prod.getPRODUCTO_NOMBRE().toLowerCase().contains(patronFiltro)){
                        listaFiltrada.add(prod);
@@ -168,9 +158,7 @@ public class ListaProductosAdapter extends RecyclerView.Adapter<ListaProductosAd
 
             FilterResults results = new FilterResults();
             results.values = listaFiltrada;
-
             return results;
-
         }
 
         @Override

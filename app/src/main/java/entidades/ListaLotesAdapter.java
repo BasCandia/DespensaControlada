@@ -22,10 +22,10 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.LotesViewHolder>  {
+// Clase para mostrar los datos de la lista de lotes de un producto
+
 //********************** Declaracion y inicializacion de Lista de Lotes ************************
     ArrayList<Lotes> listaLotes;
-
-
     public ListaLotesAdapter(ArrayList<Lotes> listaLotes){
         this.listaLotes = listaLotes;
     }
@@ -41,11 +41,9 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
     @Override
     public void onBindViewHolder(@NonNull LotesViewHolder holder, int position) {
 
-
         Date now = new Date();
         DateFormat dateFormatYMD = new SimpleDateFormat("yyyy/MM/dd");
         String vDateYMD = dateFormatYMD.format(now);
-
         Date nuevo=null;
         Date comparado=null;
 //************************* Se obtiene la cantidad de dias para que expire *************************
@@ -57,7 +55,6 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
         }
 
         int diff = (int)((comparado.getTime() - nuevo.getTime())/86400000);
-
 
         holder.viewNombre.setText(listaLotes.get(position).getLOTE_NOMBRE());
         holder.viewFecha.setText(diff+" dias para Caducar");
@@ -91,7 +88,6 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
                 holder.merma.setVisibility(View.INVISIBLE);
             }
         });
-
     }
 
     @Override
@@ -123,8 +119,6 @@ public class ListaLotesAdapter extends RecyclerView.Adapter<ListaLotesAdapter.Lo
                     context.startActivity(intent);
                 }
             });
-
-
         }
     }
 
