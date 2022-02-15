@@ -82,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
         calendar.set(Calendar.MILLISECOND, 0);
         calendar.add(Calendar.DATE, 1);
         alarmManager.setInexactRepeating( AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent );
+        //InexactRepeating enviara una notificacion alrededor de la hora especificada, intentara juntar varias notificaciones de distintas aplicaciones
+        // para mostrarlas todas juntas y ser mas eficiente en terminos de energia
 
 //****************************** Boton para agregar productos **************************************
         mas = findViewById(R.id.plus);
